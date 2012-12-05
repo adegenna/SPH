@@ -3,18 +3,19 @@
 
 class Particle {
  public:
-  Particle(double* r, double* v, double mass, double visc);
+  Particle(int tag, double* x, double* v, double mass, double visc);
   ~Particle();
-  double Distance(double* location);   // Return distance to particle
-  double* GetLocation();               // Return [r_]
-  double* GetVelocity();               // Return [v_]
+  double Distance(double* location);    // Return distance to particle
+  void GetLocation(double* location);   // Return r_
+  void GetVelocity(double* velocity);   // Return v_
+  void SetLocation(double* location);   // Update r_
+  void SetVelocity(double* velocity);   // Update v_
  private:
-  double* r_;     // Location Pointer
+  double* x_;     // Location Pointer
   double* v_;     // Velocity Pointer
   double mass_;   // Particle Mass
   double visc_;   // Particle Viscosity
-  
-  int N_;       // Dimension of Position Vector (Calculated)
+  int tag_;       // Particle identifier
 };
 
 #endif  // PARTICLE_H
