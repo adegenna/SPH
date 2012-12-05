@@ -1,11 +1,4 @@
-#include <stdlib.h>
-
-#include <particle.h>
-#include <updateDensity.h>
-#include <updateVelocity.h>
-#include <updateAll.h>
-
-using namespace std;
+#include "timestep.h"
 
 timestep(Particle *particles, float t, const float dt){
     findNeighbors(particles);
