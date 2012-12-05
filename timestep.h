@@ -4,4 +4,4 @@
 #include "updateVelocity.h"
 #include "updateAll.h"
 
-timestep(Particle *particles, float t, const float dt);
+void timestep(Particle *particles, float t, const float dt);

@@ -1,6 +1,6 @@
 #include "timestep.h"
 
-timestep(Particle *particles, float t, const float dt){
+void timestep(Particle *particles, float t, const float dt){
     findNeighbors(particles);
     for(int i=0; i < NUMPARTICLES; ++i){
         updateDensity(particle);
