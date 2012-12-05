@@ -1,13 +1,12 @@
 #include <stdlib.h>
 #include <iostream>
-#include <math.h>
 #include <string>
 
-#include <particle.h>
-#include <kernel.h>
-#include <timestep.h>
-#include <initialize.h>
-#include <output.h>
+#include "particle.h"
+#include "kernel.h"
+#include "timestep.h"
+#include "initialize.h"
+#include "output.h"
 
 using namespace std;
 
