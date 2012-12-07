@@ -1,9 +1,11 @@
-#ifndef INITIALIZE_H_
-#define INITIALIZE_H_
+//#ifndef INITIALIZE_H_
+//#define INITIALIZE_H_
 
-#include "particle.h"
-#include <fstream>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <iostream>
+//#include <fstream>
 #include <string>
+//#include "particle.h"
 
-
-void initialize(const std::string& filename, particle* particles);
+bool initialize(const std::string& filename, Particle* particles);
