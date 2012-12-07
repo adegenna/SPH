@@ -17,7 +17,7 @@ Particle::~Particle() {
   delete [] x_;
   delete [] v_;
 }
-
+//perhaps change so we can input 2 particles and return distance
 double Particle::Distance(double* location) {
   double norm;
   for (int i = 0; i < 2; i++) {

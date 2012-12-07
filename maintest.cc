@@ -1,3 +1,4 @@
+#include "kernel.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -158,6 +159,13 @@ int main() {
     for (int i=0;i<N;i++) {
     	fprintf(outfile,"%5d %.5e %.5e %.5e %.5e %.5e %.5e %.5e\n",0,t,x[i],y[i],xdot[i],ydot[i],rho[i],Pressure[i]);
     }
+    
+    Kernel *myKer = new  SplineKernel();
+    
+    //new SplineKernel;
+    double myW = myKer->W(1,2);
+    
+    cout <<myW<<endl;
     
     for(int k=1; k <= Nsteps; k++) {
         t +=dt;
