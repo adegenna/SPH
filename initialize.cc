@@ -2,45 +2,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-
-
-include "initialize.h"
-include "particle.h"
+#include "particle.h"
+#include "initialize.h"
 
 //File to load particle locations
 
+using namespace std;
 
 bool initialize(const std::string& filename, Particle** particles) {
 
     FILE* finput;
 	finput = fopen(filename.c_str(),"r");
-
-    if (fss==NULL){
+    cout <<"here3" <<endl; 
+    if (finput==NULL){
         cout << "error, didn't load file" << endl;
         exit(1);
     }
-    
+    float NParticlesf_;
+    int NParticles;
     fscanf(finput,"%f",&NParticlesf_);
-    NParticles_ = int(NParticlesf_);
-    
-    
+    NParticles = int(NParticlesf_);
     double mass; // = 1.0;
     double visc; // = 2.0;
     double x1;
     double x2;
     double xdot1;
     double xdot2;
-    double** x = new double*[2]; // Pointer to the pointers r1 and r2
-    double** v = new double*[2]; // Pointer to the pointers v1 and v2
+    double** x = new double*[2];
+    double** v = new double*[2];
     
+    //Allocate sufficient memory for particles
+    //particles = (Particle**) malloc(NParticles);
     
-    for (i=0;i<NParticles_;i++){
-        fscanf(finput, "%f %f %f %f %f %f %f",x[0],x[1],xdot[0],xdot[1],mass,density,visc);
+    for (int i=0;i<NParticles;i++){
+        fscanf(finput, "%lf %lf %lf %lf %lf %lf",&x1,&x2,&xdot1,&xdot2,&mass,&visc); //also put in density
+        cout <<"here6" <<endl;
         x[i] = &x1;
         x[i][1] = x2;
         v[i] = &xdot1;
         v[i][1] = xdot2;
-        particles[i] = new Particle(i+1,x,xdot,mass,density,visc);
+        particles[i] = new Particle(i+1,x[i],v[i],mass,visc);
     }
     fclose(finput);
     return true;

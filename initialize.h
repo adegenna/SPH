@@ -8,4 +8,4 @@
 #include <string>
 //#include "particle.h"
 
-bool initialize(const std::string& filename, Particle* particles);
+bool initialize(const std::string& filename, Particle** particles);
