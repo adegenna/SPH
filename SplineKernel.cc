@@ -2,6 +2,13 @@
 #include "SplineKernel.h"
 #include <cmath>
 
+SplineKernel::SplineKernel(double smoothinglength)
+    : h_(smoothinglength)
+{}
+
+SplineKernel::~SplineKernel()
+{}
+
 double SplineKernel::W(double r, double h)
 {
     const double disthat = r / h;
@@ -18,8 +25,6 @@ double SplineKernel::W(double r, double h)
     {
         return 0;
     }
-
-
 }
 
 Vector SplineKernel::gradW(Vector vec1, Vector vec2, double h)

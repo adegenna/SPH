@@ -1,4 +1,5 @@
-#include "kernel.h"
+#include "Kernel.h"
+#include "SplineKernel.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -21,8 +22,8 @@ double KernelGradMag(double distance,double smoothinglength) {
 void KernelGrad(double x1, double y1, double x2, double y2, double smoothinglength, double* K1, double* K2) {
     double rMag = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
     double KMag = KernelGradMag(rMag,smoothinglength);
-    cout <<"rmag = " <<rMag<<endl;
-    cout <<"Kmag = " <<KMag<<endl;
+    //cout <<"rmag = " <<rMag<<endl;
+    //cout <<"Kmag = " <<KMag<<endl;
     
     if(rMag =! 0.) {
          *K1 = -(x2-x1)/rMag*KMag;
@@ -33,8 +34,8 @@ void KernelGrad(double x1, double y1, double x2, double y2, double smoothingleng
          *K2 = 0.;
     }
     
-    cout <<"Kx = " <<*K1<<endl;
-    cout <<"Ky = " <<*K2<<endl;
+    //cout <<"Kx = " <<*K1<<endl;
+    //cout <<"Ky = " <<*K2<<endl;
 //    cout <<"address Kx = " <<K1<<endl;
 //    cout <<"address Ky = " <<K2<<endl;
 
@@ -98,10 +99,10 @@ int main() {
     double xdot[N];
     double ydot[N];
     
-    double xTemp[N];
-    double yTemp[N];
-    double xdotTemp[N];
-    double ydotTemp[N];    
+//    double xTemp[N];
+//    double yTemp[N];
+//    double xdotTemp[N];
+//    double ydotTemp[N];    
     
     double PonRhoSq[N];
     for(int i=0;i<N;i++){
@@ -160,10 +161,11 @@ int main() {
     	fprintf(outfile,"%5d %.5e %.5e %.5e %.5e %.5e %.5e %.5e\n",0,t,x[i],y[i],xdot[i],ydot[i],rho[i],Pressure[i]);
     }
     
-    Kernel *myKer = new  SplineKernel();
+    Kernel *myKer;
+    myKer = new SplineKernel(1.);
     
     //new SplineKernel;
-    double myW = myKer->W(1,2);
+    double myW = myKer->W(1,3);
     
     cout <<myW<<endl;
     
@@ -177,8 +179,8 @@ int main() {
             PonRhoSq[a] = Pressure[a]/pow(rho[a],2);
             for(int i=0;i<N;i++){
                 
-                cout << "a =" <<a<<endl;
-                cout << "i =" <<i<<endl;
+            //    cout << "a =" <<a<<endl;
+            //   cout << "i =" <<i<<endl;
                 
                 PonRhoSq[i] = Pressure[i]/pow(rho[i],2);
                 //            double distance = abs(ParticleArray[a,1]-ParticleArray[i,1]);
@@ -186,6 +188,10 @@ int main() {
                 //double distance = abs(Position[a]-Position[i]); //took out abs
                 
                 KernelGrad(x[a],y[a],x[i],y[i],smoothinglength, Kx, Ky);
+                Vector ex1 = {1,0};
+                Vector ex2 = {2,0};
+                Vector Kgrad = myKer->gradW(ex1,ex2,smoothinglength);
+                
                 //drho += Mass[i]*(Velocity[a]-Velocity[i])*KernelGradMag(distance,smoothinglength);
 //                cout << "xdot[a]-xdot[i] = " << xdot[a]-xdot[i] <<endl;
 //                cout << "Kx = "<<*Kx<<endl;

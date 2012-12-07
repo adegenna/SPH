@@ -6,9 +6,14 @@
 class SplineKernel : public Kernel
 {
 public:
-    virtual double W(double r, double h);
-    virtual Vector gradW(Vector vec1, Vector vec2, double h);
-
+    SplineKernel(double smoothinglength);
+    ~SplineKernel();
+    double W(double r, double h);
+    Vector gradW(Vector vec1, Vector vec2, double h);
+private:
+    double h_;
 };
+
+
 
 #endif  // SPLINEKERNEL_H_
