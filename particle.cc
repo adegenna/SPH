@@ -27,6 +27,8 @@ double Particle::Distance(double* location) {
   return norm;
 }
 
+
+
 void Particle::GetLocation(double* location) {
   for (int i = 0; i < 2; i++) {
     location[i] = x_[i];

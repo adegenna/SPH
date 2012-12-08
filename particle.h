@@ -10,6 +10,7 @@ class Particle {
   void GetVelocity(double* velocity);          // Return v_
   void SetLocation(double* location);          // Update r_
   void SetVelocity(double* velocity);          // Update v_
+    void Get(string blah,Properties Prop);
   void AddNeighbor(Particle* neighbor);        // Add a neighbor
   int Number_of_Neighbors();                // Return neighbors_
   void GetNeighbors(Particle** neighbor);      // Get neighbor_pointer_
