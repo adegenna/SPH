@@ -1,7 +1,7 @@
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
-struct Properties
+struct properties
 {
     double x;
     double y;
