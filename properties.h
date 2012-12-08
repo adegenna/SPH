@@ -1,7 +1,7 @@
 #ifndef PROPERTIES_H_
 #define PROPERTIES_H_
 
-struct Properties
+struct properties
 {
     double x;
     double y;
