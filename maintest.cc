@@ -1,5 +1,7 @@
 #include "Kernel.h"
 #include "SplineKernel.h"
+#include "particle.h"
+#include "initialize.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -63,31 +65,21 @@ void PrintState(double t, double x, double v) {
 
 //really hacky, crappy testing
 
-
 int main() {
 
     //number of particles
     const int N = 2;
-    //int Ndata = 4;
-    
-    
     const double dt = 0.01;
     const double Nsteps = 20;
     
-    
-   // double ParticleArray[N][Ndata];
+    Particle** particles = new Particle*;
+    string input = "input.dat";
+    initialize(input,particles);
 
-    
     //initialize random data
     
-//    for (int a=0;a<N;a++){
-//        for (int j=0;j<Ndata;j++){
-//    	//	ParticleArray[a,j] = 1.;//cos((a+0.5)*j);
-//        }
-//    }
-    
     //define initial properties
-    double smoothinglength = 0.5;
+    double smoothinglength = 5;
     double rho[N];
     double Mass[N];
     double Pressure[N];
@@ -119,13 +111,7 @@ int main() {
     y[0] = 0.;
     x[1] = 1.;
     y[1] = 0.;
-    //x[2] = 0.;
-//    y[2] = 1.;
-//    x[3] = 1.;
-//    y[3] = 1.;
-    
-    
-    //Position[1]=2.;
+
     rho[1]=2.;
     xdot[0]=0.1;
  //   ydot[0]=1.;
@@ -162,7 +148,7 @@ int main() {
     }
     
     Kernel *myKer;
-    myKer = new SplineKernel(1.);
+    myKer = new SplineKernel(smoothinglength);
     
     //new SplineKernel;
     double myW = myKer->W(1,3);
@@ -187,19 +173,21 @@ int main() {
                 //        	drho += Mass[i]*(ParticleArray[a,2]-ParticleArray[i,2])*KernelGrad(distance,smoothinglength);
                 //double distance = abs(Position[a]-Position[i]); //took out abs
                 
-                KernelGrad(x[a],y[a],x[i],y[i],smoothinglength, Kx, Ky);
+               // KernelGrad(x[a],y[a],x[i],y[i],smoothinglength, Kx, Ky);
                 Vector ex1 = {1,0};
-                Vector ex2 = {2,0};
+                Vector ex2 = {1.45,0};
                 Vector Kgrad = myKer->gradW(ex1,ex2,smoothinglength);
+                
+                cout << Kgrad.x << endl;
                 
                 //drho += Mass[i]*(Velocity[a]-Velocity[i])*KernelGradMag(distance,smoothinglength);
 //                cout << "xdot[a]-xdot[i] = " << xdot[a]-xdot[i] <<endl;
 //                cout << "Kx = "<<*Kx<<endl;
 //                cout << "address Kx = "<<Kx<<endl;
-                drho[a] += Mass[i] * InnerProduct2D(xdot[a]-xdot[i],ydot[a]-ydot[i],*Kx,*Ky);
+                drho[a] += Mass[i] * InnerProduct2D(xdot[a]-xdot[i],ydot[a]-ydot[i],Kgrad.x,Kgrad.y);  //,*Kx,*Ky);
                 //du += Mass[i] * (PonRhoSq[i]-PonRhoSq[a])*KernelGradMag(distance,smoothinglength);
-                dxdot[a] += -Mass[i] * (PonRhoSq[i]+PonRhoSq[a]) * (*Kx);
-                dydot[a] += -Mass[i] * (PonRhoSq[i]+PonRhoSq[a]) * (*Ky);
+                dxdot[a] += -Mass[i] * (PonRhoSq[i]+PonRhoSq[a]) * Kgrad.x;//(*Kx);
+                dydot[a] += -Mass[i] * (PonRhoSq[i]+PonRhoSq[a]) * Kgrad.y;//(*Ky);
                 
             //    cout << a <<"    "  <<Kx<< "   " << Ky <<endl;
             }
