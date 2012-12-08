@@ -13,7 +13,6 @@ bool initialize(const std::string& filename, Particle** particles) {
 
     FILE* finput;
 	finput = fopen(filename.c_str(),"r");
-    cout <<"here3" <<endl; 
     if (finput==NULL){
         cout << "error, didn't load file" << endl;
         exit(1);
@@ -22,8 +21,8 @@ bool initialize(const std::string& filename, Particle** particles) {
     int NParticles;
     fscanf(finput,"%f",&NParticlesf_);
     NParticles = int(NParticlesf_);
-    double mass; // = 1.0;
-    double visc; // = 2.0;
+    double mass;
+    double visc;
     double x1;
     double x2;
     double xdot1;

@@ -23,6 +23,12 @@ int main(int argc, char* argv[]){
     Particle *particles;
     initialize(initFile,particles);
     
+    Model *model = new IncompInvisc();
+    
+    
+    Integrator *integrator = new Euler(dt, *model);
+
+    
     float t = 0;
     while(t < tFinal){
         timestep(particles,t,dt); // timestep had better update t

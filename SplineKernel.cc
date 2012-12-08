@@ -9,10 +9,10 @@ SplineKernel::SplineKernel(double smoothinglength)
 SplineKernel::~SplineKernel()
 {}
 
-double SplineKernel::W(double r, double h)
+double SplineKernel::W(double r)
 {
-    const double disthat = r / h;
-    const double C = 8 * M_PI /pow(h,3);
+    const double disthat = r / h_;
+    const double C = 8 * M_PI /pow(h_,3);
     if (disthat <= 0.5)
     {
         return C* (1- 6 * pow(disthat,2)+ 6 * pow(disthat,3));
@@ -27,11 +27,11 @@ double SplineKernel::W(double r, double h)
     }
 }
 
-Vector SplineKernel::gradW(Vector vec1, Vector vec2, double h)
+Vector SplineKernel::gradW(Vector vec1, Vector vec2)  //took out h as input as it can be a property of the kernel
 {
     const double rMag = hypot(vec2.x-vec1.x, vec2.y-vec1.y);
-    const double disthat = rMag / h;
-    const double C = 8 * M_PI /pow(h,3);
+    const double disthat = rMag / h_;
+    const double C = 8 * M_PI /pow(h_,3);
 
     Vector K = {0,0};
     double kMag;
@@ -41,11 +41,11 @@ Vector SplineKernel::gradW(Vector vec1, Vector vec2, double h)
 
         if (disthat <= 0.5)
         {
-            kMag = C * (- 12 * disthat /h + 18 * pow(disthat,2)/h );
+            kMag = C * (- 12 * disthat /h_ + 18 * pow(disthat,2)/h_ );
         }
         else if (disthat <=1)
         {
-            kMag = C * -6 * pow(1 -disthat,2)/h;
+            kMag = C * -6 * pow(1 -disthat,2)/h_;
         }
         else
         {
