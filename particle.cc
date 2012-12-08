@@ -7,19 +7,16 @@
 
 Particle::Particle(int tag, Properties& properties) {
   tag_ = tag;
-  x_ = new double[2]; x_[0] = properties.x; x_[1] = properties.y;
-  v_ = new double[2]; v_[0] = properties.u; v_[1] = properties.v;
-  mass_ = properties.mass;
-  visc_ = properties.visc;
-  density_ = properties.density;
-  pressure_ = properties.pressure;
+  x_ = new double[2]; v_ = new double[2];
+  xnew_ = new double[2]; vnew_ = new double[2];
+  Set("OLD", properties);
   neighbors_ = 0;
   neighbor_pointer_ = new Particle*;
 }
 
 Particle::~Particle() {
-  delete [] x_;
-  delete [] v_;
+  delete [] x_; delete [] xnew_;
+  delete [] v_; delete [] vnew_;
 }
 //perhaps change so we can input 2 particles and return distance
 double Particle::Distance(double* location) {
@@ -29,32 +26,6 @@ double Particle::Distance(double* location) {
   }
   norm = sqrt(norm);
   return norm;
-}
-
-
-
-void Particle::GetLocation(double* location) {
-  for (int i = 0; i < 2; i++) {
-    location[i] = x_[i];
-  }
-}
-
-void Particle::GetVelocity(double* velocity) {
-  for (int i = 0; i < 2; i++) {
-    velocity[i] = v_[i];
-  }
-}
-
-void Particle::SetLocation(double* location) {
-  for (int i = 0; i < 2; i++) {
-    x_[i] = location[i];
-  }
-}
-
-void Particle::SetVelocity(double* velocity) {
-  for (int i = 0; i < 2; i++) {
-    v_[i] = velocity[i];
-  }
 }
 
 void Particle::AddNeighbor(Particle* neighbor) {
@@ -92,6 +63,29 @@ int Particle::Get(const std::string& ID, Properties& Prop) {
     Prop.density = densitynew_;
     Prop.pressure = pressure_;
     Prop.visc = visc_;
+  }
+  else {
+    return 1; // Error
+  }
+  return 0;
+}
+
+int Particle::Set(const std::string& ID, Properties& Prop) {
+  if (ID == "OLD") {
+    x_[0] = Prop.x; x_[1] = Prop.y;
+    v_[0] = Prop.u; v_[1] = Prop.v;
+    mass_ = Prop.mass;
+    density_ = Prop.density;
+    pressure_ = Prop.pressure;
+    visc_ = Prop.visc;
+  }
+  else if (ID == "NEW") {
+    xnew_[0] = Prop.x; xnew_[1] = Prop.y;
+    vnew_[0] = Prop.u; vnew_[1] = Prop.v;
+    mass_ = Prop.mass;
+    densitynew_ = Prop.density;
+    pressure_ = Prop.pressure;
+    visc_ = Prop.visc;
   }
   else {
     return 1; // Error
