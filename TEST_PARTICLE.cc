@@ -20,7 +20,7 @@ int main() {
   double** v = new double*[N]; // Pointer to the pointers v_i
 
   // **************** Set values ******************
-  r1[0] = 10; r1[1] = 20; v1[0] = 5; v1[1] = 6;
+  r1[0] = -7; r1[1] = 20; v1[0] = 5; v1[1] = 6;
   r2[0] = 30; r2[1] = 40; v2[0] = 7; v2[1] = 8;
   r3[0] = 50; r3[1] = 60; v3[0] = 9; v3[1] = 10;
 
@@ -46,23 +46,10 @@ int main() {
   // *********************************************
   
   // ********* Example Method Usages *************
-  double* location1 = new double[2];
-  double* location2 = new double[2];
-  particles[0]->GetLocation(location1);
-  particles[1]->GetLocation(location2);
-  
-  printf("P1 Location = %e %e \n", location1[0], location1[1]);
-  printf("P2 Location = %e %e \n", location2[0], location2[1]);
-
+  Properties p2props; particles[1]->Get("OLD", p2props);
+  double location2[2] = {p2props.x, p2props.y};
   double dist = particles[0]->Distance(location2);  // Get distance to p2
-  printf("Distance = %e \n", dist);
-
-  double* velocity1 = new double[2];
-  double* velocity2 = new double[2];
-  particles[0]->GetVelocity(velocity1);
-  particles[1]->GetVelocity(velocity2);
-  printf("P1 Velocity = %e %e \n", velocity1[0], velocity1[1]);
-  printf("P2 Velocity = %e %e \n", velocity2[0], velocity2[1]);
+  printf("Distance = %lf \n", dist);
   
   // Add neighbors
   particles[0]->AddNeighbor(particles[1]);
@@ -77,10 +64,14 @@ int main() {
   // Use properties struct for get/set
   Properties properties;
   particles[0]->Get("OLD", properties);
-  printf("\nx = %lf y = %lf\n", properties.x, properties.y); 
+  printf("\nP1 OLD: x = %lf y = %lf\n", properties.x, properties.y);
+  properties.x = -17.0; properties.y = 27.0;
+  particles[0]->Set("NEW", properties);
+  Properties newprop1;
+  particles[0]->Get("NEW", newprop1);
+  printf("\nP1 NEW: x = %lf y = %lf\n", newprop1.x, newprop1.y);
 
   delete r1; delete r2; delete v1; delete v2;
-  delete location1; delete location2; delete velocity1; delete velocity2;
   delete particles; delete neighbors;
   // *********************************************
 

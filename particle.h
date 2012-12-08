@@ -10,12 +10,10 @@ class Particle {
   ~Particle();
   double Distance(double* location);           // Return distance to particle
 
-  int Get(const std::string& ID, Properties& properties); // Return particle properties
-
-  void GetLocation(double* location);          // Return r_
-  void GetVelocity(double* velocity);          // Return v_
-  void SetLocation(double* location);          // Update r_
-  void SetVelocity(double* velocity);          // Update v_
+  // Return/Update particle properties
+  // ID is either "OLD" or "NEW"
+  int Get(const std::string& ID, Properties& properties); 
+  int Set(const std::string& ID, Properties& properties);
   
   void AddNeighbor(Particle* neighbor);        // Add a neighbor
   int Number_of_Neighbors();                   // Return neighbors_
