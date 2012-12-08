@@ -1,9 +1,7 @@
 #include "incompinvisc.h"
 
 IncompInvisc::IncompInvisc()
-    : //delta_(delta),
-      //gamma_(gamma),
-      //omega_(omega)
+    : 
 {}
 
 IncompInvisc::~IncompInvisc()
@@ -28,7 +26,7 @@ int IncompInvisc::update(Particle* part, Kernel* myKer) {
     PartProps.x;
     for(int i=0; i<NumberNeighbors; i++) {
         
-        neighbors[i]->Get("OLD",&NeighProps);
+        neighbors[i]->Get("OLD",NeighProps);
         Vector velDiff = {PartProps.u-NeighProps.u,PartProps.v-NeighProps.v};
         Vector neighLoc = {NeighProps.x,NeighProps.y};
         Vector GradKer = myKer->gradW(partloc,neighLoc);
@@ -41,15 +39,12 @@ int IncompInvisc::update(Particle* part, Kernel* myKer) {
                                    + NeighProps.pressure/ pow(NeighProps.density,2));
         du += - coeff *GradKer.x;
         dv += - coeff *GradKer.y;
-  		//fx[1] = x[0] * (1 - x[0]*x[0]) - delta_ * x[1] + gamma_ * cos(omega_*t);
     }
     
     PartProps.density += drho;
     PartProps.u += du;
     PartProps.v += dv;
-    
     part->Set("NEW",PartProps)
-    
     delete neighbors;
   return 0;
 }
