@@ -1,5 +1,5 @@
-#ifndef VECTOR_H_
-#define VECTOR_H_
+#ifndef PROPERTIES_H_
+#define PROPERTIES_H_
 
 struct Properties
 {
@@ -10,6 +10,7 @@ struct Properties
     double density;
     double mass;
     double pressure;
+    double visc;   
 };
 
-#endif  // VECTOR_H_
+#endif  // PROPERTIES_H_

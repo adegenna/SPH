@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <math.h>
 #include "particle.h"
+#include "properties.h"
+#include <string>
 
-Particle::Particle(int tag, double* x, double* v, double mass, double visc) {
+Particle::Particle(int tag, Properties& properties) {
   tag_ = tag;
-  x_ = new double[2]; SetLocation(x);
-  v_ = new double[2]; SetVelocity(v);
-  mass_ = mass;
-  visc_ = visc;
+  x_ = new double[2]; x_[0] = properties.x; x_[1] = properties.y;
+  v_ = new double[2]; v_[0] = properties.u; v_[1] = properties.v;
+  mass_ = properties.mass;
+  visc_ = properties.visc;
+  density_ = properties.density;
+  pressure_ = properties.pressure;
   neighbors_ = 0;
   neighbor_pointer_ = new Particle*;
 }
@@ -70,4 +74,27 @@ void Particle::GetNeighbors(Particle** neighbor) {
 
 int Particle::GetTag() {
   return tag_;
+}
+
+int Particle::Get(const std::string& ID, Properties& Prop) {
+  if (ID == "OLD") {
+    Prop.x = x_[0]; Prop.y = x_[1];
+    Prop.u = v_[0]; Prop.v = v_[1];
+    Prop.mass = mass_;
+    Prop.density = density_;
+    Prop.pressure = pressure_;
+    Prop.visc = visc_;
+  }
+  else if (ID == "NEW") {
+    Prop.x = xnew_[0]; Prop.y = xnew_[1];
+    Prop.u = vnew_[0]; Prop.v = vnew_[1];
+    Prop.mass = mass_;
+    Prop.density = densitynew_;
+    Prop.pressure = pressure_;
+    Prop.visc = visc_;
+  }
+  else {
+    return 1; // Error
+  }
+  return 0;
 }

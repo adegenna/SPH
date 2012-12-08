@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "particle.h"
+#include "properties.h"
 
 using namespace std;
 
@@ -28,12 +29,19 @@ int main() {
 
   double mass = 1.0;
   double visc = 2.0;
+  double density = 3.0;
+  double pressure = 4.0;
   // **********************************************
   
   // ************** Initialization ****************
   Particle** particles = new Particle*[N]; // Pointer to particle pointers
+  Properties initial;
   for (int i = 0; i < N; i++) {
-    particles[i] = new Particle(i+1, x[i], v[i], mass, visc);
+    initial.x = x[i][0]; initial.y = x[i][1];
+    initial.u = v[i][0]; initial.v = v[i][1];
+    initial.mass = mass; initial.visc = visc; initial.pressure = pressure;
+    initial.density = density;
+    particles[i] = new Particle(i+1, initial);
   }
   // *********************************************
   
@@ -65,9 +73,15 @@ int main() {
   particles[0]->GetNeighbors(neighbors);
   printf("P1 neighbors are particles %d and %d\n", neighbors[0]->GetTag(), neighbors[1]->GetTag());
 
+
+  // Use properties struct for get/set
+  Properties properties;
+  particles[0]->Get("OLD", properties);
+  printf("\nx = %lf y = %lf\n", properties.x, properties.y); 
+
   delete r1; delete r2; delete v1; delete v2;
   delete location1; delete location2; delete velocity1; delete velocity2;
-  delete particles;
+  delete particles; delete neighbors;
   // *********************************************
 
   return 0;
