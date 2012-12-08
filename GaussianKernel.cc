@@ -2,18 +2,25 @@
 #include "GaussianKernel.h"
 #include <cmath>
 
-double GaussianKernel::W(double r, double h)
+GaussianKernel::GaussianKernel(double smoothinglength)
+    : h_(smoothinglength)
+{}
+
+GaussianKernel::~GaussianKernel()
+{}
+
+double GaussianKernel::W(double r)
 {
-    const double disthat = r / h;
+    const double disthat = r / h_;
     const double rtpi = sqrt(M_PI);
-    return exp(-pow(disthat,2))/h/rtpi;
+    return exp(-pow(disthat,2))/h_/rtpi;
 }
 
-Vector GaussianKernel::gradW(Vector vec1, Vector vec2, double h)
+Vector GaussianKernel::gradW(Vector vec1, Vector vec2)
 {
     const double rMag = hypot(vec2.x-vec1.x, vec2.y-vec1.y);
-    const double kMag = 2* rMag/h/h * W(rMag, h); //took out -ve
-    Vector K = {0,0};
+    const double kMag = 2* rMag/h_/h_ * W(rMag); //took out -ve
+    Vector K = {0.,0.};
 
     if(fabs(rMag)> 1e-10)
     {

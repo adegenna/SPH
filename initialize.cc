@@ -32,10 +32,9 @@ bool initialize(const std::string& filename, Particle** particles) {
     //particles = (Particle**) malloc(NParticles);
     
     for (int i=0;i<NParticles;i++){
-        fscanf(finput, "%lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
+        fscanf(finput, "%lf %lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
-        cout <<"here6" <<endl;
 //        x[i] = &x1;
 //        x[i][1] = x2;
 //        v[i] = &xdot1;

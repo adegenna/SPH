@@ -44,7 +44,7 @@ int IncompInvisc::update(Particle* part, Kernel* myKer) {
     PartProps.density += drho;
     PartProps.u += du;
     PartProps.v += dv;
-    part->Set("NEW",PartProps)
+    part->Set("NEW",PartProps);
     delete neighbors;
   return 0;
 }

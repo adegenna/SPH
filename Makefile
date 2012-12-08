@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 
-SOURCE =  particle.cc initialize.cc maintest.cc SplineKernel.cc
+SOURCE =  particle.cc initialize.cc maintest.cc SplineKernel.cc GaussianKernel.cc
 MYPROGRAM = maintest
 
 CC = g++ -g -Wall

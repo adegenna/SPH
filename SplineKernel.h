@@ -8,8 +8,8 @@ class SplineKernel : public Kernel
 public:
     SplineKernel(double smoothinglength);
     ~SplineKernel();
-    double W(double r, double h);
-    Vector gradW(Vector vec1, Vector vec2, double h);
+    double W(double r);
+    Vector gradW(Vector vec1, Vector vec2);
 private:
     double h_;
 };

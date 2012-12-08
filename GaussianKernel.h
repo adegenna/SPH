@@ -6,9 +6,12 @@
 class GaussianKernel : public Kernel
 {
 public:
-    virtual double W(double r, double h);
-    virtual Vector gradW(Vector vec1, Vector vec2, double h);
-
+    GaussianKernel(double smoothinglength);
+    ~GaussianKernel();
+    double W(double r);
+    Vector gradW(Vector vec1, Vector vec2);
+private:
+    double h_;
 };
 
 #endif  // GAUSSIANKERNEL_H_

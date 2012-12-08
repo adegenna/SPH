@@ -23,7 +23,7 @@ double SplineKernel::W(double r)
     }
     else
     {
-        return 0;
+        return 0.;
     }
 }
 
@@ -49,7 +49,7 @@ Vector SplineKernel::gradW(Vector vec1, Vector vec2)  //took out h as input as i
         }
         else
         {
-            kMag = 0;
+            kMag = 0.;
         }
         K.x = -(vec2.x-vec1.x)/rMag* kMag;
         K.y = -(vec2.y-vec1.y)/rMag* kMag;
