@@ -1,4 +1,3 @@
-
 #include "SplineKernel.h"
 #include <cmath>
 
@@ -41,11 +40,11 @@ Vector SplineKernel::gradW(Vector vec1, Vector vec2)  //took out h as input as i
 
         if (disthat <= 0.5)
         {
-            kMag = C * (- 12 * disthat /h_ + 18 * pow(disthat,2)/h_ );
+            kMag = C * (- 12. * disthat /h_ + 18. * pow(disthat,2)/h_ );
         }
         else if (disthat <=1)
         {
-            kMag = C * -6 * pow(1 -disthat,2)/h_;
+            kMag = C * -6. * pow(1 -disthat,2)/h_;
         }
         else
         {

@@ -1,7 +1,10 @@
 #include "Kernel.h"
+#include "Fluid.h"
 #include "SplineKernel.h"
+#include "GaussianKernel.h"
 #include "particle.h"
 #include "initialize.h"
+#include "incompinvisc.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -12,43 +15,10 @@
 
 using namespace std;
 
-//double KernelGradMag(double distance,double smoothinglength) {
-//    //Gaussian Kernel
-//    double disthat = distance/smoothinglength;
-//    double rtpi = sqrt(4.*atan(1.));
-//    double W = exp(-pow(disthat,2))/smoothinglength/rtpi;
-//    double gradW = 2*disthat/smoothinglength*W; //took out -ve
-//    return gradW;
-//}
-//
-//void KernelGrad(double x1, double y1, double x2, double y2, double smoothinglength, double* K1, double* K2) {
-//    double rMag = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
-//    double KMag = KernelGradMag(rMag,smoothinglength);
-//    //cout <<"rmag = " <<rMag<<endl;
-//    //cout <<"Kmag = " <<KMag<<endl;
-//    
-//    if(rMag =! 0.) {
-//         *K1 = -(x2-x1)/rMag*KMag;
-//         *K2 = -(y2-y1)/rMag*KMag;
-//    }
-//    else { 
-//         *K1 = 0.;
-//         *K2 = 0.;
-//    }
-    
-    //cout <<"Kx = " <<*K1<<endl;
-    //cout <<"Ky = " <<*K2<<endl;
-//    cout <<"address Kx = " <<K1<<endl;
-//    cout <<"address Ky = " <<K2<<endl;
-
-//}
-
 double InnerProduct2D(double x1, double y1, double x2, double y2) {
     double IP = x1 * x2 + y1 * y2;
     return IP;
 }
-
-//void ICload
 
 void PrintState(double t, double x, double v) {
     printf("%15.8f", t);
@@ -57,48 +27,47 @@ void PrintState(double t, double x, double v) {
     printf("\n");
 }
 
-//really hacky, crappy testing
+//really hacky testing
 
 int main() {
 
     //number of particles
-    const int N = 2;
+    //const int N = 2;
     const double dt = 0.01;
     const double Nsteps = 20;
     
     Particle** particles = new Particle*;
     string input = "input.dat";
-    initialize(input,particles);
-
+    
+    int N;  //Number of Particles
+    
+    initialize(input,particles,N);
     //initialize random data
+    
+    cout <<N<<endl;
     
     //define initial properties
     double smoothinglength = 5;
     double rho[N];
     double Mass[N];
     double Pressure[N];
-//    double Position[N];
-//    double Velocity[N];
     
     double x[N];
     double y[N];
     double xdot[N];
     double ydot[N];
     
-//    double xTemp[N];
-//    double yTemp[N];
-//    double xdotTemp[N];
-//    double ydotTemp[N];    
-    
     double PonRhoSq[N];
+    Properties properties;
+    
+    
+    
     for(int i=0;i<N;i++){
+        particles[i]->Get("OLD",properties);
         Mass[i] = 2.;
         rho[i] = 2.;
-       // x[i]= i;
-       // y[i] = 0.;
         xdot[i]=0.;
         ydot[i]=0.;
-       // Velocity[i] = 0.;
     }
     
     x[0] = 0.;
@@ -108,8 +77,6 @@ int main() {
 
     rho[1]=2.;
     xdot[0]=0.1;
- //   ydot[0]=1.;
-    //Mass[1]=1.;
     
     double B = 100;
     double gamma = 7;
@@ -118,23 +85,12 @@ int main() {
     for(int i=0;i<N;i++){ 
     	Pressure[i] = B * (pow(rho[i],gamma)-1.);
     }
-    
     //update every timestep
     double drho[N];
     //double du;
     double dxdot[N],dydot[N];
     //double uold;
     double t = 0;
-   // double *Kx = new double; 
-   // double *Ky = new double;  //components of Kernel Gradient
-    
-//    for(int a=0;a<N;a++){
-//        xTemp[a] = x[a];
-//    	yTemp[a] = y[a];
-//        xdotTemp[a]=xdot[a];
-//        ydotTemp[a]=ydot[a];
-//    }
-    
     FILE* outfile = fopen("output.dat","w");
     //print intial conditions
     for (int i=0;i<N;i++) {
@@ -145,10 +101,8 @@ int main() {
     //myKer = new SplineKernel(smoothinglength);
     myKer = new GaussianKernel(smoothinglength);
     
-    //new SplineKernel;
-    //double myW = myKer->W(1,3);
-    
-    //cout <<myW<<endl;
+    Fluid *myFluid;
+    myFluid = new IncompInvisc();
     
     for(int k=1; k <= Nsteps; k++) {
         t +=dt;
@@ -160,6 +114,8 @@ int main() {
             PonRhoSq[a] = Pressure[a]/pow(rho[a],2);
             Vector xa = {x[a],y[a]};
             
+            myFluid->update(particles[a],myKer);
+            
             for(int i=0;i<N;i++){
                 
             //    cout << "a =" <<a<<endl;
@@ -169,7 +125,7 @@ int main() {
                 Vector xi = {x[i],y[i]};
                 Vector Kgrad = myKer->gradW(xa,xi);
                 
-                cout << Kgrad.x << endl;
+                //cout << Kgrad.x << endl;
                 drho[a] += Mass[i] * InnerProduct2D(xdot[a]-xdot[i],ydot[a]-ydot[i],Kgrad.x,Kgrad.y);  //,*Kx,*Ky);
                 //du += Mass[i] * (PonRhoSq[i]-PonRhoSq[a])*KernelGradMag(distance,smoothinglength);
                 dxdot[a] += -Mass[i] * (PonRhoSq[i]+PonRhoSq[a]) * Kgrad.x;//(*Kx);

@@ -1,25 +1,32 @@
 #ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
 
-#include "Kernel.h"
-#include <math.h>
+#include "Fluid.h"
+//#include "Kernel.h"
 #include "particle.h"
+#include "properties.h"
+#include "Vector.h"
+#include <math.h>
 
-#include "proerties.h"
-// Forced Duffing oscillator:
-//   \dot x = y
-//   \dot y = x - x^3 - delta * y + gamma * cos(omega t)
-class IncompInvisc : public Model {
- public:
-  IncompInvisc();
-  ~IncompInvisc();
-  int update(Particle* part);
+
+// Class for an incompressibe, inviscid fluid
+class IncompInvisc : public Fluid
+{
+public:
+    IncompInvisc();
+    ~IncompInvisc();
+    int update(Particle* part, Kernel* myKer);
  
- private:
-//  const double delta_;                        // damping constant
-//  const double gamma_;                        // amplitude of forcing
-//  const double omega_;                        // frequency of forcing
-//  static const int kDimen = 2;
+private:
+    int NumberNeighbors;
+    double drho_;
+    double du_;
+    double dv_;
+    double coeff_;
+    Vector velDiff_;
+    Vector neighLoc_;
+    Vector gradKer_;
+    Vector partLoc_;
 };
 
 #endif  // INCOMPINVISC_H_

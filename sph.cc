@@ -19,9 +19,10 @@ int main(int argc, char* argv[]){
 
     const string initFile = argv[1];
     const float tFinal = atof(argv[2]);
+    int NParticles;
 
     Particle *particles;
-    initialize(initFile,particles);
+    initialize(initFile,particles,NParticles);
     
     Model *model = new IncompInvisc();
     

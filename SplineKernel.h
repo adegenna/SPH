@@ -14,6 +14,4 @@ private:
     double h_;
 };
 
-
-
 #endif  // SPLINEKERNEL_H_

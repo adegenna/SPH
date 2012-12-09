@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool initialize(const std::string& filename, Particle** particles) {
+bool initialize(const std::string& filename, Particle** particles, int& NParticles) {
 
     FILE* finput;
 	finput = fopen(filename.c_str(),"r");
@@ -13,20 +13,10 @@ bool initialize(const std::string& filename, Particle** particles) {
         exit(1);
     }
     float NParticlesf_;
-    int NParticles;
     fscanf(finput,"%f",&NParticlesf_);
     NParticles = int(NParticlesf_);
     
     Properties initProps;
-//    double mass;
-//    double density;
-//    double visc;
-//    double x1;
-//    double x2;
-//    double xdot1;
-//    double xdot2;
-//    double** x = new double*[2];
-//    double** v = new double*[2];
     
     //Allocate sufficient memory for particles
     //particles = (Particle**) malloc(NParticles);
@@ -35,10 +25,7 @@ bool initialize(const std::string& filename, Particle** particles) {
         fscanf(finput, "%lf %lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
-//        x[i] = &x1;
-//        x[i][1] = x2;
-//        v[i] = &xdot1;
-//        v[i][1] = xdot2;
+
         
         particles[i] = new Particle(i+1,initProps);
     }
