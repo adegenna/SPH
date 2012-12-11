@@ -44,10 +44,10 @@ int main() {
     initialize(input,particles,N);
     //initialize random data
     
-    cout <<N<<endl;
+    //cout <<N<<endl;
     
     //define initial properties
-    double smoothinglength = 5;
+    double smoothinglength = 1;
     double rho[N];
     double Mass[N];
     double Pressure[N];
@@ -59,8 +59,6 @@ int main() {
     
     double PonRhoSq[N];
     Properties properties;
-    
-    
     
     for(int i=0;i<N;i++){
         particles[i]->Get("OLD",properties);
@@ -103,9 +101,14 @@ int main() {
     
     Fluid *myFluid;
     myFluid = new IncompInvisc();
+    //Integrator *integrator = new Euler(dt, *myfluid);
+    //Properties PartProps;
+    
     
     for(int k=1; k <= Nsteps; k++) {
         t +=dt;
+        //myFluid->update(particles,myKer);
+        
         for(int a=0;a<N;a++){
             //reinitialize temporary variables
             drho[a] = 0;
@@ -114,7 +117,17 @@ int main() {
             PonRhoSq[a] = Pressure[a]/pow(rho[a],2);
             Vector xa = {x[a],y[a]};
             
-            myFluid->update(particles[a],myKer);
+            myFluid->advance(particles[a],myKer);
+           // myFluid->update(particles[a]);
+            particles[a]->Get("OLD",properties);
+            
+            
+            
+            cout <<"x[a] = " << properties.x <<endl;
+            cout <<"y[a] = " << properties.y <<endl;
+            cout <<"u[a] = " << properties.u <<endl;
+            cout <<"v[a] = " << properties.v <<endl;
+            
             
             for(int i=0;i<N;i++){
                 
@@ -139,6 +152,7 @@ int main() {
         //update all positions, velocities, densities, pressures etc.
         // should be set velocity
         for(int a=0;a<N;a++){
+            myFluid->update(particles[a]);
             rho[a] += drho[a]*dt; 
             Pressure[a] = B * (pow(rho[a],gamma)-1.);
         
