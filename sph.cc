@@ -5,8 +5,8 @@
 #include "particle.h"
 #include "kernel.h"
 #include "initialize.h"
-#include "Fluid.h"
-#include "Physics.h"
+#include "fluid.h"
+#include "physics.h"
 #include "output.h"
 
 using namespace std;
