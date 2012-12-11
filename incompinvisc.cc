@@ -1,5 +1,5 @@
 #include "incompinvisc.h"
-#include "Vector.h"
+#include "kvector.h"
 //#include <stdio.h>
 //#include <iostream>
 //#include <stdlib.h>
@@ -20,7 +20,7 @@ int IncompInvisc::advance(Particle* part, Kernel* myKer) {
     
     //Properties PartProps_;
     part->Get("OLD", PartProps_);
-    Vector partLoc_ = {PartProps_.x,PartProps_.y};
+    Kvector partLoc_ = {PartProps_.x,PartProps_.y};
     
     Properties NeighProps_;
 
@@ -31,9 +31,9 @@ int IncompInvisc::advance(Particle* part, Kernel* myKer) {
     for(int i=0; i<NumberNeighbors; i++) {
         
         neighbors[i]->Get("OLD",NeighProps_);
-        Vector velDiff_ = {PartProps_.u-NeighProps_.u,PartProps_.v-NeighProps_.v};
-        Vector neighLoc_ = {NeighProps_.x,NeighProps_.y};
-        Vector gradKer_ = myKer->gradW(partLoc_,neighLoc_);
+        Kvector velDiff_ = {PartProps_.u-NeighProps_.u,PartProps_.v-NeighProps_.v};
+        Kvector neighLoc_ = {NeighProps_.x,NeighProps_.y};
+        Kvector gradKer_ = myKer->gradW(partLoc_,neighLoc_);
         
 		//add contribution to change in density of particle part by neighbors
         drho_ += NeighProps_.mass * (velDiff_.x * gradKer_.x + velDiff_.y * gradKer_.y);

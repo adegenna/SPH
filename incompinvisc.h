@@ -1,16 +1,12 @@
 #ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
 
-#include "Physics.h"
-//#include "Kernel.h"
+#include "physics.h"
+//#include "kernel.h"
 #include "particle.h"
 #include "properties.h"
-#include "Vector.h"
+#include "kvector.h"
 #include <math.h>
-//#include <stdio.h>
-//#include <iostream>
-//#include <stdlib.h>
-
 
 // Class for an incompressibe, inviscid fluid
 class IncompInvisc : public Physics
@@ -27,10 +23,10 @@ private:
     double du_;
     double dv_;
     double coeff_;
-    Vector velDiff_;
-    Vector neighLoc_;
-    Vector gradKer_;
-    Vector partLoc_;
+    Kvector velDiff_;
+    Kvector neighLoc_;
+    Kvector gradKer_;
+    Kvector partLoc_;
     Properties PartProps_;
     Properties NeighProps_;
 };

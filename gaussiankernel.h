@@ -9,7 +9,7 @@ public:
     GaussianKernel(double smoothinglength);
     ~GaussianKernel();
     double W(double r);
-    Vector gradW(Vector vec1, Vector vec2);
+    Kvector gradW(Kvector vec1, Kvector vec2);
 private:
     double h_;
 };

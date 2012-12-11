@@ -4,8 +4,10 @@
 
 using namespace std;
 
-bool initialize(const std::string& filename, Particle** particles, int& nparticles) {
-
+//bool initialize(const std::string& filename, Particle** particles, int& nparticles) {
+bool initialize(const std::string& filename, fluid* fluid, int& nparticles) {
+    
+    
     FILE* finput;
 	finput = fopen(filename.c_str(),"r");
     if (finput==NULL){
@@ -26,8 +28,9 @@ bool initialize(const std::string& filename, Particle** particles, int& nparticl
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
 
+        fluid->addParticle(initProps);
+      //  particles[i] = new Particle(i+1,initProps);
         
-        particles[i] = new Particle(i+1,initProps);
     }
     fclose(finput);
     return true;

@@ -1,7 +1,7 @@
-#include "Kernel.h"
-#include "Fluid.h"
-#include "SplineKernel.h"
-#include "GaussianKernel.h"
+#include "kernel.h"
+#include "fluid.h"
+#include "splinekernel.h"
+#include "gaussiankernel.h"
 #include "particle.h"
 #include "initialize.h"
 #include "incompinvisc.h"
@@ -115,7 +115,7 @@ int main() {
             dxdot[a] = 0;
             dydot[a] = 0;
             PonRhoSq[a] = Pressure[a]/pow(rho[a],2);
-            Vector xa = {x[a],y[a]};
+            Kvector xa = {x[a],y[a]};
             
             myPhysics->advance(particles[a],myKer);
            // myFluid->update(particles[a]);
@@ -135,8 +135,8 @@ int main() {
             //   cout << "i =" <<i<<endl;
                 
                 PonRhoSq[i] = Pressure[i]/pow(rho[i],2);
-                Vector xi = {x[i],y[i]};
-                Vector Kgrad = myKer->gradW(xa,xi);
+                Kvector xi = {x[i],y[i]};
+                Kvector Kgrad = myKer->gradW(xa,xi);
                 
                 //cout << Kgrad.x << endl;
                 drho[a] += Mass[i] * InnerProduct2D(xdot[a]-xdot[i],ydot[a]-ydot[i],Kgrad.x,Kgrad.y);  //,*Kx,*Ky);
