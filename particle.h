@@ -6,33 +6,36 @@
 struct Properties;
 class Particle {
  public:
-  Particle(int tag, Properties& properties);
+  Particle(int tag, int N, Properties& properties);
   ~Particle();
-  double Distance(double* location);           // Return distance to particle
 
   // Return/Update particle properties
   // ID is either "OLD" or "NEW"
-  int Get(const std::string& ID, Properties& properties); 
-  int Set(const std::string& ID, Properties& properties);
+  int get(const std::string& ID, Properties& properties); 
+  int set(const std::string& ID, Properties& properties);
   
-  void AddNeighbor(Particle* neighbor);        // Add a neighbor
-  int Number_of_Neighbors();                   // Return neighbors_
-  void GetNeighbors(Particle** neighbor);      // Get neighbor_pointer_
-  int GetTag();                                // Return tag_
+  void addNeighbor(Particle* neighbor);        // Add a neighbor tag
+  int numberOfNeighbors();                     // Return neighbors_
+  void getNeighbors(int neighbors[]);          // Get neighborarray_
+  int getTag();                                // Return tag_
+  void deleteNeighbors();                      // Re-initialize neighborarray_
   
  private:
-  double* x_;                    // Location Pointer
-  double* v_;                    // Velocity Pointer
-  double* xnew_;
-  double* vnew_;
-  double mass_;                  // Particle Mass
-  double visc_;                  // Particle Viscosity
-  double density_;               // Particle Density
-  double densitynew_;            // Particle New Density
-  double pressure_;              // Particle Pressure
-  int tag_;                      // Particle identifier
-  int neighbors_;                // Number of neighbors
-  Particle** neighbor_pointer_;  // Pointer to neighbor chain
+  double* x_;                     // Location Pointer
+  double* v_;                     // Velocity Pointer
+  double* xnew_;                  // New Location Pointer
+  double* vnew_;                  // New Velocity Pointer
+  double mass_;                   // Particle Mass
+  double visc_;                   // Particle Viscosity
+  double density_;                // Particle Density
+  double densitynew_;             // Particle New Density
+  double pressure_;               // Particle Pressure
+  int tag_;                       // Particle identifier
+  int neighbors_;                 // Number of neighbors
+  int* neighborarray_;            // Array of neighbor tags
+  int N_;                         // Global Number of Particles
+
+  void initializeNeighborArray(); // Initialize neighbor array
 };
 
 #endif  // PARTICLE_H

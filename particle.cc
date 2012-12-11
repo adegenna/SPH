@@ -5,49 +5,44 @@
 #include "properties.h"
 #include <string>
 
-Particle::Particle(int tag, Properties& properties) {
+Particle::Particle(int tag, int N, Properties& properties) {
   tag_ = tag;
   x_ = new double[2]; v_ = new double[2];
   xnew_ = new double[2]; vnew_ = new double[2];
-  Set("OLD", properties);
+  set("OLD", properties);
   neighbors_ = 0;
-  neighbor_pointer_ = new Particle*;
+  N_ = N;
+  neighborarray_ = new int[N_];
+  initializeNeighborArray();
 }
 
 Particle::~Particle() {
   delete [] x_; delete [] xnew_;
   delete [] v_; delete [] vnew_;
-}
-//perhaps change so we can input 2 particles and return distance
-double Particle::Distance(double* location) {
-  double norm;
-  for (int i = 0; i < 2; i++) {
-    norm += pow((x_[i] - location[i]), 2);
-  }
-  norm = sqrt(norm);
-  return norm;
+  delete [] neighborarray_;
 }
 
-void Particle::AddNeighbor(Particle* neighbor) {
+void Particle::addNeighbor(Particle* neighbor) {
   neighbors_ += 1;
-  neighbor_pointer_[neighbors_-1] = neighbor;
+  int neighbortag = neighbor->getTag();
+  neighborarray_[neighbors_-1] = neighbortag;
 }
 
-int Particle::Number_of_Neighbors() {
+int Particle::numberOfNeighbors() {
   return neighbors_;
 }
 
-void Particle::GetNeighbors(Particle** neighbor) {
-  for (int i = 0; i < neighbors_; i++) {
-    neighbor[i] = neighbor_pointer_[i];
+void Particle::getNeighbors(int neighbors[]) {
+  for (int i = 0; i < N_; i++) {
+    neighbors[i] = neighborarray_[i];
   }
 }
 
-int Particle::GetTag() {
+int Particle::getTag() {
   return tag_;
 }
 
-int Particle::Get(const std::string& ID, Properties& Prop) {
+int Particle::get(const std::string& ID, Properties& Prop) {
   if (ID == "OLD") {
     Prop.x = x_[0]; Prop.y = x_[1];
     Prop.u = v_[0]; Prop.v = v_[1];
@@ -70,7 +65,7 @@ int Particle::Get(const std::string& ID, Properties& Prop) {
   return 0;
 }
 
-int Particle::Set(const std::string& ID, Properties& Prop) {
+int Particle::set(const std::string& ID, Properties& Prop) {
   if (ID == "OLD") {
     x_[0] = Prop.x; x_[1] = Prop.y;
     v_[0] = Prop.u; v_[1] = Prop.v;
@@ -91,4 +86,15 @@ int Particle::Set(const std::string& ID, Properties& Prop) {
     return 1; // Error
   }
   return 0;
+}
+
+void Particle::initializeNeighborArray() {
+  for (int i = 0; i < N_; i++) {
+    neighborarray_[i] = -1;
+  }
+}
+
+void Particle::deleteNeighbors() {
+  neighbors_ = 0;
+  initializeNeighborArray();
 }
