@@ -1,21 +1,25 @@
 #ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
 
-#include "Fluid.h"
+#include "Physics.h"
 //#include "Kernel.h"
 #include "particle.h"
 #include "properties.h"
 #include "Vector.h"
 #include <math.h>
+//#include <stdio.h>
+//#include <iostream>
+//#include <stdlib.h>
 
 
 // Class for an incompressibe, inviscid fluid
-class IncompInvisc : public Fluid
+class IncompInvisc : public Physics
 {
 public:
     IncompInvisc();
     ~IncompInvisc();
-    int update(Particle* part, Kernel* myKer);
+    int advance(Particle* part, Kernel* myKer);
+    int update(Particle* part);
  
 private:
     int NumberNeighbors;
@@ -27,6 +31,8 @@ private:
     Vector neighLoc_;
     Vector gradKer_;
     Vector partLoc_;
+    Properties PartProps_;
+    Properties NeighProps_;
 };
 
 #endif  // INCOMPINVISC_H_
