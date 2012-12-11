@@ -13,8 +13,8 @@ int main() {
   double* v1 = new double[2]; // Velocity of P1
   double* r2 = new double[2]; // Position of P2
   double* v2 = new double[2]; // Velocity of P2
-  double* r3 = new double[2];
-  double* v3 = new double[2];
+  double* r3 = new double[2]; // Position of P3
+  double* v3 = new double[2]; // Velocity of P3
 
   double** x = new double*[N]; // Pointer to the pointers r_i
   double** v = new double*[N]; // Pointer to the pointers v_i
@@ -41,38 +41,42 @@ int main() {
     initial.u = v[i][0]; initial.v = v[i][1];
     initial.mass = mass; initial.visc = visc; initial.pressure = pressure;
     initial.density = density;
-    particles[i] = new Particle(i+1, initial);
+    particles[i] = new Particle(i+1, N, initial);
   }
   // *********************************************
   
   // ********* Example Method Usages *************
-  Properties p2props; particles[1]->Get("OLD", p2props);
+  Properties p2props; particles[1]->get("OLD", p2props);
   double location2[2] = {p2props.x, p2props.y};
-  double dist = particles[0]->Distance(location2);  // Get distance to p2
-  printf("Distance = %lf \n", dist);
+  printf("\nP2 OLD location = %lf %lf\n", location2[0], location2[1]);
   
   // Add neighbors
-  particles[0]->AddNeighbor(particles[1]);
-  particles[0]->AddNeighbor(particles[2]);
-  int numberneighbors = particles[0]->Number_of_Neighbors();
+  particles[0]->addNeighbor(particles[1]);
+  particles[0]->addNeighbor(particles[2]);
+  int numberneighbors = particles[0]->numberOfNeighbors();
   printf("\nP1 Number of neighbors = %d\n",numberneighbors);
-  Particle** neighbors = new Particle*;
-  particles[0]->GetNeighbors(neighbors);
-  printf("P1 neighbors are particles %d and %d\n", neighbors[0]->GetTag(), neighbors[1]->GetTag());
-
+  int neighbors[N];
+  particles[0]->getNeighbors(neighbors);
+  printf("P1 neighbors are particles %d and %d and %d\n", neighbors[0], neighbors[1], neighbors[2]);
 
   // Use properties struct for get/set
   Properties properties;
-  particles[0]->Get("OLD", properties);
+  particles[0]->get("OLD", properties);
   printf("\nP1 OLD: x = %lf y = %lf\n", properties.x, properties.y);
   properties.x = -17.0; properties.y = 27.0;
-  particles[0]->Set("NEW", properties);
+  particles[0]->set("NEW", properties);
   Properties newprop1;
-  particles[0]->Get("NEW", newprop1);
+  particles[0]->get("NEW", newprop1);
   printf("\nP1 NEW: x = %lf y = %lf\n", newprop1.x, newprop1.y);
+  
+  // Delete all neighbors
+  particles[0]->deleteNeighbors();
+  particles[0]->getNeighbors(neighbors);
+  numberneighbors = particles[0]->numberOfNeighbors();
+  printf("\nP1 now has %d neighbors and the neighbor array is empty: %d %d %d\n\n", numberneighbors, neighbors[0], neighbors[1], neighbors[2]);
 
   delete r1; delete r2; delete v1; delete v2;
-  delete particles; delete neighbors;
+  delete particles;
   // *********************************************
 
   return 0;
