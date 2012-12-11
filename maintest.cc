@@ -99,9 +99,9 @@ int main() {
     //myKer = new SplineKernel(smoothinglength);
     myKer = new GaussianKernel(smoothinglength);
     
-    Fluid *myFluid;
-    myFluid = new IncompInvisc();
-    //Integrator *integrator = new Euler(dt, *myfluid);
+    Physics *myPhysics;
+    myPhysics = new IncompInvisc();
+    Integrator *integrator = new Euler(dt, *myPhysics);
     //Properties PartProps;
     
     
@@ -117,7 +117,7 @@ int main() {
             PonRhoSq[a] = Pressure[a]/pow(rho[a],2);
             Vector xa = {x[a],y[a]};
             
-            myFluid->advance(particles[a],myKer);
+            myPhysics->advance(particles[a],myKer);
            // myFluid->update(particles[a]);
             particles[a]->Get("OLD",properties);
             
