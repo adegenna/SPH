@@ -1,4 +1,4 @@
-#ifndef INCOMPINVISC_H_
+n#ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
 
 #include "physics.h"
@@ -14,21 +14,22 @@ class IncompInvisc : public Physics
 public:
     IncompInvisc();
     ~IncompInvisc();
-    int advance(Particle* part, Kernel* myKer);
+    int advance(Particle* part, Kernel* myker,double dt);
     int update(Particle* part);
  
 private:
-    int NumberNeighbors;
+    int numberneighbors;
     double drho_;
     double du_;
     double dv_;
+    double dt_;
     double coeff_;
-    Kvector velDiff_;
-    Kvector neighLoc_;
-    Kvector gradKer_;
-    Kvector partLoc_;
-    Properties PartProps_;
-    Properties NeighProps_;
+    Kvector veldiff_;
+    Kvector neighloc_;
+    Kvector gradker_;
+    Kvector partloc_;
+    Properties partprops_;
+    Properties neighprops_;
 };
 
 #endif  // INCOMPINVISC_H_

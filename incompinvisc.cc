@@ -12,51 +12,51 @@ IncompInvisc::~IncompInvisc()
 
 //using namespace std;
 
-int IncompInvisc::advance(Particle* part, Kernel* myKer) {
+int IncompInvisc::advance(Particle* part, Kernel* myker,_dt) {   // change input to fluid
     
-    NumberNeighbors = part->Number_of_Neighbors();  //maybe put in struct
+    numberneighbors = part->numberOfNeighbors();  //maybe put in struct
     Particle** neighbors = new Particle*;
     part->GetNeighbors(neighbors);
     
     //Properties PartProps_;
-    part->Get("OLD", PartProps_);
-    Kvector partLoc_ = {PartProps_.x,PartProps_.y};
+    part->get("OLD", partprops_);
+    Kvector partloc_ = {partprops_.x,partprops_.y};
     
-    Properties NeighProps_;
+    //Properties neighprops_;
 
     drho_ = 0.;
     dv_ = 0.;
     du_ = 0. ;
 
-    for(int i=0; i<NumberNeighbors; i++) {
+    for(int i=0; i<numberneighbors; i++) {
         
-        neighbors[i]->Get("OLD",NeighProps_);
-        Kvector velDiff_ = {PartProps_.u-NeighProps_.u,PartProps_.v-NeighProps_.v};
-        Kvector neighLoc_ = {NeighProps_.x,NeighProps_.y};
-        Kvector gradKer_ = myKer->gradW(partLoc_,neighLoc_);
+        neighbors[i]->Get("OLD",neighprops_);
+        Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
+        Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
+        Kvector gradKer_ = myker->gradW(partloc_,neighloc_);
         
 		//add contribution to change in density of particle part by neighbors
-        drho_ += NeighProps_.mass * (velDiff_.x * gradKer_.x + velDiff_.y * gradKer_.y);
+        drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
         
 		//add contribution to change in velocity of particle part by neighbors
-        coeff_ = NeighProps_.mass * (PartProps_.pressure/ pow(PartProps_.density,2)
-                                   + NeighProps_.pressure/ pow(NeighProps_.density,2));
-        du_ += - coeff_ *gradKer_.x;
-        dv_ += - coeff_ *gradKer_.y;
+        coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
+                                   + neighprops_.pressure/ pow(neighprops_.density,2));
+        du_ += - coeff_ *gradker_.x;
+        dv_ += - coeff_ *gradker_.y;
         
         //cout << "du = " du_ <<endl;
     }
     
-    PartProps_.density += drho_;
-    PartProps_.u += du_;
-    PartProps_.v += dv_;
-    part->Set("NEW",PartProps_);
+    partprops_.density += drho_ * dt_;
+    partprops_.u += du_ * dt_;
+    partprops_.v += dv_ * dt_;
+    part->set("NEW",partprops_);
     delete neighbors;
     return 0;
 }
 
 int IncompInvisc::update(Particle* part) {
-    part->Get("NEW",PartProps_);
-    part->Set("OLD",PartProps_);
+    part->get("NEW",partprops_);
+    part->set("OLD",partprops_);
     return 0;
 }
