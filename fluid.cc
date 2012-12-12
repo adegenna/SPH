@@ -16,6 +16,7 @@ Fluid::~Fluid(){
   delete kernel_;
 }
 
+//should this just be addParticle(Properties props) ?
 void Fluid::addParticle(int tag, double *x, double *v, double mass, 
     double pressure, double visc){
   Properties props;
