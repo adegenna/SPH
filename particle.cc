@@ -23,6 +23,7 @@ Particle::~Particle() {
 }
 
 void Particle::addNeighbor(Particle* neighbor) {
+  // do we want this to take int tag instead of Particle*?
   neighbors_ += 1;
   int neighbortag = neighbor->getTag();
   neighborarray_[neighbors_-1] = neighbortag;
@@ -42,6 +43,7 @@ int Particle::getTag() {
   return tag_;
 }
 
+// do we also want the ability to get individual properties directly as well?
 int Particle::get(const std::string& ID, Properties& Prop) {
   if (ID == "OLD") {
     Prop.x = x_[0]; Prop.y = x_[1];
