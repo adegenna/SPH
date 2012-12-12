@@ -37,8 +37,8 @@ void Fluid::findNeighbors(){
     for(int j=i+1; j<nparticles_; ++j){
       // old or new?
       particles_[j].get("OLD",&propj);
-      float dist = sqrt(pow(propi.x[0]-propj.x[0],2)+
-        pow(propi.x[1]-propj.x[1],2));
+      float dist = sqrt(pow(propi.x-propj.x,2)+
+        pow(propi.y-propj.y,2));
       if(dist < smoothinglenght_){
         particles_[i].addNeighbor(particles_[j]);
         particles_[j].addNeighbor(particles_[i]);
@@ -55,6 +55,7 @@ void Fluid::resetNeighbors(){
   }
 }
 
-Kernel Fluid::getKernel(){
-  return kernel_;
+*Kernel Fluid::getKernel(){
+  // should this just be Kernel Fluid::..?
+  return kernel_*;
 }
