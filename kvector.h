@@ -2,7 +2,7 @@
 #define KVECTOR_H_
 
 // create a struct for a vector object that is useful for kernel operations
-struct kKector
+struct Kvector
 {
     double x;
     double y;
