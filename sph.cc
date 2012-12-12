@@ -2,12 +2,11 @@
 #include <iostream>
 #include <string>
 
-#include "particle.h"
-#include "kernel.h"
-#include "initialize.h"
 #include "fluid.h"
-#include "physics.h"
-#include "output.h"
+#include "initialize.h"
+#include "incompinvisc.h"
+#include "euler.h" // <-- does not exist
+#include "output.h" // <-- does not exist
 
 using namespace std;
 

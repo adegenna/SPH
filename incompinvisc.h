@@ -1,4 +1,4 @@
-n#ifndef INCOMPINVISC_H_
+#ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
 
 #include "physics.h"
