@@ -1,7 +1,7 @@
 //#ifndef INITIALIZE_H_
 //#define INITIALIZE_H_
 #include "particle.h"
-#include "Properties.h"
+#include "properties.h"
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
