@@ -7,7 +7,7 @@
 
 class Fluid {
   public:
-    Fluid(Kernel *kernel, int nparticles, double smoothingLength);
+    Fluid(Kernel *kernel, int nparticles, double smoothinglength);
     ~Fluid();
     Particle* getParticles();
     void addParticle(Properties properties);
@@ -19,6 +19,6 @@ class Fluid {
     Particle **particles_;
     const Kernel *kernel_;
     const int nparticles_;  // number of particles
-    double smoothingLength_;
+    double smoothinglength_;
 
 #endif // FLUID_H
