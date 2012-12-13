@@ -2,23 +2,27 @@
 #define FLUID_H_
 
 #include <stdlib.h>
-#include "particle.h"
+#include "kvector.h"
+#include "kernel.h"
 #include "properties.h"
+#include "particle.h"
+#include "math.h"
 
 class Fluid {
   public:
     Fluid(Kernel *kernel, int nparticles, double smoothinglength);
     ~Fluid();
     Particle* getParticles();
-    void addParticle(Properties properties);
+    void addParticle(int tag, double *x, double *v, double mass,
+      double pressure, double visc);
     void findNeighbors();
     void resetNeighbors();
-    Kernel getKernel();
+    Kernel* getKernel();
     
   private:
     Particle **particles_;
-    const Kernel *kernel_;
-    const int nparticles_;  // number of particles
+    Kernel *kernel_;
+    int nparticles_;  // number of particles
     double smoothinglength_;
-
+};
 #endif // FLUID_H
