@@ -5,10 +5,14 @@
 
 class Kernel
 {
-public:
+  public:
+    Kernel(double smoothinglength) {}
     virtual ~Kernel() {}
     virtual double W(double r) = 0;
     virtual Kvector gradW(Kvector vec1, Kvector vec2) = 0;
+
+  private:
+    double h_;
 };
 
 #endif  // KERNEL_H_
