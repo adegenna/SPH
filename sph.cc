@@ -34,9 +34,10 @@ int main(int argc, char** argv){
     float t = 0;
     while(t < tFinal){
       integrator->Step(t,fluid);
-      // output??
       t = t + dt;
     }
+
+    output(fluid);
 
     delete integrator;
     delete physics;
