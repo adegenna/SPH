@@ -14,7 +14,7 @@ class IncompInvisc : public Physics
 public:
     IncompInvisc();
     ~IncompInvisc();
-    int advance(Particle* part, Kernel* myker,double dt);
+    int rhs(Particle* part, Kernel* myker,double *fx);
     int update(Particle* part);
  
 private:

@@ -12,11 +12,14 @@ IncompInvisc::~IncompInvisc()
 
 //using namespace std;
 
-int IncompInvisc::advance(Particle* part, Kernel* myker,_dt) {   // change input to fluid
+int IncompInvisc::rhs(Particle* part, Kernel* myker, properties fx) {   // change input to fluid
     
-    numberneighbors = part->numberOfNeighbors();  //maybe put in struct
+    //this will change, but I'm not entirely sure how to call it at the moment
+    numberneighbors = part->numberOfNeighbors(); 
     Particle** neighbors = new Particle*;
-    part->GetNeighbors(neighbors);
+    
+    //
+    fluid->findneighbors();
     
     //Properties PartProps_;
     part->get("OLD", partprops_);
@@ -47,10 +50,15 @@ int IncompInvisc::advance(Particle* part, Kernel* myker,_dt) {   // change input
         //cout << "du = " du_ <<endl;
     }
     
-    partprops_.density += drho_ * dt_;
-    partprops_.u += du_ * dt_;
-    partprops_.v += dv_ * dt_;
-    part->set("NEW",partprops_);
+//    partprops_.density += drho_ * dt_;
+//    partprops_.u += du_ * dt_;
+//    partprops_.v += dv_ * dt_;
+    
+    //update changes as a property struct
+    fx.u = du_;
+    fx.v = dv_;
+    fx.density = drho_;
+    //part->set("NEW",partprops_);
     delete neighbors;
     return 0;
 }
