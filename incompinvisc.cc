@@ -68,3 +68,10 @@ int IncompInvisc::update(Particle* part) {
     part->set("OLD",partprops_);
     return 0;
 }
+
+int IncompInvisc::calcPressure(Particle* part, double pressure) {
+    B = 10;   //this should be changed so the parameters are not set every time
+    gamma = 7;
+    pressure = B * (pow(rho[a],gamma)-1.);
+    return 0;
+}

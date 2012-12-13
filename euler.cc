@@ -30,6 +30,10 @@ int Euler::Step(Particle* particle) {
     props_.density += fx_.density * dt_;
     props_.u += fx_.u * dt_;
     props_.v += fx_.v * dt_;
+    
+    double pressure_;
+    myphysics->calcPressure(particle,pressure_);
+    props_.pressure = pressure_;
 
     particle->set("NEW",props);
     return 0;
