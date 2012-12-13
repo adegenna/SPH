@@ -4,3 +4,5 @@
 maintest
 output.dat
 *.o
+libgtest.a
+test_fluid
