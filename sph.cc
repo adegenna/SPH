@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]){
+int main(int argc, char** argv){
     // what is the usage? main <initialFile> <tFinal> ?
     if(argc != 3){
         cout << "USAGE: " << argv[0] << " <initFile> <tFinal>" << endl;
