@@ -1,19 +1,22 @@
-#------------------------------------------------------------------------------
+#---------------------------------------
 
-SOURCE =  particle.cc initialize.cc maintest.cc SplineKernel.cc incompinvisc.cc GaussianKernel.cc
-MYPROGRAM = maintest
+objs_fltest = fluid.o particle.o
+objs_sph = sph.o fluid.o initialize.o incompinvisc.o euler.o output.o
 
 CC = g++ -g -Wall
 
-#------------------------------------------------------------------------------
+#--------------------------------------
 
-all: $(MYPROGRAM)
 
-$(MYPROGRAM): $(SOURCE)
+# not sure what the correct dependencies are.
 
-	$(CC) $(SOURCE) -o $(MYPROGRAM)
+all: test_fluid sph
 
+sph: $(objs_sph)
+	$(CC) -o $@ $^
+
+test_fluid: $(objs_fltest)
+	$(CC) -o test_fluid test_fluid.cc -I/usr/src/gtest/include/ -lpthread libgtest.a
 
 clean:
-
-	rm -f $(MYPROGRAM)
+	rm -f *.o
