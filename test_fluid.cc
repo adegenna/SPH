@@ -1,16 +1,15 @@
 #include <stdlib.h>
 #include <iostream>
-#include <gtest/gtest.h>
 
-#include <fluid.h>
-#include <particle.h>
+#include "properties.h"
+#include "particle.h"
+#include "fluid.h"
 
+using namespace std;
 
 int main(int argc, char** argv){
-  // program to test the fluid and particle classes
-  
-  cout << "Fluid and particle testing:" << endl;
 
+  cout << "Testing fluid properties: " << endl;
 
   return 0;
 }
