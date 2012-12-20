@@ -5,4 +5,4 @@
 #include "particle.h"
 #include "fluid.h"
 
-void output(Fluid *fluid);
+void output(const std::string& filename, Fluid *fluid);

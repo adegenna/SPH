@@ -26,7 +26,6 @@ bool initialize(const std::string& filename, Fluid *fluid, int& nparticles) {
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
         fluid->addParticle(i,initProps);
-        cout <<"herei4"<<endl;
       //  particles[i] = new Particle(i+1,initProps);
         
     }

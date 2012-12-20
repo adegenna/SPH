@@ -21,11 +21,11 @@ int main(int argc, char** argv){
     }
 
     const float dt = 0.1; // <-- make into input??
-    const double smoothinglength = 1.;
+    const double smoothinglength = 20.;
     const string initFile = argv[1];
     const float tFinal = atof(argv[2]);
 
-    int nparticles = 5;
+    int nparticles = 3;  //this shouldn't be hard coded,
     
     
     Fluid *fluid;
@@ -33,11 +33,10 @@ int main(int argc, char** argv){
     myKer = new SplineKernel(smoothinglength);
     //myKer = new GaussianKernel(smoothinglength);
     
+    //initialize fluid, so that initialize will work:
     fluid = new Fluid(myKer,nparticles,smoothinglength);
     
     initialize(initFile,fluid,nparticles); // initializes the fluid from file
-
-    cout <<"here"<<endl;
     
     Physics *physics;
     Integrator *integrator;
@@ -49,13 +48,14 @@ int main(int argc, char** argv){
     while(t < tFinal){
       fluid->findNeighbors();
       integrator->step();
+      output("output.dat",fluid);  //moved output in here so outputs every timestep
       t = t + dt;
     }
-
-    output(fluid);
+    
 
     delete integrator;
     delete physics;
     delete fluid;
+  //  delete myKer;
     return 0;
 }
