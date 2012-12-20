@@ -1,7 +1,7 @@
 #---------------------------------------
 
 objs_fltest = fluid.o particle.o
-objs_sph = sph.o particle.o fluid.o initialize.o incompinvisc.o euler.o output.o
+objs_sph = sph.o particle.o fluid.o initialize.o incompinvisc.o  splinekernel.o gaussiankernel.o euler.o output.o
 
 CC = g++ -g -Wall
 

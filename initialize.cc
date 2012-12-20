@@ -15,11 +15,9 @@ bool initialize(const std::string& filename, Fluid *fluid, int& nparticles) {
         exit(1);
       }
     float nparticlesf_;
-    fscanf(finput,"%f",nparticlesf_);
+    fscanf(finput,"%f",&nparticlesf_);
     nparticles = int(nparticlesf_);
-    
     Properties initProps;
-    
     //Allocate sufficient memory for particles
     //particles = (Particle**) malloc(NParticles);
     
@@ -27,8 +25,8 @@ bool initialize(const std::string& filename, Fluid *fluid, int& nparticles) {
         fscanf(finput, "%lf %lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
-
         fluid->addParticle(i,initProps);
+        cout <<"herei4"<<endl;
       //  particles[i] = new Particle(i+1,initProps);
         
     }

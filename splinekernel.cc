@@ -26,7 +26,7 @@ double SplineKernel::W(double r)
     }
 }
 
-Kvector SplineKernel::gradW(Vector vec1, Vector vec2)  //took out h as input as it can be a property of the kernel
+Kvector SplineKernel::gradW(Kvector vec1, Kvector vec2)  //took out h as input as it can be a property of the kernel
 {
     const double rMag = hypot(vec2.x-vec1.x, vec2.y-vec1.y);
     const double disthat = rMag / h_;

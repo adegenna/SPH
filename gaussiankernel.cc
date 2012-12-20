@@ -1,4 +1,3 @@
-
 #include "gaussiankernel.h"
 #include <cmath>
 
@@ -16,7 +15,7 @@ double GaussianKernel::W(double r)
     return exp(-pow(disthat,2))/h_/rtpi;
 }
 
-kVector GaussianKernel::gradW(Kvector vec1, Kvector vec2)
+Kvector GaussianKernel::gradW(Kvector vec1, Kvector vec2)
 {
     const double rMag = hypot(vec2.x-vec1.x, vec2.y-vec1.y);
     const double kMag = 2* rMag/h_/h_ * W(rMag); //took out -ve
