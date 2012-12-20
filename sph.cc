@@ -38,7 +38,7 @@ int main(int argc, char** argv){
       t = t + dt;
     }
 
-    output(fluid);
+    output(t,fluid);
 
     delete integrator;
     delete physics;
