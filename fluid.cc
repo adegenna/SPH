@@ -19,6 +19,7 @@ Fluid::~Fluid(){
 //should this just be addParticle(Properties props) ?
 void Fluid::addParticle(int tag, Properties prop){
   particles_[tag] = new Particle(tag,nparticles_,prop);
+//  particles_[tag] = new Particle(tag,prop);  
 }
 
 void Fluid::findNeighbors(){
@@ -31,6 +32,8 @@ void Fluid::findNeighbors(){
       particles_[j]->get(old,propj);
       float dist = sqrt(pow(propi.x-propj.x,2)+
         pow(propi.y-propj.y,2));
+        
+        //should this cutoff distance be larger?
       if(dist < smoothinglength_){
         particles_[i]->addNeighbor(particles_[j]);
         particles_[j]->addNeighbor(particles_[i]);

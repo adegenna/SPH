@@ -5,6 +5,9 @@
 #include "fluid.h"
 #include "initialize.h"
 #include "incompinvisc.h"
+#include "kernel.h"
+#include "gaussiankernel.h"
+#include "splinekernel.h"
 #include "euler.h" // <-- does not exist
 #include "output.h" // <-- does not exist
 
@@ -18,13 +21,24 @@ int main(int argc, char** argv){
     }
 
     const float dt = 0.1; // <-- make into input??
+    const double smoothinglength = 1.;
     const string initFile = argv[1];
     const float tFinal = atof(argv[2]);
 
+    int nparticles = 5;
+    
+    
     Fluid *fluid;
-    int nparticles;
+    Kernel *myKer;
+    myKer = new SplineKernel(smoothinglength);
+    //myKer = new GaussianKernel(smoothinglength);
+    
+    fluid = new Fluid(myKer,nparticles,smoothinglength);
+    
     initialize(initFile,fluid,nparticles); // initializes the fluid from file
 
+    cout <<"here"<<endl;
+    
     Physics *physics;
     Integrator *integrator;
 
