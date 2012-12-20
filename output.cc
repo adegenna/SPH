@@ -2,7 +2,6 @@
 
 using namespace std;
 
-<<<<<<< HEAD
 void output(float t,Fluid *fluid){
   // this should write fluid_<t>.dat
   // which is a list of particle positions
