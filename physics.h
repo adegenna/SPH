@@ -8,7 +8,7 @@ class Physics {
   virtual ~Physics() {}
 
   // general update function
-    virtual int rhs(Particle* part, Kernel* myKer, double *fx) = 0;
+    virtual int rhs(Particle* part, Kernel* myKer,Properties fx) = 0;
     virtual int update(Particle* part) = 0;
     virtual int calcPressure(Particle* part, double &pressure) = 0;
   // number of states (size of x)

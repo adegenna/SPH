@@ -10,13 +10,14 @@ class Physics;
 
 class Euler : public Integrator {
  public:
-  Euler(double dt, const Fluid *fluid, const Physics *physics);
+  Euler(double dt,Fluid *fluid,Physics *physics);
   ~Euler();
   int step();
  private:
 //  const int dimen_;                     // dimension of state x
-    const double dt_;                     // timestep
-    const Fluid fluid_;                 
+    double dt_;                     // timestep
+    Fluid *fluid_;                 
+    Physics *physics_;
     double *fx_;   						// temporary space to hold f(x,t)
   	Particle** parts_;
 };

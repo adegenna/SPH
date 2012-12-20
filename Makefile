@@ -1,7 +1,7 @@
 #---------------------------------------
 
 objs_fltest = fluid.o particle.o
-objs_sph = sph.o fluid.o initialize.o incompinvisc.o euler.o output.o
+objs_sph = sph.o particle.o fluid.o initialize.o incompinvisc.o euler.o output.o
 
 CC = g++ -g -Wall
 
@@ -10,7 +10,7 @@ CC = g++ -g -Wall
 
 # not sure what the correct dependencies are.
 
-all: test_fluid sph
+all: sph
 
 sph: $(objs_sph)
 	$(CC) -o $@ $^
