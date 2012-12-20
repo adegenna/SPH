@@ -43,8 +43,8 @@ int Euler::step(){
       props.u += fx.u * dt_;
       props.v += fx.v * dt_;
         
-        std::cout << "fx.u = " <<fx.u<<std::endl;
-        std::cout << "fx.v = " <<fx.v<<std::endl;
+     //   std::cout << "fx.u = " <<fx.u<<std::endl;
+     //   std::cout << "fx.v = " <<fx.v<<std::endl;
 
       particles[i]->set("NEW",props);
     }
