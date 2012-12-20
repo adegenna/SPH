@@ -10,7 +10,7 @@ class Physics;
 
 class Euler : public Integrator {
  public:
-  Euler(double dt, const Fluid &fluid, const Physics &physics);
+  Euler(double dt, const Fluid *fluid, const Physics *physics);
   ~Euler();
   int Step(Particle* particle);
  private:

@@ -5,7 +5,7 @@
 using namespace std;
 
 //bool initialize(const std::string& filename, Particle** particles, int& nparticles) {
-bool initialize(const std::string& filename, fluid* fluid, int& nparticles) {
+bool initialize(const std::string& filename, Fluid *fluid, int& nparticles) {
     
     
     FILE* finput;

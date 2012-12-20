@@ -1,7 +1,7 @@
 #include "euler.h"
 //#include "physics.h"
 
-Euler::Euler(double dt, const Fluid &fluid, const Physics &physics)
+Euler::Euler(double dt, const Fluid *fluid, const Physics *physics)
     : //dimen_(model.dimen()),
       dt_(dt),
       model_(model) {

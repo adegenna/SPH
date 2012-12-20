@@ -7,6 +7,6 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-//#include "particle.h"
+#include "fluid.h"
 
-bool initialize(const std::string& filename, Particle** particles, int& Nparticles);
+bool initialize(const std::string& filename, Fluid *fluid, int& Nparticles);

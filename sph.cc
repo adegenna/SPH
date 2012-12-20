@@ -23,17 +23,17 @@ int main(int argc, char** argv){
 
     Fluid *fluid;
     int nparticles;
-    initialize(initFile,*fluid,nparticles); // initializes the fluid from file
+    initialize(initFile,fluid,nparticles); // initializes the fluid from file
 
     Physics *physics;
     Integrator *integrator;
 
     physics = new IncompInvisc();
-    integrator = new Euler(dt,*physics);
+    integrator = new Euler(dt,fluid,physics);
         
     float t = 0;
     while(t < tFinal){
-      integrator->Step(t,fluid);
+      integrator->Step(fluid);
       t = t + dt;
     }
 
