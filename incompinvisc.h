@@ -16,7 +16,7 @@ public:
     ~IncompInvisc();
     int rhs(Particle* part, Kernel* myker,Properties fx);
     int update(Particle* part);
-    int calcPressure(Particle* part, double &pressure); 
+    int calcPressure(Particle* part); 
 private:
     int numberneighbors;
     double drho_;

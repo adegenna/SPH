@@ -19,11 +19,20 @@ int Euler::step(){
     Particle** particles = new Particle*[nparticles];
     particles = fluid_->getParticles();
     for(int i=0; i<nparticles; ++i){
+      physics_->calcPressure(particles[i]);
       particles[i]->get("OLD", props);
       
       Properties fx;   //struct to store the changes in particle properties,
                        //which itself can be a Properties struct.
+
+      //double pressure_;
       
+      //props.pressure = pressure_;
+      
+        //update pressure. This is passing more info than is necessary. Perhaps
+        //create asetPressure function
+      particles[i]->set("OLD", props);
+        
       physics_->rhs(particles[i],fluid_->getKernel(),fx);
       
       //Do Euler's method for all properties,
@@ -33,12 +42,16 @@ int Euler::step(){
       props.density += fx.density * dt_;
       props.u += fx.u * dt_;
       props.v += fx.v * dt_;
-      
-      double pressure_;
-      physics_->calcPressure(particles[i],pressure_);
-      props.pressure = pressure_;
+        
+        std::cout << "fx.u = " <<fx.u<<std::endl;
+        std::cout << "fx.v = " <<fx.v<<std::endl;
 
       particles[i]->set("NEW",props);
+    }
+    
+    for(int i=0; i<nparticles; ++i){
+        particles[i]->get("NEW", props);
+        particles[i]->set("OLD", props);
     }
     return 0;
 }

@@ -5,6 +5,7 @@
 #include "fluid.h"
 #include "physics.h"
 #include "kernel.h"
+#include <iostream>
 
 class Physics;
 

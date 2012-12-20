@@ -18,19 +18,14 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
     numberneighbors = part->numberOfNeighbors(); 
     Particle** neighbors = new Particle*;
     
-    // this is wrong
-    //fluid->findneighbors();
-    
-    //Properties PartProps_;
+
     part->get("OLD", partprops_);
     Kvector partloc_ = {partprops_.x,partprops_.y};
-    
-    //Properties neighprops_;
 
     drho_ = 0.;
     dv_ = 0.;
     du_ = 0. ;
-
+    
     for(int i=0; i<numberneighbors; i++) {
         
         neighbors[i]->get("OLD",neighprops_);
@@ -40,6 +35,8 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
         
 		//add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
+        
+        
         
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
@@ -63,6 +60,8 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
     return 0;
 }
 
+
+//This function might be obsolete now. I put this directly in the integrator (Euler)
 int IncompInvisc::update(Particle* part) {
     part->get("NEW",partprops_);
     part->set("OLD",partprops_);
@@ -75,6 +74,7 @@ int IncompInvisc::calcPressure(Particle* part, double &pressure) {
     // SCOTTTTTT
     Properties props;
     part->get("OLD",props);
-    pressure = B * (pow(props.density,gamma)-1.);
+    props.pressure = B * (pow(props.density,gamma)-1.);
+    part->set("OLD",props);
     return 0;
 }
