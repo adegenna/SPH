@@ -33,7 +33,8 @@ int main(int argc, char** argv){
         
     float t = 0;
     while(t < tFinal){
-      integrator->Step(fluid);
+      fluid->findNeighbors();
+      integrator->step();
       t = t + dt;
     }
 

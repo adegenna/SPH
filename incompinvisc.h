@@ -14,9 +14,9 @@ class IncompInvisc : public Physics
 public:
     IncompInvisc();
     ~IncompInvisc();
-    int rhs(Particle* part, Kernel* myker,double *fx);
+    int rhs(Particle* part, Kernel* myker,Properties fx);
     int update(Particle* part);
-    int calcPressure(Particle* part, double pressure); 
+    int calcPressure(Particle* part, double &pressure); 
 private:
     int numberneighbors;
     double drho_;

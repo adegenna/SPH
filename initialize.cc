@@ -9,14 +9,14 @@ bool initialize(const std::string& filename, Fluid *fluid, int& nparticles) {
     
     
     FILE* finput;
-	finput = fopen(filename.c_str(),"r");
+	  finput = fopen(filename.c_str(),"r");
     if (finput==NULL){
         cout << "error, didn't load file" << endl;
         exit(1);
-    }
-    float NParticlesf_;
+      }
+    float nparticlesf_;
     fscanf(finput,"%f",nparticlesf_);
-    NParticles = int(nparticlesf_);
+    nparticles = int(nparticlesf_);
     
     Properties initProps;
     
@@ -28,7 +28,7 @@ bool initialize(const std::string& filename, Fluid *fluid, int& nparticles) {
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
 
-        fluid->addParticle(initProps);
+        fluid->addParticle(i,initProps);
       //  particles[i] = new Particle(i+1,initProps);
         
     }

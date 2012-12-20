@@ -12,14 +12,14 @@ IncompInvisc::~IncompInvisc()
 
 //using namespace std;
 
-int IncompInvisc::rhs(Particle* part, Kernel* myker, properties fx) {   // change input to fluid
+int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // change input to fluid
     
     //this will change, but I'm not entirely sure how to call it at the moment
     numberneighbors = part->numberOfNeighbors(); 
     Particle** neighbors = new Particle*;
     
-    //
-    fluid->findneighbors();
+    // this is wrong
+    //fluid->findneighbors();
     
     //Properties PartProps_;
     part->get("OLD", partprops_);
@@ -33,7 +33,7 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, properties fx) {   // chang
 
     for(int i=0; i<numberneighbors; i++) {
         
-        neighbors[i]->Get("OLD",neighprops_);
+        neighbors[i]->get("OLD",neighprops_);
         Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
         Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
         Kvector gradKer_ = myker->gradW(partloc_,neighloc_);
@@ -69,9 +69,12 @@ int IncompInvisc::update(Particle* part) {
     return 0;
 }
 
-int IncompInvisc::calcPressure(Particle* part, double pressure) {
-    B = 10;   //this should be changed so the parameters are not set every time
-    gamma = 7;
-    pressure = B * (pow(rho[a],gamma)-1.);
+int IncompInvisc::calcPressure(Particle* part, double &pressure) {
+    int B = 10;   //this should be changed so the parameters are not set every time
+    int gamma = 7;
+    // SCOTTTTTT
+    Properties props;
+    part->get("OLD",props);
+    pressure = B * (pow(props.density,gamma)-1.);
     return 0;
 }

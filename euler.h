@@ -12,7 +12,7 @@ class Euler : public Integrator {
  public:
   Euler(double dt, const Fluid *fluid, const Physics *physics);
   ~Euler();
-  int Step(Particle* particle);
+  int step();
  private:
 //  const int dimen_;                     // dimension of state x
     const double dt_;                     // timestep

@@ -17,17 +17,8 @@ Fluid::~Fluid(){
 }
 
 //should this just be addParticle(Properties props) ?
-void Fluid::addParticle(int tag, double *x, double *v, double mass, 
-    double pressure, double visc){
-  Properties props;
-  props.x = x[0];
-  props.y = x[1];
-  props.u = v[0];
-  props.v = v[1];
-  props.mass = mass;
-  props.pressure = pressure;
-  props.visc = visc;
-  particles_[tag] = new Particle(tag,nparticles_,props);
+void Fluid::addParticle(int tag, Properties prop){
+  particles_[tag] = new Particle(tag,nparticles_,prop);
 }
 
 void Fluid::findNeighbors(){
@@ -57,4 +48,12 @@ void Fluid::resetNeighbors(){
 Kernel* Fluid::getKernel(){
   // should this just be Kernel Fluid::..?
   return kernel_;
+}
+
+int Fluid::getNParticles(){
+  return nparticles_;
+}
+
+Particle** Fluid::getParticles(){
+  return particles_;
 }
