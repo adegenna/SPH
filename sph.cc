@@ -48,10 +48,10 @@ int main(int argc, char** argv){
     while(t < tFinal){
       fluid->findNeighbors();
       integrator->step();
-      output("output.dat",fluid);  //moved output in here so outputs every timestep
       t = t + dt;
     }
-    
+
+    output(t,fluid);
 
     delete integrator;
     delete physics;
