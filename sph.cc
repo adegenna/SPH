@@ -21,13 +21,13 @@ int main(int argc, char** argv){
     }
 
     const float dt = 0.1; // <-- make into input??
-    const double smoothinglength = 20.;
+    const double smoothinglength = 1.5;
     const string initFile = argv[1];
     const float tFinal = atof(argv[2]);
 
-    int nparticles = 3;  //this shouldn't be hard coded,
+    int nparticles = 15;  //this shouldn't be hard coded,
     
-    string kerneltype = "Gaussian";
+    string kerneltype = "Spline";
     
     Fluid *fluid;
     Kernel *myKer;

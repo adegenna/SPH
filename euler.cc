@@ -11,13 +11,15 @@ Euler::~Euler() {
   delete [] fx_;
 }
 
-//Step a single particle
+// Step all particles forward using explicit Euler method
 //I don't think we explicitly need time here, as equations are time invariant
 int Euler::step(){
     Properties props;
     int nparticles = fluid_->getNParticles();
     Particle** particles = new Particle*[nparticles];
     particles = fluid_->getParticles();
+    
+ //   std::cout <<"hereS1"<<std::endl;
     for(int i=0; i<nparticles; ++i){
       physics_->calcPressure(particles[i]);
       particles[i]->get("OLD", props);
@@ -25,16 +27,13 @@ int Euler::step(){
       Properties fx;   //struct to store the changes in particle properties,
                        //which itself can be a Properties struct.
 
-      //double pressure_;
-      
-      //props.pressure = pressure_;
-      
         //update pressure. This is passing more info than is necessary. Perhaps
-        //create asetPressure function
+        //create a setPressure function
       particles[i]->set("OLD", props);
-        
+      //  std::cout <<"hereS3"<<std::endl;
       physics_->rhs(particles[i],fluid_->getKernel(),fx);
-      
+      //std::cout <<"hereS4"<<std::endl;
+        
       //Do Euler's method for all properties,
       //maybe there is a nicer way to do this:
       props.x += props.u * dt_;

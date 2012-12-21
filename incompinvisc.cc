@@ -1,7 +1,7 @@
 #include "incompinvisc.h"
 #include "kvector.h"
 //#include <stdio.h>
-//#include <iostream>
+#include <iostream>
 //#include <stdlib.h>
 IncompInvisc::IncompInvisc()
    // : 
@@ -24,33 +24,30 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
 
     drho_ = 0.;
     dv_ = 0.;
-    du_ = 0. ;
+    du_ = 0.;
     
     for(int i=0; i<numberneighbors; i++) {
-        
+        std::cout << "hereII "<<std::endl;
         neighbors[i]->get("OLD",neighprops_);
+        std::cout << "hereIIaa "<<std::endl;
         Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
+        std::cout << "hereIIa "<<std::endl;
+        
         Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
         Kvector gradKer_ = myker->gradW(partloc_,neighloc_);
-        
+        std::cout << "hereII2 "<<std::endl;
 		//add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
-        
-        
-        
+        std::cout << "hereII3 "<<std::endl;
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                    + neighprops_.pressure/ pow(neighprops_.density,2));
         du_ += - coeff_ *gradker_.x;
         dv_ += - coeff_ *gradker_.y;
         
-        //cout << "du = " du_ <<endl;
+        
     }
-    
-//    partprops_.density += drho_ * dt_;
-//    partprops_.u += du_ * dt_;
-//    partprops_.v += dv_ * dt_;
-    
+    std::cout << "du = " << du_ <<std::endl;
     //update changes as a property struct
     fx.u = du_;
     fx.v = dv_;
@@ -68,7 +65,7 @@ int IncompInvisc::update(Particle* part) {
     return 0;
 }
 
-int IncompInvisc::calcPressure(Particle* part, double &pressure) {
+int IncompInvisc::calcPressure(Particle* part) {
     int B = 10;   //this should be changed so the parameters are not set every time
     int gamma = 7;
     // SCOTTTTTT

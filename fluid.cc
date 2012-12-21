@@ -34,7 +34,7 @@ void Fluid::findNeighbors(){
         pow(propi.y-propj.y,2));
         
         //should this cutoff distance be larger?
-      if(dist < smoothinglength_){
+      if(dist < 5.*smoothinglength_){
         particles_[i]->addNeighbor(particles_[j]);
         particles_[j]->addNeighbor(particles_[i]);
       }
