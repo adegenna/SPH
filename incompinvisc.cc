@@ -27,18 +27,13 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
     du_ = 0.;
     
     for(int i=0; i<numberneighbors; i++) {
-        std::cout << "hereII "<<std::endl;
         neighbors[i]->get("OLD",neighprops_);
-        std::cout << "hereIIaa "<<std::endl;
         Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
-        std::cout << "hereIIa "<<std::endl;
-        
+
         Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
         Kvector gradKer_ = myker->gradW(partloc_,neighloc_);
-        std::cout << "hereII2 "<<std::endl;
 		//add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
-        std::cout << "hereII3 "<<std::endl;
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                    + neighprops_.pressure/ pow(neighprops_.density,2));
