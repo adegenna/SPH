@@ -18,6 +18,8 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
     numberneighbors = part->numberOfNeighbors(); 
     Particle** neighbors = new Particle*;
     
+    //need to insert code to assign neighbors (should I use getNeighbors?)
+    
 
     part->get("OLD", partprops_);
     Kvector partloc_ = {partprops_.x,partprops_.y};
@@ -27,7 +29,7 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
     du_ = 0.;
     
     for(int i=0; i<numberneighbors; i++) {
-        neighbors[i]->get("OLD",neighprops_);
+        neighbors[i]->get("OLD",neighprops_);  //but neighbors is currently unpopulated?
         Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
 
         Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
