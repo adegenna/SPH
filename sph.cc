@@ -27,12 +27,17 @@ int main(int argc, char** argv){
 
     int nparticles = 3;  //this shouldn't be hard coded,
     
+    string kerneltype = "Gaussian";
     
     Fluid *fluid;
     Kernel *myKer;
-    myKer = new SplineKernel(smoothinglength);
-    //myKer = new GaussianKernel(smoothinglength);
     
+    if (kerneltype=="Spline"){
+        myKer = new SplineKernel(smoothinglength);
+    }
+    else if (kerneltype=="Gaussian"){
+        myKer = new GaussianKernel(smoothinglength);
+    }
     //initialize fluid, so that initialize will work:
     fluid = new Fluid(myKer,nparticles,smoothinglength);
     
@@ -49,9 +54,10 @@ int main(int argc, char** argv){
       fluid->findNeighbors();
       integrator->step();
       t = t + dt;
+      output(t,fluid);  
     }
 
-    output(t,fluid);
+    
 
     delete integrator;
     delete physics;

@@ -23,10 +23,11 @@ void output(float t,Fluid *fluid){
   file.open(fnamechar);
 
   // not sure we need headers
-  myfile << "x\ty" << endl;
+  // should we also include the particle labels??
+  file << "x\ty" << endl;
   for(int i=0; i<nparticles; ++i){
     particles[i]->get("NEW",props);
-    myfile << props.x << "\t" << props.y << endl;
+    file << props.x << "\t" << props.y << endl;
   }
 
   file.close();
