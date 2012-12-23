@@ -1,4 +1,5 @@
 #include "fluid.h"
+#include <iostream>
 
 Fluid::Fluid(Kernel* kernel, int nparticles, double smoothinglength){
   nparticles_ = nparticles;
@@ -57,6 +58,16 @@ int Fluid::getNParticles(){
   return nparticles_;
 }
 
-Particle** Fluid::getParticles(){
-  return particles_;
+void Fluid::getParticles(Particle** particles){
+  for (int i=0; i<nparticles_; i++) {
+    particles[i] = particles_[i];
+  }
+}
+
+void Fluid::resetParticles(Particle** newparticles) {
+  delete [] particles_;
+  particles_ = new Particle*[nparticles_];
+  for(int i=0; i<nparticles_; ++i){
+    particles_[i] = newparticles[i];
+  }
 }

@@ -48,16 +48,15 @@ int main(int argc, char** argv){
 
     physics = new IncompInvisc();
     integrator = new Euler(dt,fluid,physics);
-        
+    
     float t = 0;
     while(t < tFinal){
       fluid->findNeighbors();
       integrator->step();
       t = t + dt;
-      output(t,fluid);  
+      output(t,fluid);
+      fluid->resetNeighbors();  // Need to reset after each time step  
     }
-
-    
 
     delete integrator;
     delete physics;

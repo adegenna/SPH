@@ -12,14 +12,16 @@ IncompInvisc::~IncompInvisc()
 
 //using namespace std;
 
-int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // change input to fluid
+int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties fx) {   // change input to fluid
     
     //this will change, but I'm not entirely sure how to call it at the moment
-    numberneighbors = part->numberOfNeighbors(); 
-    Particle** neighbors = new Particle*;
+    numberneighbors = part->numberOfNeighbors();
+    int N = fluid->getNParticles();
+    Particle** neighbors = new Particle*[N];
     
     //need to insert code to assign neighbors (should I use getNeighbors?)
-    
+    int neighbortags[numberneighbors];
+    part->getNeighbors(neighbortags); // Returns tags of all neighbors
 
     part->get("OLD", partprops_);
     Kvector partloc_ = {partprops_.x,partprops_.y};
@@ -28,8 +30,10 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
     dv_ = 0.;
     du_ = 0.;
     
+    fluid->getParticles(neighbors);
+    
     for(int i=0; i<numberneighbors; i++) {
-        neighbors[i]->get("OLD",neighprops_);  //but neighbors is currently unpopulated?
+        neighbors[neighbortags[i]]->get("OLD",neighprops_);
         Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
 
         Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
@@ -44,13 +48,13 @@ int IncompInvisc::rhs(Particle* part, Kernel* myker, Properties fx) {   // chang
         
         
     }
-    std::cout << "du = " << du_ <<std::endl;
     //update changes as a property struct
     fx.u = du_;
     fx.v = dv_;
     fx.density = drho_;
-    //part->set("NEW",partprops_);
-    delete neighbors;
+    
+    delete neighbors; 
+    
     return 0;
 }
 

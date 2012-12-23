@@ -3,12 +3,13 @@
 #include "particle.h"
 #include "kernel.h"
 
+class Fluid;
 class Physics {
  public:
   virtual ~Physics() {}
 
   // general update function
-    virtual int rhs(Particle* part, Kernel* myKer,Properties fx) = 0;
+  virtual int rhs(Fluid* fluid, Particle* part, Kernel* myKer,Properties fx) = 0;
     virtual int update(Particle* part) = 0;
     virtual int calcPressure(Particle* part) = 0;
   // number of states (size of x)

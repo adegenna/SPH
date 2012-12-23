@@ -8,7 +8,7 @@ void output(float t,Fluid *fluid){
   Properties props;
   int nparticles = fluid->getNParticles();
   Particle **particles = new Particle*[nparticles];
-  particles = fluid->getParticles();
+  fluid->getParticles(particles);
 
   // get the file name in the proper format
   ofstream myfile;
@@ -32,5 +32,5 @@ void output(float t,Fluid *fluid){
 
   file.close();
 
-  delete [] fnamechar;
+  delete [] fnamechar; delete [] particles;
 }

@@ -7,6 +7,7 @@
 #include "properties.h"
 #include "kvector.h"
 #include <math.h>
+#include "fluid.h"
 
 // Class for an incompressibe, inviscid fluid
 class IncompInvisc : public Physics
@@ -14,7 +15,7 @@ class IncompInvisc : public Physics
 public:
     IncompInvisc();
     ~IncompInvisc();
-    int rhs(Particle* part, Kernel* myker,Properties fx);
+    int rhs(Fluid* fluid, Particle* part, Kernel* myker,Properties fx);
     int update(Particle* part);
     int calcPressure(Particle* part); 
 private:
