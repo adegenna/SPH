@@ -12,7 +12,7 @@ IncompInvisc::~IncompInvisc()
 
 //using namespace std;
 
-int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties fx) {   // change input to fluid
+int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* fx) {   // change input to fluid
     
     //this will change, but I'm not entirely sure how to call it at the moment
     numberneighbors = part->numberOfNeighbors();
@@ -30,31 +30,48 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties fx
     dv_ = 0.;
     du_ = 0.;
     
+    //std::cout<<"numberneighbors "<< numberneighbors<<std::endl;
+    //std::cout<<"xlocation "<< partprops_.x<<std::endl;
+    
+    
     fluid->getParticles(neighbors);
     
     for(int i=0; i<numberneighbors; i++) {
         neighbors[neighbortags[i]]->get("OLD",neighprops_);
-        Kvector velDiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
-
-        Kvector neighLoc_ = {neighprops_.x,neighprops_.y};
-        Kvector gradKer_ = myker->gradW(partloc_,neighloc_);
+//        std::cout<<"neighbor xlocation "<<neighprops_.x<<std::endl;
+//        std::cout<<"partu "<< partprops_.u<<std::endl;
+//        std::cout<<"neighu "<< neighprops_.u<<std::endl;
+        
+        //these should be redefined as Kvectors each time, but I seem to get an error otherwise:
+        Kvector veldiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
+        Kvector neighloc_ = {neighprops_.x,neighprops_.y};
+        Kvector gradker_ = myker->gradW(partloc_,neighloc_);
+        
 		//add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
+        
+//        std::cout<<"veldiff_.x = "<< veldiff_.x<<std::endl;
+//        std::cout<<"gradker_.x = "<< gradker_.x<<std::endl;
+//        std::cout<<"drho = "<< drho_<<std::endl;
+
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                    + neighprops_.pressure/ pow(neighprops_.density,2));
+        
+        //std::cout<<"coeff = " <<coeff_<<std::endl;
+        
+        
         du_ += - coeff_ *gradker_.x;
         dv_ += - coeff_ *gradker_.y;
-        
+       // std::cout<<"du = " <<du_<<std::endl;
         
     }
     //update changes as a property struct
-    fx.u = du_;
-    fx.v = dv_;
-    fx.density = drho_;
-    
+    fx->u = du_;
+    fx->v = dv_;
+    fx->density = drho_;
+    //std::cout<<"in II: fx.u = " <<fx->u<<std::endl;
     delete neighbors; 
-    
     return 0;
 }
 
@@ -67,7 +84,7 @@ int IncompInvisc::update(Particle* part) {
 }
 
 int IncompInvisc::calcPressure(Particle* part) {
-    int B = 10;   //this should be changed so the parameters are not set every time
+    int B = 1;   //this should be changed so the parameters are not set every time
     int gamma = 7;
     // SCOTTTTTT
     Properties props;

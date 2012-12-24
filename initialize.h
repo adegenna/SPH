@@ -9,5 +9,6 @@
 #include <string>
 #include "fluid.h"
 
-bool initialize(const std::string& filename, Fluid *fluid, int& Nparticles);
-bool getNparticles(const std::string& filename, int& Nparticles);
+bool getNparticles(const std::string& filename, const std::string& boundaryFile, int& nparticles,int& nboundaries);
+bool initialize(const std::string& filename, const std::string& boundaryFile, Fluid *fluid, int& nparticles, int& nboundaries);
+

@@ -16,28 +16,41 @@ Euler::~Euler() {
 int Euler::step(){
     Properties props;
     int nparticles = fluid_->getNParticles();
+    int nboundaries = fluid_->getNBoundaries();
     Particle** particles = new Particle*[nparticles];
+    Particle** boundaries = new Particle*[nboundaries];
     fluid_->getParticles(particles);
+    fluid_->getBoundaries(boundaries);
 
     for(int i=0; i<nparticles; i++){
-      physics_->calcPressure(particles[i]);
+        physics_->calcPressure(particles[i]);
       
-      Properties fx;   //struct to store the changes in particle properties,
-                       //which itself can be a Properties struct.
+        Properties fx;   //struct to store the changes in particle properties,
+                         //which itself can be a Properties struct.
 
         //update pressure. This is passing more info than is necessary. Perhaps
         //create a setPressure function
 
-      physics_->rhs(fluid_, particles[i],fluid_->getKernel(),fx);
+        physics_->rhs(fluid_, particles[i],fluid_->getKernel(),&fx);
+//        std::cout << "Euler: fx.u = " <<fx.u <<std::endl;
         
-      //Do Euler's method for all properties,
-      //maybe there is a nicer way to do this:
-      props.x += props.u * dt_;
-      props.y += props.v * dt_;
-      props.density += fx.density * dt_;
-      props.u += fx.u * dt_;
-      props.v += fx.v * dt_;
-      particles[i]->set("NEW", props);
+        
+        //Do Euler's method for all properties,
+        //maybe there is a nicer way to do this:
+        
+        particles[i]->get("OLD", props);
+        props.x += props.u * dt_;
+        props.y += props.v * dt_;
+        props.density += fx.density * dt_;
+        props.u += fx.u * dt_;
+        props.v += fx.v * dt_;
+        particles[i]->set("NEW", props);
+        
+//        std::cout << "Euler: x = " <<props.x <<std::endl;
+//        std::cout << "Euler: u = " <<props.u <<std::endl;
+//        std::cout << "Euler: fx.u = " <<fx.u <<std::endl;
+//        std::cout << "Euler: fx.density = " <<fx.density <<std::endl;
+        
     }
     
     for(int i=0; i<nparticles; i++){
@@ -47,5 +60,6 @@ int Euler::step(){
     
     fluid_->resetParticles(particles);
     delete [] particles;
+    delete [] boundaries;
     return 0;
 }

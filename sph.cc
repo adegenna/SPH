@@ -14,22 +14,33 @@
 using namespace std;
 
 int main(int argc, char** argv){
-    // what is the usage? main <initialFile> <tFinal> ?
-    if(argc != 3){
-        cout << "USAGE: " << argv[0] << " <initFile> <tFinal>" << endl;
+    // what is the usage? main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> ?
+    string initFile, boundaryFile;
+    float tFinal;
+    if(argc == 3) {
+      initFile = argv[1];
+      tFinal = atof(argv[2]);
+    }
+    else if(argc == 4) {
+      initFile = argv[1];
+      tFinal = atof(argv[3]);
+      boundaryFile = argv[2];
+    }
+    else{
+        cout << "USAGE: " << argv[0] << " <initFile> <boundaryFile(OPTIONAL)> <tFinal>" << endl;
         exit(1);
     }
 
     const float dt = 0.1; // <-- make into input??
-    const double smoothinglength = 1.5;
-    const string initFile = argv[1];
-    const float tFinal = atof(argv[2]);
+    const double smoothinglength = 1;
 
-    //int nparticles = 15;  //this shouldn't be hard coded,
+
+    //int nparticles = 3;  //this shouldn't be hard coded,
     int nparticles;
-    
+    int nboundaries;
     //read in number of particles, so that fluid can be initialized
-    getNparticles(initFile, nparticles);
+    getNparticles(initFile,boundaryFile, nparticles,nboundaries);
+    //int nparticles = 15;  //this shouldn't be hard coded,
     
     string kerneltype = "Spline";
     
@@ -43,9 +54,9 @@ int main(int argc, char** argv){
         myKer = new GaussianKernel(smoothinglength);
     }
     //initialize fluid, so that initialize will work:
-    fluid = new Fluid(myKer,nparticles,smoothinglength);
+    fluid = new Fluid(myKer,nparticles,nboundaries,smoothinglength);
     
-    initialize(initFile,fluid,nparticles); // initializes the fluid from file
+    initialize(initFile,boundaryFile,fluid,nparticles,nboundaries); // initializes the fluid from file
     
     Physics *physics;
     Integrator *integrator;
@@ -55,6 +66,7 @@ int main(int argc, char** argv){
     
     float t = 0;
     while(t < tFinal){
+      //  cout << "t =" << t <<endl;
       fluid->findNeighbors();
       integrator->step();
       t = t + dt;
