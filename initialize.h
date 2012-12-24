@@ -10,3 +10,4 @@
 #include "fluid.h"
 
 bool initialize(const std::string& filename, Fluid *fluid, int& Nparticles);
+bool getNparticles(const std::string& filename, int& Nparticles);

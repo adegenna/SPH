@@ -25,7 +25,11 @@ int main(int argc, char** argv){
     const string initFile = argv[1];
     const float tFinal = atof(argv[2]);
 
-    int nparticles = 15;  //this shouldn't be hard coded,
+    //int nparticles = 15;  //this shouldn't be hard coded,
+    int nparticles;
+    
+    //read in number of particles, so that fluid can be initialized
+    getNparticles(initFile, nparticles);
     
     string kerneltype = "Spline";
     
