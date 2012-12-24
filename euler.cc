@@ -16,8 +16,11 @@ Euler::~Euler() {
 int Euler::step(){
     Properties props;
     int nparticles = fluid_->getNParticles();
+    int nboundaries = fluid_->getNBoundaries();
     Particle** particles = new Particle*[nparticles];
+    Particle** boundaries = new Particle*[nboundaries];
     fluid_->getParticles(particles);
+    fluid_->getBoundaries(boundaries);
 
     for(int i=0; i<nparticles; i++){
       physics_->calcPressure(particles[i]);
@@ -47,5 +50,6 @@ int Euler::step(){
     
     fluid_->resetParticles(particles);
     delete [] particles;
+    delete [] boundaries;
     return 0;
 }

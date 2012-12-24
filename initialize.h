@@ -9,4 +9,4 @@
 #include <string>
 #include "fluid.h"
 
-bool initialize(const std::string& filename, Fluid *fluid, int& Nparticles);
+bool initialize(std::string& filename, std::string& boundaryFile, Fluid *fluid, int& Nparticles, int nboundaries);
