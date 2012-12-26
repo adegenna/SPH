@@ -16,7 +16,7 @@ sph: $(objs_sph)
 	$(CC) -o $@ $^
 
 test_fluid: $(objs_fltest)
-	$(CC) -o test_fluid test_fluid.cc -I/usr/src/gtest/include/ -lpthread libgtest.a
+	$(CC) -o $@ $^ -I/usr/src/gtest/include/ -lpthread libgtest.a
 
 clean:
 	rm -f *.o
