@@ -8,3 +8,4 @@ libgtest.a
 test_fluid
 sph
 progress.txt
+tests
