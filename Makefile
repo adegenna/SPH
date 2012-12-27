@@ -1,6 +1,6 @@
 #---------------------------------------
 
-objs_fltest = tests.o properties_test.o
+objs_fltest = tests.o properties_test.o particle_test.o fluid_test.o gaussiankernel.o
 objs_sph = sph.o particle.o fluid.o initialize.o incompinvisc.o  splinekernel.o gaussiankernel.o euler.o output.o
 
 CC = g++ -g -Wall
