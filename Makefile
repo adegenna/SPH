@@ -15,8 +15,10 @@ all: sph test_fluid
 sph: $(objs_sph)
 	$(CC) -o $@ $^
 
+# to run this the user should have set the environment variable GTEST to
+# something equivalent to /usr/src/gtest/include/
 test_fluid: $(objs_fltest)
-	$(CC) -o $@ $^ -I/usr/src/gtest/include/ -lpthread libgtest.a
+	$(CC) -o $@ $^ -I$(GTEST) -lpthread libgtest.a
 
 clean:
 	rm -f *.o
