@@ -5,14 +5,18 @@
 #include "properties.h"
 #include <string>
 
-Particle::Particle(int tag, int N, Properties& properties) {
+Particle::Particle(int tag, int N, int NB, Properties& properties) {
   tag_ = tag;
   x_ = new double[2]; v_ = new double[2];
   xnew_ = new double[2]; vnew_ = new double[2];
   set("OLD", properties);
   neighbors_ = 0;
+  boundaryneighbors_ = 0;
   N_ = N;
+  NB_ = NB;
   neighborarray_ = new int[N_];
+  boundaryneighborarray_ = new int[NB_];
+  
   initializeNeighborArray();
 }
 
@@ -20,6 +24,7 @@ Particle::~Particle() {
   delete [] x_; delete [] xnew_;
   delete [] v_; delete [] vnew_;
   delete [] neighborarray_;
+  delete [] boundaryneighborarray_;
 }
 
 void Particle::addNeighbor(Particle* neighbor) {
@@ -29,13 +34,29 @@ void Particle::addNeighbor(Particle* neighbor) {
   neighborarray_[neighbors_-1] = neighbortag;
 }
 
+void Particle::addBoundaryNeighbor(Particle* neighbor) {
+  boundaryneighbors_ += 1;
+  int neighbortag = neighbor->getTag();
+  boundaryneighborarray_[boundaryneighbors_-1] = neighbortag;
+}
+
 int Particle::numberOfNeighbors() {
   return neighbors_;
+}
+
+int Particle::numberOfBoundaryNeighbors() {
+  return boundaryneighbors_;
 }
 
 void Particle::getNeighbors(int neighbors[]) {
   for (int i = 0; i < N_; i++) {
     neighbors[i] = neighborarray_[i];
+  }
+}
+
+void Particle::getBoundaryNeighbors(int neighbors[]) {
+  for (int i = 0; i < NB_; i++) {
+    neighbors[i] = boundaryneighborarray_[i];
   }
 }
 
@@ -94,9 +115,13 @@ void Particle::initializeNeighborArray() {
   for (int i = 0; i < N_; i++) {
     neighborarray_[i] = -1;
   }
+  for (int i = 0; i < NB_; i++) {
+    boundaryneighborarray_[i] = -1;
+  }
 }
 
 void Particle::deleteNeighbors() {
   neighbors_ = 0;
+  boundaryneighbors_ = 0;
   initializeNeighborArray();
 }

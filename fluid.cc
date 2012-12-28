@@ -22,11 +22,11 @@ Fluid::~Fluid(){
 
 //should this just be addParticle(Properties props) ?
 void Fluid::addParticle(int tag, Properties prop){
-  particles_[tag] = new Particle(tag,nparticles_,prop);
+  particles_[tag] = new Particle(tag,nparticles_,nboundaries_,prop);
 }
 
 void Fluid::addBoundary(int tag, Properties prop){
-  boundaries_[tag] = new Particle(tag,nboundaries_,prop);  
+  boundaries_[tag] = new Particle(tag,nparticles_,nboundaries_,prop);  
 }
 
 void Fluid::findNeighbors(){
@@ -49,14 +49,16 @@ void Fluid::findNeighbors(){
   }
   for(int i=0; i<nboundaries_; ++i) {
     boundaries_[i]->get(old,propi);
-    for(int j=i+1; j<nparticles_; ++j){
+    for(int j=0; j<nparticles_; ++j){
       particles_[j]->get(old,propj);
       float dist = sqrt(pow(propi.x-propj.x,2)+
         pow(propi.y-propj.y,2));
+
+      int BN = particles_[j]->numberOfBoundaryNeighbors();
         
         //should this cutoff distance be larger?
       if(dist < 5.*smoothinglength_){
-        particles_[j]->addNeighbor(boundaries_[i]);
+        particles_[j]->addBoundaryNeighbor(boundaries_[i]);
       }
     }
   }

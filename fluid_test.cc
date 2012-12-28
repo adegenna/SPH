@@ -31,33 +31,48 @@ TEST_F (FluidTest,checkFindNeighbors){
   // tag to highest tag, including the self, which it is not written
   // that way. Need to talk to others about this. -- Kevin
   initFluid();
-  Particle **parts = new Particle*[2];
-  int neighbors[2];
+  Particle **parts = new Particle*[3];
+  Particle **bound = new Particle*[1];
+  int neighbors0[3], neighbors1[3], neighbors2[3];
+  int boundneigh2[1];
 
   fluid_->findNeighbors();
   fluid_->getParticles(parts);
+  fluid_->getBoundaries(bound);
 
-  parts[0]->getNeighbors(neighbors);
-  EXPECT_EQ(0,neighbors[0]);
-  EXPECT_EQ(1,neighbors[1]);
+  parts[0]->getNeighbors(neighbors0);
+  EXPECT_EQ(1,neighbors0[0]);
+  EXPECT_EQ(2,neighbors0[1]);
+  EXPECT_EQ(-1,neighbors0[2]);
 
-  parts[1]->getNeighbors(neighbors);
-  EXPECT_EQ(0,neighbors[0]);
-  EXPECT_EQ(1,neighbors[1]);
+  parts[1]->getNeighbors(neighbors1);
+  EXPECT_EQ(0,neighbors1[0]);
+  EXPECT_EQ(2,neighbors1[1]);
+  EXPECT_EQ(-1,neighbors1[2]);
 
-  delete parts, neighbors;
+  parts[2]->getNeighbors(neighbors2);
+  EXPECT_EQ(0,neighbors2[0]);
+  EXPECT_EQ(1,neighbors2[1]);
+  EXPECT_EQ(-1,neighbors2[2]);
+  
+  parts[2]->getBoundaryNeighbors(boundneigh2);
+  EXPECT_EQ(0,boundneigh2[0]);
+
+  fluid_->resetNeighbors();
+
+  delete parts; delete bound;
 }
 
 TEST_F (FluidTest,checkResetNeighbors){
   initFluid();
-  Particle **parts = new Particle*[2];
-  int neighbors[2];
+  Particle **parts = new Particle*[3];
+  int neighbors[3];
 
   // if findNeighbors is working (see above test)
   // then this should produce different data
+  fluid_->getParticles(parts);
   fluid_->findNeighbors();
   fluid_->resetNeighbors();
-  fluid_->getParticles(parts);
 
   parts[0]->getNeighbors(neighbors);
   EXPECT_EQ(-1,neighbors[0]);
@@ -67,7 +82,7 @@ TEST_F (FluidTest,checkResetNeighbors){
   EXPECT_EQ(-1,neighbors[0]);
   EXPECT_EQ(-1,neighbors[1]);
 
-  delete parts, neighbors;
+  delete parts;
 }
 
 TEST_F (FluidTest,checkGetKernel){
@@ -88,7 +103,7 @@ TEST_F (FluidTest,checkGetKernel){
 
 TEST_F (FluidTest,checkGetNParticles){
   initFluid();
-  EXPECT_EQ(2,fluid_->getNParticles());
+  EXPECT_EQ(3,fluid_->getNParticles());
 }
 
 TEST_F (FluidTest,checkGetNBoundaries){
@@ -107,8 +122,8 @@ TEST_F (FluidTest,checkResetParticles){
 
   Particle **parts1 = new Particle*[2];
   Particle **parts2 = new Particle*[2];
-  parts1[0] = new Particle(0,2,props1);
-  parts1[1] = new Particle(1,2,props2);
+  parts1[0] = new Particle(0,2,0,props1);
+  parts1[1] = new Particle(1,2,0,props2);
 
   fluid_->resetParticles(parts1);
   fluid_->getParticles(parts2);

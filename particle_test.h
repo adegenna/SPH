@@ -25,8 +25,8 @@ class ParticleTest : public ::testing::Test{
       props2_.pressure = 0.005;
       props2_.visc = 2;
 
-      part1_ = new Particle(1,2,props1_);
-      part2_ = new Particle(2,2,props2_);
+      part1_ = new Particle(1,2,0,props1_);
+      part2_ = new Particle(2,2,0,props2_);
     }
 
     virtual void TearDown(){ delete part1_, part2_; }
