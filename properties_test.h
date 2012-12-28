@@ -4,10 +4,6 @@
 #include "properties.h"
 #include "gtest/gtest.h"
 
-class PropertiesTest : public ::testing::Test{
-  protected:
-    PropertiesTest(){}
-    ~PropertiesTest(){}
-};
+class PropertiesTest : public ::testing::Test{};
 
 #endif // PROPERTIES_TEST_H_
