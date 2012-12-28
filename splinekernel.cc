@@ -11,7 +11,7 @@ SplineKernel::~SplineKernel()
 double SplineKernel::W(double r)
 {
     const double disthat = r / h_;
-    const double C = 8 * M_PI /pow(h_,3);
+    const double C = 8 / M_PI /pow(h_,3);
     if (disthat <= 0.5)
     {
         return C* (1- 6 * pow(disthat,2)+ 6 * pow(disthat,3));
@@ -30,7 +30,7 @@ Kvector SplineKernel::gradW(Kvector vec1, Kvector vec2)  //took out h as input a
 {
     const double rMag = hypot(vec2.x-vec1.x, vec2.y-vec1.y);
     const double disthat = rMag / h_;
-    const double C = 8 * M_PI /pow(h_,3);
+    const double C = 8 / M_PI /pow(h_,3);
 
     Kvector K = {0,0};
     double kMag;
