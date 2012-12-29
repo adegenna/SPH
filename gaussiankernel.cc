@@ -10,23 +10,25 @@ GaussianKernel::~GaussianKernel()
 
 double GaussianKernel::W(double r)
 {
-    const double disthat = r / h_;
-    const double rtpi = sqrt(M_PI);
-    return exp(-pow(disthat,2))/h_/rtpi;
+    const double q = r / h_;
+    const double sigma = 1 / M_PI;
+    return sigma * exp(-q*q) / (h_*h_);
 }
 
 Kvector GaussianKernel::gradW(Kvector vec1, Kvector vec2)
 {
-    const double rMag = hypot(vec2.x-vec1.x, vec2.y-vec1.y);
-    const double kMag = 2* rMag/h_/h_ * W(rMag); //took out -ve
-    Kvector K = {0.,0.};
-
-    if(fabs(rMag)> 1e-10)
-    {
-        K.x = -(vec2.x-vec1.x)/rMag* kMag;
-        K.y = -(vec2.y-vec1.y)/rMag* kMag;
-    }
+    const double r = hypot(vec2.x - vec1.x, vec2.y - vec1.y);
+    const double grad = -2 * W(r) / (h_*h_);
+    Kvector K = {
+        grad * (vec2.x - vec1.x),
+        grad * (vec2.y - vec1.y)
+    };
     return K;
+}
+
+double GaussianKernel::lapW(double r)
+{
+    return 4 * (r*r - h_*h_) * W(r) / pow(h_, 4);
 }
 
 

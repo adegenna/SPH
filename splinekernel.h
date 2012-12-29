@@ -10,6 +10,8 @@ public:
     ~SplineKernel();
     double W(double r);
     Kvector gradW(Kvector vec1, Kvector vec2);
+    double lapW(double r);
+
 private:
     double h_;
 };
