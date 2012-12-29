@@ -15,13 +15,19 @@ IncompInvisc::~IncompInvisc()
 int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* fx) {   // change input to fluid
     
     //this will change, but I'm not entirely sure how to call it at the moment
-    numberneighbors = part->numberOfNeighbors();
+    numberneighbors_ = part->numberOfNeighbors();
+    numberboundaryneighbors_ = part->numberOfBoundaryNeighbors();
     int N = fluid->getNParticles();
+    int NB = fluid->getNBoundaries();
     Particle** neighbors = new Particle*[N];
+    Particle** boundaryneighbors = new Particle*[NB];
     
-    //need to insert code to assign neighbors (should I use getNeighbors?)
-    int neighbortags[numberneighbors];
-    part->getNeighbors(neighbortags); // Returns tags of all neighbors
+    
+    int neighbortags[numberneighbors_];
+    part->getNeighbors(neighbortags); // Returns tags of all fluid neighbors
+    int boundaryneighbortags[numberboundaryneighbors_];
+    part->getBoundaryNeighbors(boundaryneighbortags); // Returns tags of all boundary neighbors    
+    
 
     part->get("OLD", partprops_);
     Kvector partloc_ = {partprops_.x,partprops_.y};
@@ -36,7 +42,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
     
     fluid->getParticles(neighbors);
     
-    for(int i=0; i<numberneighbors; i++) {
+    for(int i=0; i<numberneighbors_; i++) {
         neighbors[neighbortags[i]]->get("OLD",neighprops_);
 //        std::cout<<"neighbor xlocation "<<neighprops_.x<<std::endl;
 //        std::cout<<"partu "<< partprops_.u<<std::endl;
@@ -57,21 +63,39 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                    + neighprops_.pressure/ pow(neighprops_.density,2));
+
+        du_ += - coeff_ *gradker_.x;
+        dv_ += - coeff_ *gradker_.y;
+    }
+    
+    fluid->getBoundaries(boundaryneighbors);
+    
+    //add contribution from boundary neighbors:
+    for(int i=0; i<numberboundaryneighbors_; i++) {
+        boundaryneighbors[boundaryneighbortags[i]]->get("OLD",neighprops_);
         
-        //std::cout<<"coeff = " <<coeff_<<std::endl;
+        //these should be redefined as Kvectors each time, but I seem to get an error otherwise:
+        Kvector veldiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
+        Kvector neighloc_ = {neighprops_.x,neighprops_.y};
+        Kvector gradker_ = myker->gradW(partloc_,neighloc_);
         
+		//add contribution to change in density of particle part by boundary neighbors
+        drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
+        
+		//add contribution to change in velocity of particle part by boundary neighbors
+        coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
+                                     + neighprops_.pressure/ pow(neighprops_.density,2));
         
         du_ += - coeff_ *gradker_.x;
         dv_ += - coeff_ *gradker_.y;
-       // std::cout<<"du = " <<du_<<std::endl;
-        
     }
+    
     //update changes as a property struct
     fx->u = du_;
     fx->v = dv_;
     fx->density = drho_;
-    //std::cout<<"in II: fx.u = " <<fx->u<<std::endl;
-    delete neighbors; 
+    delete neighbors;
+    delete boundaryneighbors;
     return 0;
 }
 

@@ -19,7 +19,8 @@ public:
     int update(Particle* part);
     int calcPressure(Particle* part); 
 private:
-    int numberneighbors;
+    int numberneighbors_;
+    int numberboundaryneighbors_;
     double drho_;
     double du_;
     double dv_;
@@ -31,6 +32,7 @@ private:
     Kvector partloc_;
     Properties partprops_;
     Properties neighprops_;
+    //Properties boundaryneighprops_;  //actually don't think I need this
 };
 
 #endif  // INCOMPINVISC_H_
