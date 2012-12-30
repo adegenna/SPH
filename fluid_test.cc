@@ -18,12 +18,10 @@
 TEST_F (FluidTest,checkAddGetBoundary){
   fluid_->addBoundary(0,propsb_);
 
-  Particle **parts = new Particle*[1];
+  Particle *parts[1];
   fluid_->getBoundaries(parts);
 
   EXPECT_EQ(0,parts[0]->getTag());
-
-  delete parts;
 }
 
 TEST_F (FluidTest,checkFindNeighbors){
@@ -122,8 +120,8 @@ TEST_F (FluidTest,checkResetParticles){
   props1.x = props1_.x + 1;
   props2.density = props2_.density - 1;
 
-  Particle **parts1 = new Particle*[2];
-  Particle **parts2 = new Particle*[2];
+  Particle *parts1[2];
+  Particle *parts2[2];
   parts1[0] = new Particle(0,2,0,props1);
   parts1[1] = new Particle(1,2,0,props2);
 
@@ -134,7 +132,5 @@ TEST_F (FluidTest,checkResetParticles){
   EXPECT_FLOAT_EQ(props3.x,props1_.x+1);
   parts2[1]->get("OLD",props3);
   EXPECT_FLOAT_EQ(props3.density,props1_.density-1);
-
-  delete parts1, parts2;
 }
 

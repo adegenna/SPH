@@ -6,6 +6,7 @@ TEST_F (KernelTest,gaussianW){
     EXPECT_LE(0,kernel_->W(r_[i]));
     EXPECT_GE(1,kernel_->W(r_[i]));
   }
+  delete kernel_;
 }
 
 TEST_F (KernelTest,DISABLED_splineW){
@@ -15,6 +16,7 @@ TEST_F (KernelTest,DISABLED_splineW){
     EXPECT_LE(0,kernel_->W(r_[i]));
     EXPECT_GE(1,kernel_->W(r_[i]));
   }
+  delete kernel_;
 }
 
 TEST_F (KernelTest,gaussianGradW){
@@ -35,6 +37,7 @@ TEST_F (KernelTest,gaussianGradW){
   kvec3 = kernel_->gradW(kvec1,kvec2);
   EXPECT_FLOAT_EQ(0,kvec3.x);
   EXPECT_FLOAT_EQ(0,kvec3.y);
+  delete kernel_;
 }
 
 TEST_F (KernelTest,splineGradW){
@@ -64,4 +67,5 @@ TEST_F (KernelTest,splineGradW){
   kvec3 = kernel_->gradW(kvec1,kvec2);
   EXPECT_FLOAT_EQ(0,kvec3.x);
   EXPECT_FLOAT_EQ(0,kvec3.y);
+  delete kernel_;
 }

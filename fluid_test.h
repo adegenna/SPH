@@ -53,7 +53,8 @@ class FluidTest : public ::testing::Test{
     }
 
     virtual void TearDown(){
-      delete kernel_, fluid_;
+        delete kernel_;
+        delete fluid_;
     }
 
     virtual void initFluid(){
@@ -68,7 +69,7 @@ class FluidTest : public ::testing::Test{
     Fluid *fluid_;
     double smoothinglength_;
 
-  private:
+//  private:
     Kernel *kernel_;
 };
 

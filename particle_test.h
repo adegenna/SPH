@@ -29,7 +29,7 @@ class ParticleTest : public ::testing::Test{
       part2_ = new Particle(2,2,0,props2_);
     }
 
-    virtual void TearDown(){ delete part1_, part2_; }
+    virtual void TearDown(){ delete part1_; delete part2_; }
 
     Properties props1_, props2_;
     Particle *part1_, *part2_;

@@ -17,7 +17,6 @@ Fluid::Fluid(Kernel* kernel, int nparticles, int nboundaries, double smoothingle
 Fluid::~Fluid(){
   delete [] particles_;
   delete [] boundaries_;
-  delete kernel_;
 }
 
 //should this just be addParticle(Properties props) ?
@@ -54,8 +53,8 @@ void Fluid::findNeighbors(){
       float dist = sqrt(pow(propi.x-propj.x,2)+
         pow(propi.y-propj.y,2));
 
-      int BN = particles_[j]->numberOfBoundaryNeighbors();
-        
+//      int BN = particles_[j]->numberOfBoundaryNeighbors();
+
         //should this cutoff distance be larger?
       if(dist < 5.*smoothinglength_){
         particles_[j]->addBoundaryNeighbor(boundaries_[i]);
@@ -96,9 +95,8 @@ void Fluid::getBoundaries(Particle** boundaries) {
 }
 
 void Fluid::resetParticles(Particle** newparticles) {
-  delete [] particles_;
-  particles_ = new Particle*[nparticles_];
   for(int i=0; i<nparticles_; ++i){
+    delete particles_[i];
     particles_[i] = newparticles[i];
   }
 }

@@ -15,7 +15,7 @@ class KernelTest : public ::testing::Test{
         r_[i] = i*.011;
       }
     }
-    virtual void TearDown(){ delete kernel_, r_; }
+//    virtual void TearDown(){}
 
     Kernel *kernel_;
     double r_[100];
