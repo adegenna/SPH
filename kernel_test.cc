@@ -9,7 +9,7 @@ TEST_F (KernelTest,gaussianW){
   delete kernel_;
 }
 
-TEST_F (KernelTest,DISABLED_splineW){
+TEST_F (KernelTest,splineW){
   kernel_ = new SplineKernel(h_);
   EXPECT_FLOAT_EQ(0,kernel_->W(1.1));
   for(int i=0; i<100; ++i){
@@ -35,8 +35,8 @@ TEST_F (KernelTest,gaussianGradW){
   kvec2.x = 1e-11;
   kvec2.y = 0;
   kvec3 = kernel_->gradW(kvec1,kvec2);
-  EXPECT_FLOAT_EQ(0,kvec3.x);
-  EXPECT_FLOAT_EQ(0,kvec3.y);
+  EXPECT_LE(fabs(kvec3.x), 1e-10);
+  EXPECT_LE(fabs(kvec3.y), 1e-10);
   delete kernel_;
 }
 
@@ -65,7 +65,7 @@ TEST_F (KernelTest,splineGradW){
   kvec2.x = 1e-11;
   kvec2.y = 0;
   kvec3 = kernel_->gradW(kvec1,kvec2);
-  EXPECT_FLOAT_EQ(0,kvec3.x);
-  EXPECT_FLOAT_EQ(0,kvec3.y);
+  EXPECT_LE(fabs(kvec3.x), 1e-10);
+  EXPECT_LE(fabs(kvec3.y), 1e-10);
   delete kernel_;
 }
