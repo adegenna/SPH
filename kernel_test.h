@@ -6,6 +6,7 @@
 #include "gaussiankernel.h"
 #include "kvector.h"
 #include "gtest/gtest.h"
+#include "math.h"
 
 class KernelTest : public ::testing::Test{
   protected:
