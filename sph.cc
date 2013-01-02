@@ -66,9 +66,11 @@ int main(int argc, char** argv){
     
     float t = 0;
     while(t < tFinal){
-      //  cout << "t =" << t <<endl;
+       // cout << "t =" << t <<endl;
       fluid->findNeighbors();
+       // cout <<"found neighbors"<<endl;
       integrator->step();
+       // cout <<"stepped"<<endl;
       t = t + dt;
       output(t,fluid);
       fluid->resetNeighbors();  // Need to reset after each time step  

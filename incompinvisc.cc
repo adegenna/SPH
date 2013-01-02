@@ -108,7 +108,8 @@ int IncompInvisc::update(Particle* part) {
 }
 
 int IncompInvisc::calcPressure(Particle* part) {
-    int B = 1;   //this should be changed so the parameters are not set every time
+    //set properties to those which apparently approximate water
+    int B = 3000;   //this should be changed so the parameters are not set every time
     int gamma = 7;
     // SCOTTTTTT
     Properties props;

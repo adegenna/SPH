@@ -58,8 +58,9 @@ int Euler::step(){
         particles[i]->set("OLD", props);
     }
     
+    
     fluid_->resetParticles(particles);
-    delete [] particles;
-    delete [] boundaries;
+    delete particles;
+    delete boundaries;
     return 0;
 }

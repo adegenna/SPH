@@ -25,12 +25,13 @@ void output(float t,Fluid *fluid){
   // not sure we need headers
   // should we also include the particle labels??
   file << "x\ty" << endl;
+      std::string NEW = "NEW";
   for(int i=0; i<nparticles; ++i){
-    particles[i]->get("NEW",props);
+    particles[i]->get("OLD",props); //this line seg faults...why?
     file << props.x << "\t" << props.y << endl;
   }
 
   file.close();
-
-  delete [] fnamechar; delete [] particles;
+  delete particles;
+  delete fnamechar; 
 }

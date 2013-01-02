@@ -96,7 +96,7 @@ void Fluid::getBoundaries(Particle** boundaries) {
 
 void Fluid::resetParticles(Particle** newparticles) {
   for(int i=0; i<nparticles_; ++i){
-    delete particles_[i];
+   // delete particles_[i];
     particles_[i] = newparticles[i];
   }
 }
