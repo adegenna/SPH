@@ -89,6 +89,9 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
         du_ += - coeff_ *gradker_.x;
         dv_ += - coeff_ *gradker_.y;
     }
+
+    //add gravitational force
+    dv_ += -1.;    
     
     //update changes as a property struct
     fx->u = du_;
@@ -109,7 +112,8 @@ int IncompInvisc::update(Particle* part) {
 
 int IncompInvisc::calcPressure(Particle* part) {
     //set properties to those which apparently approximate water
-    int B = 3000;   //this should be changed so the parameters are not set every time
+    //renormalize
+    int B = 1;   //this should be changed so the parameters are not set every time
     int gamma = 7;
     // SCOTTTTTT
     Properties props;

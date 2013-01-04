@@ -58,6 +58,7 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
       //  cout << "x = " << initProps.x <<endl;
       //  cout << "u = " << initProps.u <<endl;
     }
+    fclose(finput);
 
     if (nboundaries !=0){
       FILE* fboundary;
