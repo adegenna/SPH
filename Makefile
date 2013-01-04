@@ -28,3 +28,6 @@ tests: $(objs_tests)
 
 clean:
 	rm -f *.o
+
+cleandat:
+	rm -f fluid*dat
