@@ -10,7 +10,7 @@ IncompInvisc::IncompInvisc()
 IncompInvisc::~IncompInvisc()
 {}
 
-//using namespace std;
+using namespace std;
 
 int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* fx) {   // change input to fluid
     
@@ -36,9 +36,16 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
     dv_ = 0.;
     du_ = 0.;
     
-    //std::cout<<"numberneighbors "<< numberneighbors<<std::endl;
+    std::cout<<"numberneighbors "<< numberneighbors_<<std::endl;
+    std::cout<<"boundaryneighbors "<< numberboundaryneighbors_<<std::endl;
     //std::cout<<"xlocation "<< partprops_.x<<std::endl;
-    
+//    cout << "x = " << partprops_.x <<endl;
+//    cout << "y = " << partprops_.y <<endl;
+//    cout << "u = " << partprops_.u <<endl;
+//    cout << "v = " << partprops_.v <<endl;
+//    cout << "mass = " << partprops_.mass <<endl;
+//    cout << "density = " << partprops_.mass <<endl;
+//    cout << "visc = " << partprops_.visc <<endl;
     
     fluid->getParticles(neighbors);
     
@@ -48,7 +55,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
 //        std::cout<<"partu "<< partprops_.u<<std::endl;
 //        std::cout<<"neighu "<< neighprops_.u<<std::endl;
         
-        //these should be redefined as Kvectors each time, but I seem to get an error otherwise:
+        //these shouldn't be redefined as Kvectors each time, but I seem to get an error otherwise:
         Kvector veldiff_ = {partprops_.u-neighprops_.u,partprops_.v-neighprops_.v};
         Kvector neighloc_ = {neighprops_.x,neighprops_.y};
         Kvector gradker_ = myker->gradW(partloc_,neighloc_);
@@ -85,6 +92,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
 		//add contribution to change in velocity of particle part by boundary neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                      + neighprops_.pressure/ pow(neighprops_.density,2));
+    
         
         du_ += - coeff_ *gradker_.x;
         dv_ += - coeff_ *gradker_.y;

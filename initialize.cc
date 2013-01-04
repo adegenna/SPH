@@ -55,8 +55,13 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
                &initProps.mass,&initProps.density,&initProps.visc);
         fluid->addParticle(i,initProps);
         
-      //  cout << "x = " << initProps.x <<endl;
-      //  cout << "u = " << initProps.u <<endl;
+//        cout << "x = " << initProps.x <<endl;
+//        cout << "y = " << initProps.y <<endl;
+//        cout << "u = " << initProps.u <<endl;
+//        cout << "v = " << initProps.u <<endl;
+//        cout << "mass = " << initProps.mass <<endl;
+//        cout << "density = " << initProps.mass <<endl;
+//        cout << "visc = " << initProps.visc <<endl;
     }
     fclose(finput);
 
