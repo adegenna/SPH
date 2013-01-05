@@ -18,7 +18,7 @@ class Particle {
   // Return/Update particle properties
   // ID is either "OLD" or "NEW"
   int get(const std::string& ID, Properties& props); 
-  int set(const std::string& ID, Properties& props);
+  int set(const std::string& ID, Properties props);
   
   void addNeighbor(Particle* neighbor);         // Add a neighbor tag
   void addBoundaryNeighbor(Particle* neighbor); // Add boundary tag

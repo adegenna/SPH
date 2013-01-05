@@ -82,7 +82,7 @@ int Particle::get(const std::string& ID, Properties& props) {
   return 0;
 }
 
-int Particle::set(const std::string& ID, Properties& props) {
+int Particle::set(const std::string& ID, Properties props) {
   if (ID == "OLD") {
     propsold_.x = props.x;
     propsold_.y = props.y;
