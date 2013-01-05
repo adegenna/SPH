@@ -79,6 +79,6 @@ int main(int argc, char** argv){
     delete integrator;
     delete physics;
     delete fluid;
-  //  delete myKer;
+    delete myKer;
     return 0;
 }

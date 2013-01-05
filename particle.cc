@@ -40,13 +40,13 @@ int Particle::numberOfBoundaryNeighbors() {
 }
 
 void Particle::getNeighbors(int neighbors[]) {
-  for (int i = 0; i < N_; i++) {
+  for (int i = 0; i < N_; ++i) {
     neighbors[i] = neighborarray_[i];
   }
 }
 
 void Particle::getBoundaryNeighbors(int neighbors[]) {
-  for (int i = 0; i < NB_; i++) {
+  for (int i = 0; i < NB_; ++i) {
     neighbors[i] = boundaryneighborarray_[i];
   }
 }
@@ -110,10 +110,10 @@ int Particle::set(const std::string& ID, Properties& props) {
 }
 
 void Particle::initializeNeighborArray() {
-  for (int i = 0; i < N_; i++) {
+  for (int i = 0; i < N_; ++i) {
     neighborarray_[i] = -1;
   }
-  for (int i = 0; i < NB_; i++) {
+  for (int i = 0; i < NB_; ++i) {
     boundaryneighborarray_[i] = -1;
   }
 }

@@ -60,7 +60,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
     
     fluid->getParticles(neighbors);
     
-    for(int i=0; i<numberneighbors_; i++) {
+    for(int i=0; i<numberneighbors_; ++i) {
         
 //        cout << "i = " << i <<endl;
 //        cout << "neighbortags[0] =  " << neighbortags[0] <<endl;
@@ -107,7 +107,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
     part->getBoundaryNeighbors(boundaryneighbortags); // Returns tags of all boundary neighbors    
     
     //add contribution from boundary neighbors:
-    for(int i=0; i<numberboundaryneighbors_; i++) {
+    for(int i=0; i<numberboundaryneighbors_; ++i) {
         boundaryneighbors[boundaryneighbortags[i]]->get("OLD",neighprops_);
         
         //these should be redefined as Kvectors each time, but I seem to get an error otherwise:

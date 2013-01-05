@@ -22,7 +22,7 @@ int Euler::step(){
     fluid_->getParticles(particles);
     fluid_->getBoundaries(boundaries);
 
-    for(int i=0; i<nparticles; i++){
+    for(int i=0; i<nparticles; ++i){
         physics_->calcPressure(particles[i]);
       
         Properties fx;   //struct to store the changes in particle properties,
@@ -53,7 +53,7 @@ int Euler::step(){
         
     }
     
-    for(int i=0; i<nparticles; i++){
+    for(int i=0; i<nparticles; ++i){
         particles[i]->get("NEW", props);
         particles[i]->set("OLD", props);
     }

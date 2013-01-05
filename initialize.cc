@@ -49,7 +49,7 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
     //Allocate sufficient memory for particles
     //particles = (Particle**) malloc(NParticles);
     
-    for (int i=0;i<nparticles;i++){
+    for (int i=0;i<nparticles;++i){
         fscanf(finput, "%lf %lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
@@ -71,7 +71,7 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
       float nboundariesf_;
       fscanf(fboundary,"%f",&nboundariesf_);
       nboundaries = int(nboundariesf_);
-      for (int i=0; i<nboundaries; i++) {
+      for (int i=0; i<nboundaries; ++i) {
           fscanf(fboundary, "%lf %lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc

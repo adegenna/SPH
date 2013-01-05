@@ -83,13 +83,13 @@ int Fluid::getNBoundaries(){
 }
 
 void Fluid::getParticles(Particle** particles){
-  for (int i=0; i<nparticles_; i++) {
+  for (int i=0; i<nparticles_; ++i) {
     particles[i] = particles_[i];
   }
 }
 
 void Fluid::getBoundaries(Particle** boundaries) {
-  for (int i=0; i<nboundaries_; i++) {
+  for (int i=0; i<nboundaries_; ++i) {
     boundaries[i] = boundaries_[i];
   }
 }
