@@ -1,15 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <math.h>
 #include "particle.h"
-#include "properties.h"
-#include <string>
 
 Particle::Particle(int tag, int N, int NB, Properties& properties) {
   tag_ = tag;
-  x_ = new double[2]; v_ = new double[2];
-  xnew_ = new double[2]; vnew_ = new double[2];
   set("OLD", properties);
   neighbors_ = 0;
   boundaryneighbors_ = 0;
@@ -22,8 +14,6 @@ Particle::Particle(int tag, int N, int NB, Properties& properties) {
 }
 
 Particle::~Particle() {
-  delete [] x_; delete [] xnew_;
-  delete [] v_; delete [] vnew_;
   delete [] neighborarray_;
   delete [] boundaryneighborarray_;
 }
@@ -65,23 +55,26 @@ int Particle::getTag() {
   return tag_;
 }
 
-// do we also want the ability to get individual properties directly as well?
-int Particle::get(const std::string& ID, Properties& Prop) {
+int Particle::get(const std::string& ID, Properties& props) {
   if (ID == "OLD") {
-    Prop.x = x_[0]; Prop.y = x_[1];
-    Prop.u = v_[0]; Prop.v = v_[1];
-    Prop.mass = mass_;
-    Prop.density = density_;
-    Prop.pressure = pressure_;
-    Prop.visc = visc_;
+    props.x = propsold_.x;
+    props.y = propsold_.y;
+    props.u = propsold_.u;
+    props.v = propsold_.v;
+    props.density = propsold_.density;
+    props.mass = propsold_.mass;
+    props.pressure = propsold_.pressure;
+    props.visc = propsold_.visc;
   }
   else if (ID == "NEW") {
-    Prop.x = xnew_[0]; Prop.y = xnew_[1];
-    Prop.u = vnew_[0]; Prop.v = vnew_[1];
-    Prop.mass = mass_;
-    Prop.density = densitynew_;
-    Prop.pressure = pressure_;
-    Prop.visc = visc_;
+    props.x = propsnew_.x;
+    props.y = propsnew_.y;
+    props.u = propsnew_.u;
+    props.v = propsnew_.v;
+    props.density = propsnew_.density;
+    props.mass = propsnew_.mass;
+    props.pressure = propsnew_.pressure;
+    props.visc = propsnew_.visc;
   }
   else {
     return 1; // Error
@@ -89,22 +82,26 @@ int Particle::get(const std::string& ID, Properties& Prop) {
   return 0;
 }
 
-int Particle::set(const std::string& ID, Properties& Prop) {
+int Particle::set(const std::string& ID, Properties& props) {
   if (ID == "OLD") {
-    x_[0] = Prop.x; x_[1] = Prop.y;
-    v_[0] = Prop.u; v_[1] = Prop.v;
-    mass_ = Prop.mass;
-    density_ = Prop.density;
-    pressure_ = Prop.pressure;
-    visc_ = Prop.visc;
+    propsold_.x = props.x;
+    propsold_.y = props.y;
+    propsold_.u = props.u;
+    propsold_.v = props.v;
+    propsold_.density = props.density;
+    propsold_.mass = props.mass;
+    propsold_.pressure = props.pressure;
+    propsold_.visc = props.visc;
   }
   else if (ID == "NEW") {
-    xnew_[0] = Prop.x; xnew_[1] = Prop.y;
-    vnew_[0] = Prop.u; vnew_[1] = Prop.v;
-    mass_ = Prop.mass;
-    densitynew_ = Prop.density;
-    pressure_ = Prop.pressure;
-    visc_ = Prop.visc;
+    propsnew_.x = props.x;
+    propsnew_.y = props.y;
+    propsnew_.u = props.u;
+    propsnew_.v = props.v;
+    propsnew_.density = props.density;
+    propsnew_.mass = props.mass;
+    propsnew_.pressure = props.pressure;
+    propsnew_.visc = props.visc;
   }
   else {
     return 1; // Error
