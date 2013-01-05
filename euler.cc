@@ -27,6 +27,14 @@ int Euler::step(){
       
         Properties fx;   //struct to store the changes in particle properties,
                          //which itself can be a Properties struct.
+        fx.x = 0;
+        fx.y = 0;
+        fx.u = 0;
+        fx.v = 0;
+        fx.density = 0;
+        fx.mass = 0;
+        fx.pressure = 0;
+        fx.visc = 0;
 
         //update pressure. This is passing more info than is necessary. Perhaps
         //create a setPressure function

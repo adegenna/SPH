@@ -12,7 +12,7 @@ IncompInvisc::~IncompInvisc()
 
 using namespace std;
 
-int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties fx) {   // change input to fluid
+int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &fx) {   // change input to fluid
     
     //this will change, but I'm not entirely sure how to call it at the moment
     numberneighbors_ = part->numberOfNeighbors();
