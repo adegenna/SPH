@@ -40,13 +40,13 @@ int Particle::numberOfBoundaryNeighbors() {
 }
 
 void Particle::getNeighbors(int neighbors[]) {
-  for (int i = 0; i < N_; ++i) {
+  for (int i = 0; i < neighbors_; ++i) {
     neighbors[i] = neighborarray_[i];
   }
 }
 
 void Particle::getBoundaryNeighbors(int neighbors[]) {
-  for (int i = 0; i < NB_; ++i) {
+  for (int i = 0; i < boundaryneighbors_; ++i) {
     neighbors[i] = boundaryneighborarray_[i];
   }
 }
