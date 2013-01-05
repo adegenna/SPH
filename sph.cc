@@ -42,7 +42,7 @@ int main(int argc, char** argv){
     getNparticles(initFile,boundaryFile, nparticles,nboundaries);
     //int nparticles = 15;  //this shouldn't be hard coded,
     
-    string kerneltype = "Spline";
+    string kerneltype = "Gaussian";
     
     Fluid *fluid;
     Kernel *myKer;

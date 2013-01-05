@@ -15,7 +15,7 @@ class IncompInvisc : public Physics
 public:
     IncompInvisc();
     ~IncompInvisc();
-    int rhs(Fluid* fluid, Particle* part, Kernel* myker,Properties* fx);
+    int rhs(Fluid* fluid, Particle* part, Kernel* myker,Properties fx);
     int update(Particle* part);
     int calcPressure(Particle* part); 
 private:

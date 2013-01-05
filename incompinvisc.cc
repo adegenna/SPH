@@ -12,7 +12,7 @@ IncompInvisc::~IncompInvisc()
 
 using namespace std;
 
-int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* fx) {   // change input to fluid
+int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties fx) {   // change input to fluid
     
     //this will change, but I'm not entirely sure how to call it at the moment
     numberneighbors_ = part->numberOfNeighbors();
@@ -138,13 +138,13 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties* f
     dv_ += -1.;    
     
     //update changes as a property struct
-    fx->u = du_;
-    fx->v = dv_;
-    fx->density = drho_;
-    fx->mass = 0;
-    fx->visc = 0;
-    fx->x = 0;
-    fx->y = 0;
+    fx.u = du_;
+    fx.v = dv_;
+    fx.density = drho_;
+    fx.mass = 0;
+    fx.visc = 0;
+    fx.x = 0;
+    fx.y = 0;
     delete neighbors;
     delete boundaryneighbors;
     return 0;

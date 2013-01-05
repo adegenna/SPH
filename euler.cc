@@ -31,7 +31,7 @@ int Euler::step(){
         //update pressure. This is passing more info than is necessary. Perhaps
         //create a setPressure function
 
-        physics_->rhs(fluid_, particles[i],fluid_->getKernel(),&fx);
+        physics_->rhs(fluid_, particles[i],fluid_->getKernel(),fx);
 //        std::cout << "Euler: fx.u = " <<fx.u <<std::endl;
         
         
