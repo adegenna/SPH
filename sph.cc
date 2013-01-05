@@ -68,15 +68,20 @@ int main(int argc, char** argv){
     integrator = new Euler(dt,fluid,physics);
     
     double t = 0;
+    int counter = 0;
     while(t < tFinal){
         cout << "t =" << t <<endl;
       fluid->findNeighbors();
        // cout <<"found neighbors"<<endl;
       integrator->step();
        // cout <<"stepped"<<endl;
-      t = t + dt;
-      output(t,fluid);
+        
+      if (counter%10 == 0){  //output every 10 timesteps
+        output(t,fluid);
+      }
       fluid->resetNeighbors();  // Need to reset after each time step  
+      counter += 1;
+      t += dt;
     }
 
     delete integrator;

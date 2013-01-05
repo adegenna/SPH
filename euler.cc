@@ -24,7 +24,12 @@ int Euler::step(){
 
     for(int i=0; i<nparticles; ++i){
         physics_->calcPressure(particles[i]);
-      
+    }
+    for(int i=0; i<nboundaries; ++i){
+        physics_->calcPressure(boundaries[i]);
+    }
+    
+    for(int i=0; i<nparticles; ++i){
         Properties fx;   //struct to store the changes in particle properties,
                          //which itself can be a Properties struct.
         fx.x = 0;
