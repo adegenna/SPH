@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void output(float t,Fluid *fluid){
+void output(double t,Fluid *fluid){
   // this should write fluid_<t>.dat
   // which is a list of particle positions
   Properties props;

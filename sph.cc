@@ -8,30 +8,33 @@
 #include "kernel.h"
 #include "gaussiankernel.h"
 #include "splinekernel.h"
-#include "euler.h" // <-- does not exist
-#include "output.h" // <-- does not exist
+#include "euler.h"
+#include "output.h"
 
 using namespace std;
 
 int main(int argc, char** argv){
-    // what is the usage? main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> ?
+    // Usage: main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep>
     string initFile, boundaryFile;
-    float tFinal;
-    if(argc == 3) {
+    double tFinal;
+    double dt;
+    if(argc == 4) {
       initFile = argv[1];
       tFinal = atof(argv[2]);
+      dt = atof(argv[3]);
     }
-    else if(argc == 4) {
+    else if(argc == 5) {
       initFile = argv[1];
       tFinal = atof(argv[3]);
+        dt = atof(argv[4]);
       boundaryFile = argv[2];
     }
     else{
-        cout << "USAGE: " << argv[0] << " <initFile> <boundaryFile(OPTIONAL)> <tFinal>" << endl;
+        cout << "USAGE: " << argv[0] << " <initFile> <boundaryFile(OPTIONAL)> <tFinal>  <timestep>" << endl;
         exit(1);
     }
 
-    const float dt = 0.1; // <-- make into input??
+    //const double dt = 0.1; // <-- make into input??
     const double smoothinglength = 1;
 
 
@@ -64,9 +67,9 @@ int main(int argc, char** argv){
     physics = new IncompInvisc();
     integrator = new Euler(dt,fluid,physics);
     
-    float t = 0;
+    double t = 0;
     while(t < tFinal){
-       // cout << "t =" << t <<endl;
+        cout << "t =" << t <<endl;
       fluid->findNeighbors();
        // cout <<"found neighbors"<<endl;
       integrator->step();

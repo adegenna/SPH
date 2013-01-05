@@ -8,4 +8,4 @@
 #include "particle.h"
 #include "fluid.h"
 
-void output(float t,Fluid *fluid);
+void output(double t,Fluid *fluid);
