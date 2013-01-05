@@ -32,6 +32,7 @@ private:
     Kvector partloc_;
     Properties partprops_;
     Properties neighprops_;
+    Properties bneighprops_;
     //Properties boundaryneighprops_;  //actually don't think I need this
 };
 
