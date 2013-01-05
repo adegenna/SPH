@@ -82,3 +82,23 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
     }
     return true;
 }
+
+void rectangleParticles(Kvector p0, Kvector p1, double density, double smoothinglength, Fluid *fluid) {
+  p0.x += 0.5*smoothinglength; p0.y += 0.5*smoothinglength;
+  p1.x -= 0.5*smoothinglength; p1.y -= 0.5*smoothinglength;
+  int xsteps = 1 + (int) floor((p1.x-p0.x)/smoothinglength);
+  int ysteps = 1 + (int) floor((p1.y-p0.y)/smoothinglength);
+  int counter = 0;
+  Properties props;
+  double mass = density*pow(smoothinglength,2);
+  for(int i=0; i<xsteps; i++) {
+    for(int j=0; j<ysteps; j++) {
+      props.x = p0.x + i*smoothinglength;
+      props.y = p0.y + j*smoothinglength;
+      props.u = 0; props.v = 0; props.mass = mass; props.density = 0;
+      props.visc = 0;
+      fluid->addParticle(counter,props);
+      counter += 1;
+    }
+  }
+}
