@@ -2,6 +2,12 @@
 #define PARTICLE_H_
 
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <math.h>
+#include "particle.h"
+#include "properties.h"
 
 struct Properties;
 class Particle {
@@ -11,8 +17,8 @@ class Particle {
 
   // Return/Update particle properties
   // ID is either "OLD" or "NEW"
-  int get(const std::string& ID, Properties& properties); 
-  int set(const std::string& ID, Properties& properties);
+  int get(const std::string& ID, Properties& props); 
+  int set(const std::string& ID, Properties& props);
   
   void addNeighbor(Particle* neighbor);         // Add a neighbor tag
   void addBoundaryNeighbor(Particle* neighbor); // Add boundary tag
@@ -24,15 +30,8 @@ class Particle {
   void deleteNeighbors();                       // Re-initialize neighborarray_
   
  private:
-  double* x_;                     // Location Pointer
-  double* v_;                     // Velocity Pointer
-  double* xnew_;                  // New Location Pointer
-  double* vnew_;                  // New Velocity Pointer
-  double mass_;                   // Particle Mass
-  double visc_;                   // Particle Viscosity
-  double density_;                // Particle Density
-  double densitynew_;             // Particle New Density
-  double pressure_;               // Particle Pressure
+  Properties propsold_;           // old properties
+  Properties propsnew_;           // new properties
   int tag_;                       // Particle identifier
   int neighbors_;                 // Number of neighbors
   int boundaryneighbors_;         // Number of boundary neighbors
@@ -40,7 +39,6 @@ class Particle {
   int* boundaryneighborarray_;    // Array of boundary neighbor tags
   int N_;                         // Global Number of Particles
   int NB_;                        // Global Number of Boundary Particles
-
   void initializeNeighborArray(); // Initialize neighbor array
 };
 
