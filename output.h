@@ -1,11 +1,15 @@
-#include <stdlib.h>
-#include <iostream>
 #include <fstream>
-#include <sstream>
-#include <cstring>
 
-#include "properties.h"
-#include "particle.h"
-#include "fluid.h"
+class Fluid;
 
-void output(double t,Fluid *fluid);
+
+class Output
+{
+public:
+    Output(const std::string& filename);
+
+    void write(double t, const Fluid& fluid);
+
+private:
+    std::ofstream file_;
+};

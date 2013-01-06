@@ -12,15 +12,15 @@ class Fluid {
   public:
   Fluid(Kernel *kernel, int nparticles, int nboundaries, double smoothinglength);
     ~Fluid();
-    void getParticles(Particle** particles);
+    void getParticles(Particle** particles) const;
     void addParticle(int tag,Properties prop);
-    void getBoundaries(Particle** boundaries);
+    void getBoundaries(Particle** boundaries) const;
     void addBoundary(int tag,Properties prop);
     void findNeighbors();
     void resetNeighbors();
     Kernel* getKernel();
-    int getNParticles();
-    int getNBoundaries();
+    int getNParticles() const;
+    int getNBoundaries() const;
     void resetParticles(Particle** newparticles); // Global particle update
     
   private:
