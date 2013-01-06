@@ -18,8 +18,8 @@
 
 using namespace std;
 
+/// Usage: main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep>
 int main(int argc, char** argv){
-    // Usage: main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep>
     string initFile, boundaryFile;
     double tFinal;
     double dt;
@@ -96,5 +96,9 @@ int main(int argc, char** argv){
 /**
  * \mainpage
  *
- * This is where the overview of the program goes. Need to write that.
+ * sph is a smoothed particle hydrodynamics solver. The driver program is 
+ * sph.cc.
+ *
+ * Associated with sph is tests.cc, which is the driver program for testing 
+ * classes and structs used by sph.
  */
