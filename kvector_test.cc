@@ -1,5 +1,11 @@
+/**
+ * \file
+ *
+ * \brief tests for Kvector
+ */
 #include "kvector_test.h"
 
+// tests that Kvector initialized properly
 TEST (KvectorTest,kvector){
   Kvector k;
   k.x = 1;

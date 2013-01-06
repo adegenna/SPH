@@ -1,5 +1,11 @@
+/** 
+ * \file
+ * 
+ * \brief Tests for Properties
+ */
 #include "properties_test.h"
 
+/// tests that Properties initializes properly
 TEST (PropertiesTest,checkAllProps){
   Properties props;
   props.x = 1.25;

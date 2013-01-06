@@ -1,3 +1,8 @@
+/**
+ * \file
+ *
+ * \brief Driver program for testing of sph
+ */
 #include <stdlib.h>
 #include <iostream>
 #include "gtest/gtest.h"

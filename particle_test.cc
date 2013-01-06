@@ -1,5 +1,11 @@
+/**
+ * \file
+ *
+ * \brief tests Particle
+ */
 #include "particle_test.h"
 
+/// tests Particle::getOldProperties and Particle::setNewProperties
 TEST_F (ParticleTest,checkGetSet){
   // check Particle::get
   props2_ = part1_->getOldProperties();
@@ -19,6 +25,7 @@ TEST_F (ParticleTest,checkGetSet){
   EXPECT_EQ(props1_.x,props2_.x);
 }
 
+/// tests Particle::numberOfNeighbors, Particle::addNeighbor, Particle::deleteNeighbors
 TEST_F (ParticleTest,checkNeighbors){
   // check numberOfNeighbors is initially 0
   EXPECT_EQ(0,part1_->numberOfNeighbors());
@@ -32,6 +39,7 @@ TEST_F (ParticleTest,checkNeighbors){
   EXPECT_EQ(0,part1_->numberOfNeighbors());
 }
 
+/// tests Particle::getTag
 TEST_F (ParticleTest,checkGetTag){
 
   EXPECT_EQ(1,part1_->getTag());

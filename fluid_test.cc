@@ -1,3 +1,8 @@
+/**
+ * \file
+ *
+ * \brief tests for Fluid
+ */
 #include "fluid_test.h"
 
 //TEST_F (FluidTest,checkAddGetParticle){
@@ -15,6 +20,7 @@
 //    std::cout << "here5" <<std::endl;
 //}
 
+/// tests Fluid::addBoundary and Fluid::getBoundaries
 TEST_F (FluidTest,checkAddGetBoundary){
   fluid_->addBoundary(0,propsb_);
 
@@ -23,6 +29,7 @@ TEST_F (FluidTest,checkAddGetBoundary){
   EXPECT_EQ(0,parts[0]->getTag());
 }
 
+/// tests Fluid::findNeighbors
 TEST_F (FluidTest,checkFindNeighbors){
   // NOTE: find neighbors is not working like I expected
   // it is working how it is written, but I expected something 
@@ -56,6 +63,7 @@ TEST_F (FluidTest,checkFindNeighbors){
   fluid_->resetNeighbors();
 }
 
+/// tests Fluid::resetNeighbors undoes neighbor tags
 TEST_F (FluidTest,checkResetNeighbors){
   initFluid();
 
@@ -74,6 +82,7 @@ TEST_F (FluidTest,checkResetNeighbors){
   EXPECT_EQ(-1,neighbors[1]);
 }
 
+/// tests Fluid::getKernel
 TEST_F (FluidTest,checkGetKernel){
   Kernel &kernel = fluid_->getKernel();
   // this is here only to assert that Fluid::getKernel works,
@@ -81,16 +90,19 @@ TEST_F (FluidTest,checkGetKernel){
   EXPECT_NE(x,kernel.W(1));
 }
 
+/// tests Fluid::getNParticles
 TEST_F (FluidTest,checkGetNParticles){
   initFluid();
   EXPECT_EQ(3,fluid_->getNParticles());
 }
 
+/// tests Fluid::getNBoundaries
 TEST_F (FluidTest,checkGetNBoundaries){
   initFluid();
   EXPECT_EQ(1,fluid_->getNBoundaries());
 }
 
+/// tests Fluid::resetParticles updates particle properties
 TEST_F (FluidTest,checkResetParticles){
   initFluid();
   Properties props1 = props1_;

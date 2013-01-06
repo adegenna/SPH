@@ -1,5 +1,11 @@
+/**
+ * \file
+ *
+ * \brief Tests SplineKernel and GaussianKernel
+ */
 #include "kernel_test.h"
 
+/// tests GaussianKernel::W
 TEST_F (KernelTest,gaussianW){
   GaussianKernel kernel(h_);
   for(int i=0; i<100; ++i){
@@ -8,6 +14,7 @@ TEST_F (KernelTest,gaussianW){
   }
 }
 
+/// tests SplineKernel::W
 TEST_F (KernelTest,splineW){
   SplineKernel kernel(h_);
   EXPECT_FLOAT_EQ(0, kernel.W(1.1));
@@ -17,6 +24,7 @@ TEST_F (KernelTest,splineW){
   }
 }
 
+/// tests GaussianKernel::GradW
 TEST_F (KernelTest,gaussianGradW){
   Kvector kvec1, kvec2, kvec3;
   GaussianKernel kernel(h_);
@@ -37,6 +45,7 @@ TEST_F (KernelTest,gaussianGradW){
   EXPECT_LE(fabs(kvec3.y), 1e-10);
 }
 
+/// tests SplineKernel::GradW
 TEST_F (KernelTest,splineGradW){
   Kvector kvec1, kvec2, kvec3;
   SplineKernel kernel(h_);
