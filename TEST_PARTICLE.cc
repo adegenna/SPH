@@ -3,21 +3,22 @@
 #include <math.h>
 #include "particle.h"
 #include "properties.h"
+#include "fluid.h"
 
 using namespace std;
 
 int main() {
-  int N = 3; // Number of particles
+  const int N = 3; // Number of particles
 
-  double* r1 = new double[2]; // Position of P1
-  double* v1 = new double[2]; // Velocity of P1
-  double* r2 = new double[2]; // Position of P2
-  double* v2 = new double[2]; // Velocity of P2
-  double* r3 = new double[2]; // Position of P3
-  double* v3 = new double[2]; // Velocity of P3
+  double r1[2]; // Position of P1
+  double v1[2]; // Velocity of P1
+  double r2[2]; // Position of P2
+  double v2[2]; // Velocity of P2
+  double r3[2]; // Position of P3
+  double v3[2]; // Velocity of P3
 
-  double** x = new double*[N]; // Pointer to the pointers r_i
-  double** v = new double*[N]; // Pointer to the pointers v_i
+  double* x[N]; // Pointer to the pointers r_i
+  double* v[N]; // Pointer to the pointers v_i
 
   // **************** Set values ******************
   r1[0] = -7; r1[1] = 20; v1[0] = 5; v1[1] = 6;
@@ -34,14 +35,14 @@ int main() {
   // **********************************************
   
   // ************** Initialization ****************
-  Particle** particles = new Particle*[N]; // Pointer to particle pointers
+    Fluid::ParticleArray particles(N); // Pointer to particle pointers
   Properties initial;
   for (int i = 0; i < N; i++) {
     initial.x = x[i][0]; initial.y = x[i][1];
     initial.u = v[i][0]; initial.v = v[i][1];
     initial.mass = mass; initial.visc = visc; initial.pressure = pressure;
     initial.density = density;
-    particles[i] = new Particle(i+1, N, initial);
+    particles[i].reset(new Particle(i+1, N, 0, initial));
   }
   // *********************************************
   
@@ -51,12 +52,11 @@ int main() {
   printf("\nP2 OLD location = %lf %lf\n", location2[0], location2[1]);
   
   // Add neighbors
-  particles[0]->addNeighbor(particles[1]);
-  particles[0]->addNeighbor(particles[2]);
+  particles[0]->addNeighbor(*particles[1]);
+  particles[0]->addNeighbor(*particles[2]);
   int numberneighbors = particles[0]->numberOfNeighbors();
   printf("\nP1 Number of neighbors = %d\n",numberneighbors);
-  int neighbors[N];
-  particles[0]->getNeighbors(neighbors);
+  Particle::TagArray neighbors = particles[0]->getNeighbors();
   printf("P1 neighbors are particles %d and %d and %d\n", neighbors[0], neighbors[1], neighbors[2]);
 
   // Use properties struct for get/set
@@ -69,12 +69,10 @@ int main() {
   
   // Delete all neighbors
   particles[0]->deleteNeighbors();
-  particles[0]->getNeighbors(neighbors);
+  neighbors = particles[0]->getNeighbors();
   numberneighbors = particles[0]->numberOfNeighbors();
   printf("\nP1 now has %d neighbors and the neighbor array is empty: %d %d %d\n\n", numberneighbors, neighbors[0], neighbors[1], neighbors[2]);
 
-  delete r1; delete r2; delete v1; delete v2;
-  delete particles;
   // *********************************************
 
   return 0;

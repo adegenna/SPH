@@ -1,6 +1,7 @@
 #ifndef FLUID_TEST_H_
 #define FLUID_TEST_H_
 
+#include <boost/shared_ptr.hpp>
 #include "properties.h"
 #include "particle.h"
 #include "fluid.h"
@@ -11,7 +12,7 @@ class FluidTest : public ::testing::Test{
   protected:
     virtual void SetUp(){
       smoothinglength_ = 1;
-      kernel_ = new GaussianKernel(smoothinglength_);
+      kernel_.reset(new GaussianKernel(smoothinglength_));
 
       props1_.x = 1;
       props1_.y = -1;
@@ -49,12 +50,7 @@ class FluidTest : public ::testing::Test{
       propsb_.pressure = 0;
       propsb_.visc = 100;
 
-      fluid_ = new Fluid(kernel_,3,1,smoothinglength_);
-    }
-
-    virtual void TearDown(){
-        delete kernel_;
-        delete fluid_;
+      fluid_.reset(new Fluid(*kernel_,3,1,smoothinglength_));
     }
 
     virtual void initFluid(){
@@ -66,11 +62,10 @@ class FluidTest : public ::testing::Test{
     }
 
     Properties props1_, props2_, props3_, propsb_;
-    Fluid *fluid_;
+    boost::shared_ptr<Fluid> fluid_;
     double smoothinglength_;
 
-//  private:
-    Kernel *kernel_;
+    boost::shared_ptr<Kernel> kernel_;
 };
 
 #endif // FLUID_TEST_H_

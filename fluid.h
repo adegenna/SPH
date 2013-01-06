@@ -1,34 +1,37 @@
 #ifndef FLUID_H_
 #define FLUID_H_
 
-#include <stdlib.h>
-#include "kvector.h"
-#include "kernel.h"
+#include <vector>
+#include <boost/shared_ptr.hpp>
+
 #include "properties.h"
-#include "particle.h"
-#include "math.h"
+
+class Kernel;
+class Particle;
+
 
 class Fluid {
   public:
-  Fluid(Kernel *kernel, int nparticles, int nboundaries, double smoothinglength);
-    ~Fluid();
-    void getParticles(Particle** particles) const;
-    void addParticle(int tag,Properties prop);
-    void getBoundaries(Particle** boundaries) const;
-    void addBoundary(int tag,Properties prop);
+    typedef std::vector< boost::shared_ptr<Particle> > ParticleArray;
+
+    Fluid(Kernel& kernel, size_t nparticles, size_t nboundaries, double smoothinglength);
+    ParticleArray getParticles() const;
+    void addParticle(int tag, const Properties& prop);
+    ParticleArray getBoundaries() const;
+    void addBoundary(int tag, const Properties& prop);
     void findNeighbors();
     void resetNeighbors();
-    Kernel* getKernel();
-    int getNParticles() const;
-    int getNBoundaries() const;
-    void resetParticles(Particle** newparticles); // Global particle update
+    Kernel& getKernel();
+    size_t getNParticles() const;
+    size_t getNBoundaries() const;
+    void resetParticles(const ParticleArray& newparticles); // Global particle update
     
   private:
-    Particle **particles_;
-    Particle **boundaries_; // Boundary particles
-    Kernel *kernel_;
-    int nparticles_;  // number of particles
-    int nboundaries_; // number of boundaries
+    Kernel& kernel_;
+    size_t nparticles_;  // number of particles
+    size_t nboundaries_; // number of boundaries
     double smoothinglength_;
+    ParticleArray particles_;
+    ParticleArray boundaries_; // Boundary particles
 };
 #endif // FLUID_H

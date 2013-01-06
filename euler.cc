@@ -1,31 +1,29 @@
 #include "euler.h"
-//#include "physics.h"
 
-Euler::Euler(double dt,Fluid *fluid,Physics *physics){
-  dt_ = dt;
-  fluid_ = fluid;
-  physics_ = physics;
-}
+#include "fluid.h"
+#include "physics.h"
+#include "particle.h"
 
-Euler::~Euler() {
-  delete [] fx_;
-}
+
+Euler::Euler(double dt, Fluid& fluid, Physics& physics) :
+dt_(dt),
+fluid_(fluid),
+physics_(physics)
+{}
 
 // Step all particles forward using explicit Euler method
 //I don't think we explicitly need time here, as equations are time invariant
 int Euler::step(){
-    int nparticles = fluid_->getNParticles();
-    int nboundaries = fluid_->getNBoundaries();
-    Particle** particles = new Particle*[nparticles];
-    Particle** boundaries = new Particle*[nboundaries];
-    fluid_->getParticles(particles);
-    fluid_->getBoundaries(boundaries);
+    int nparticles = fluid_.getNParticles();
+    int nboundaries = fluid_.getNBoundaries();
+    Fluid::ParticleArray particles = fluid_.getParticles();
+    Fluid::ParticleArray boundaries = fluid_.getBoundaries();
 
     for(int i=0; i<nparticles; ++i){
-        physics_->calcPressure(particles[i]);
+        physics_.calcPressure(*particles[i]);
     }
     for(int i=0; i<nboundaries; ++i){
-        physics_->calcPressure(boundaries[i]);
+        physics_.calcPressure(*boundaries[i]);
     }
     
     for(int i=0; i<nparticles; ++i){
@@ -43,7 +41,7 @@ int Euler::step(){
         //update pressure. This is passing more info than is necessary. Perhaps
         //create a setPressure function
 
-        physics_->rhs(fluid_, particles[i],fluid_->getKernel(),fx);
+        physics_.rhs(fluid_, *particles[i], fluid_.getKernel(), fx);
 //        std::cout << "Euler: fx.u = " <<fx.u <<std::endl;
         
         
@@ -71,8 +69,7 @@ int Euler::step(){
     }
     
     
-    fluid_->resetParticles(particles);
-    delete particles;
-    delete boundaries;
+    fluid_.resetParticles(particles);
+
     return 0;
 }

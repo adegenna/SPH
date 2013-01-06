@@ -1,7 +1,9 @@
 #include "output.h"
 
 #include "fluid.h"
+#include "particle.h"
 #include <cstdlib>
+#include <iostream>
 
 
 Output::Output(const std::string& filename) : file_(filename.c_str())
@@ -23,8 +25,7 @@ Output::Output(const std::string& filename) : file_(filename.c_str())
 void Output::write(double t, const Fluid& fluid)
 {
     const int nparticles = fluid.getNParticles();
-    Particle *particles[nparticles];
-    fluid.getParticles(particles);
+    Fluid::ParticleArray particles = fluid.getParticles();
 
     file_ << t;
     for (size_t i = 0; i < nparticles; ++i)

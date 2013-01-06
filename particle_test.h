@@ -1,6 +1,7 @@
 #ifndef PARTICLE_TEST_H_
 #define PARTICLE_TEST_H_
 
+#include <boost/shared_ptr.hpp>
 #include "properties.h"
 #include "particle.h"
 #include "gtest/gtest.h"
@@ -25,14 +26,12 @@ class ParticleTest : public ::testing::Test{
       props2_.pressure = 0.005;
       props2_.visc = 2;
 
-      part1_ = new Particle(1,2,0,props1_);
-      part2_ = new Particle(2,2,0,props2_);
+      part1_.reset(new Particle(1,2,0,props1_));
+      part2_.reset(new Particle(2,2,0,props2_));
     }
 
-    virtual void TearDown(){ delete part1_; delete part2_; }
-
     Properties props1_, props2_;
-    Particle *part1_, *part2_;
+    boost::shared_ptr<Particle> part1_, part2_;
 };
 
 #endif // PARTICLE_TEST_H_

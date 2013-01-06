@@ -2,22 +2,16 @@
 #define INCOMPINVISC_H_
 
 #include "physics.h"
-//#include "kernel.h"
-#include "particle.h"
 #include "properties.h"
 #include "kvector.h"
-#include <math.h>
-#include "fluid.h"
 
 // Class for an incompressibe, inviscid fluid
 class IncompInvisc : public Physics
 {
 public:
-    IncompInvisc();
-    ~IncompInvisc();
-    int rhs(Fluid* fluid, Particle* part, Kernel* myker,Properties &fx);
-    int update(Particle* part);
-    int calcPressure(Particle* part); 
+    int rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& fx);
+    int update(Particle& part);
+    int calcPressure(Particle& part);
 private:
     int numberneighbors_;
     int numberboundaryneighbors_;
@@ -33,7 +27,6 @@ private:
     Properties partprops_;
     Properties neighprops_;
     Properties bneighprops_;
-    //Properties boundaryneighprops_;  //actually don't think I need this
 };
 
 #endif  // INCOMPINVISC_H_

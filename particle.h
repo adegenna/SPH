@@ -2,18 +2,16 @@
 #define PARTICLE_H_
 
 #include <string>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <math.h>
-#include "particle.h"
+#include <vector>
 #include "properties.h"
 
-struct Properties;
+
 class Particle {
  public:
-  Particle(int tag, int N, int NB, Properties& properties);
-  ~Particle();
+  typedef int Tag;
+  typedef std::vector<int> TagArray;
+
+  Particle(Tag tag, size_t N, size_t NB, const Properties& properties);
 
   // Return/Update particle properties
   Properties getOldProperties() const;
@@ -21,26 +19,25 @@ class Particle {
   void setOldProperties(const Properties& props);
   void setNewProperties(const Properties& props);
   
-  void addNeighbor(Particle* neighbor);         // Add a neighbor tag
-  void addBoundaryNeighbor(Particle* neighbor); // Add boundary tag
-  int numberOfNeighbors();                      // Return neighbors_
-  int numberOfBoundaryNeighbors();              // Return boundaryneighbors_
-  void getNeighbors(int neighbors[]);           // Get neighborarray_
-  void getBoundaryNeighbors(int neighbors[]);   // Get boundaryneighborarray_
-  int getTag();                                 // Return tag_
-  void deleteNeighbors();                       // Re-initialize neighborarray_
+  void addNeighbor(const Particle& neighbor);         // Add a neighbor tag
+  void addBoundaryNeighbor(const Particle& neighbor); // Add boundary tag
+  size_t numberOfNeighbors() const;                   // Return neighbors_
+  size_t numberOfBoundaryNeighbors() const;           // Return boundaryneighbors_
+  TagArray getNeighbors() const;                      // Get neighborarray_
+  TagArray getBoundaryNeighbors() const;              // Get boundaryneighborarray_
+  Tag getTag() const;                                 // Return tag_
+  void deleteNeighbors();                             // Re-initialize neighborarray_
   
  private:
-  Properties propsold_;           // old properties
-  Properties propsnew_;           // new properties
-  int tag_;                       // Particle identifier
-  int neighbors_;                 // Number of neighbors
-  int boundaryneighbors_;         // Number of boundary neighbors
-  int* neighborarray_;            // Array of neighbor tags
-  int* boundaryneighborarray_;    // Array of boundary neighbor tags
-  int N_;                         // Global Number of Particles
-  int NB_;                        // Global Number of Boundary Particles
-  void initializeNeighborArray(); // Initialize neighbor array
+  Tag tag_;                        // Particle identifier
+  size_t neighbors_;               // Number of neighbors
+  size_t boundaryneighbors_;       // Number of boundary neighbors
+  TagArray neighborarray_;         // Array of neighbor tags
+  TagArray boundaryneighborarray_; // Array of boundary neighbor tags
+  Properties propsold_;            // old properties
+  Properties propsnew_;            // new properties
+
+  void initializeNeighborArray();  // Initialize neighbor array
 };
 
 #endif  // PARTICLE_H

@@ -18,8 +18,7 @@
 TEST_F (FluidTest,checkAddGetBoundary){
   fluid_->addBoundary(0,propsb_);
 
-  Particle *parts[1];
-  fluid_->getBoundaries(parts);
+  Fluid::ParticleArray parts = fluid_->getBoundaries();
 
   EXPECT_EQ(0,parts[0]->getTag());
 }
@@ -31,74 +30,55 @@ TEST_F (FluidTest,checkFindNeighbors){
   // tag to highest tag, including the self, which it is not written
   // that way. Need to talk to others about this. -- Kevin
   initFluid();
-  Particle **parts = new Particle*[3];
-  Particle **bound = new Particle*[1];
-  int neighbors0[3], neighbors1[3], neighbors2[3];
-  int boundneigh2[1];
 
   fluid_->findNeighbors();
-  fluid_->getParticles(parts);
-  fluid_->getBoundaries(bound);
+  Fluid::ParticleArray parts = fluid_->getParticles();
+  Fluid::ParticleArray bound = fluid_->getBoundaries();
 
-  parts[0]->getNeighbors(neighbors0);
+  const Particle::TagArray neighbors0 = parts[0]->getNeighbors();
   EXPECT_EQ(1,neighbors0[0]);
   EXPECT_EQ(2,neighbors0[1]);
   EXPECT_EQ(-1,neighbors0[2]);
 
-  parts[1]->getNeighbors(neighbors1);
+  const Particle::TagArray neighbors1 = parts[1]->getNeighbors();
   EXPECT_EQ(0,neighbors1[0]);
   EXPECT_EQ(2,neighbors1[1]);
   EXPECT_EQ(-1,neighbors1[2]);
 
-  parts[2]->getNeighbors(neighbors2);
+  const Particle::TagArray neighbors2 = parts[2]->getNeighbors();
   EXPECT_EQ(0,neighbors2[0]);
   EXPECT_EQ(1,neighbors2[1]);
   EXPECT_EQ(-1,neighbors2[2]);
   
-  parts[2]->getBoundaryNeighbors(boundneigh2);
+  const Particle::TagArray boundneigh2 = parts[2]->getBoundaryNeighbors();
   EXPECT_EQ(0,boundneigh2[0]);
 
   fluid_->resetNeighbors();
-
-  delete parts; delete bound;
 }
 
 TEST_F (FluidTest,checkResetNeighbors){
   initFluid();
-  Particle **parts = new Particle*[3];
-  int neighbors[3];
 
   // if findNeighbors is working (see above test)
   // then this should produce different data
-  fluid_->getParticles(parts);
+  Fluid::ParticleArray parts = fluid_->getParticles();
   fluid_->findNeighbors();
   fluid_->resetNeighbors();
 
-  parts[0]->getNeighbors(neighbors);
+  Particle::TagArray neighbors = parts[0]->getNeighbors();
   EXPECT_EQ(-1,neighbors[0]);
   EXPECT_EQ(-1,neighbors[1]);
 
-  parts[1]->getNeighbors(neighbors);
+  neighbors = parts[1]->getNeighbors();
   EXPECT_EQ(-1,neighbors[0]);
   EXPECT_EQ(-1,neighbors[1]);
-
-  delete parts;
 }
 
 TEST_F (FluidTest,checkGetKernel){
-  Kernel *kernel;
-  kernel = fluid_->getKernel();
-
+  Kernel &kernel = fluid_->getKernel();
   // this is here only to assert that Fluid::getKernel works,
-  // as the destructor below is not working (not sure why)
   double x = -99999;
-  EXPECT_NE(x,kernel->W(1));
-
-  // the delete below is causing a seg fault
-  // the destructors seem to be in place, but there is no kernel
-  // constructor, so maybe that's it??
-
-  //delete kernel;
+  EXPECT_NE(x,kernel.W(1));
 }
 
 TEST_F (FluidTest,checkGetNParticles){
@@ -120,13 +100,12 @@ TEST_F (FluidTest,checkResetParticles){
   props1.x = props1_.x + 1;
   props2.density = props2_.density - 1;
 
-  Particle *parts1[2];
-  Particle *parts2[2];
-  parts1[0] = new Particle(0,2,0,props1);
-  parts1[1] = new Particle(1,2,0,props2);
+  Fluid::ParticleArray parts1(2);
+  parts1[0].reset(new Particle(0,2,0,props1));
+  parts1[1].reset(new Particle(1,2,0,props2));
 
   fluid_->resetParticles(parts1);
-  fluid_->getParticles(parts2);
+  Fluid::ParticleArray parts2 = fluid_->getParticles();
 
   props3 = parts2[0]->getOldProperties();
   EXPECT_FLOAT_EQ(props3.x,props1_.x+1);

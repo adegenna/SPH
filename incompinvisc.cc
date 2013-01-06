@@ -1,29 +1,18 @@
 #include "incompinvisc.h"
-#include "kvector.h"
-//#include <stdio.h>
-#include <iostream>
-//#include <stdlib.h>
-IncompInvisc::IncompInvisc()
-   // : 
-{}
 
-IncompInvisc::~IncompInvisc()
-{}
+#include <cmath>
+#include "fluid.h"
+#include "particle.h"
+#include "kernel.h"
 
-using namespace std;
 
-int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &fx) {   // change input to fluid
+int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& fx) {   // change input to fluid
     
-    numberneighbors_ = part->numberOfNeighbors();
-    numberboundaryneighbors_ = part->numberOfBoundaryNeighbors();
+    numberneighbors_ = part.numberOfNeighbors();
+    numberboundaryneighbors_ = part.numberOfBoundaryNeighbors();
     
-    Particle** neighbors = new Particle*[fluid->getNParticles()];
-    Particle** boundaryneighbors = new Particle*[fluid->getNBoundaries()];
-    
-    int neighbortags[numberneighbors_];
-    part->getNeighbors(neighbortags);    // Returns tags of all fluid neighbors
-    int boundaryneighbortags[numberboundaryneighbors_];
-    partprops_ = part->getOldProperties();
+    Particle::TagArray neighbortags = part.getNeighbors();    // Returns tags of all fluid neighbors
+    partprops_ = part.getOldProperties();
     partloc_.x = partprops_.x;
     partloc_.y = partprops_.y;
     
@@ -31,7 +20,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &f
     dv_ = 0.;
     du_ = 0.;
     
-    fluid->getParticles(neighbors);
+    Fluid::ParticleArray neighbors = fluid.getParticles();
     
     for(int i=0; i<numberneighbors_; ++i) {
         
@@ -41,7 +30,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &f
         neighloc_.x = neighprops_.x;
         neighloc_.y = neighprops_.y;
         
-        gradker_ = myker->gradW(partloc_,neighloc_);
+        gradker_ = myker.gradW(partloc_,neighloc_);
         
         
 		//add contribution to change in density of particle part by neighbors
@@ -55,8 +44,8 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &f
         dv_ += - coeff_ *gradker_.y;
     }
     
-    fluid->getBoundaries(boundaryneighbors);
-    part->getBoundaryNeighbors(boundaryneighbortags); // Returns tags of all boundary neighbors    
+    Fluid::ParticleArray boundaryneighbors = fluid.getBoundaries();
+    Particle::TagArray boundaryneighbortags = part.getBoundaryNeighbors(); // Returns tags of all boundary neighbors
     
     //add contribution from boundary neighbors:
     for(int i=0; i<numberboundaryneighbors_; ++i) {
@@ -68,7 +57,7 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &f
         veldiff_.y = partprops_.v-neighprops_.v;
         neighloc_.x = neighprops_.x;
         neighloc_.y = neighprops_.y;
-        gradker_ = myker->gradW(partloc_,neighloc_);
+        gradker_ = myker.gradW(partloc_,neighloc_);
         
 		//add contribution to change in density of particle part by boundary neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
@@ -94,27 +83,26 @@ int IncompInvisc::rhs(Fluid* fluid, Particle* part, Kernel* myker, Properties &f
     fx.visc = 0;
     fx.x = 0;
     fx.y = 0;
-    delete neighbors;
-    delete boundaryneighbors;
+
     return 0;
 }
 
 
 //This function might be obsolete now. I put this directly in the integrator (Euler)
-int IncompInvisc::update(Particle* part) {
-    partprops_ = part->getNewProperties();
-    part->setOldProperties(partprops_);
+int IncompInvisc::update(Particle& part) {
+    partprops_ = part.getNewProperties();
+    part.setOldProperties(partprops_);
     return 0;
 }
 
-int IncompInvisc::calcPressure(Particle* part) {
+int IncompInvisc::calcPressure(Particle& part) {
     //set properties to those which apparently approximate water
     
     int B = 3000;   //this should be changed so the parameters are not set every time
     int gamma = 7;
     double rho_0 = 1000.;
-    Properties props = part->getOldProperties();
+    Properties props = part.getOldProperties();
     props.pressure = B * (pow(props.density / rho_0,gamma)-1.);
-    part->setOldProperties(props);
+    part.setOldProperties(props);
     return 0;
 }

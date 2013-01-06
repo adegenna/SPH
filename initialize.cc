@@ -2,6 +2,13 @@
 
 //File to load particle locations
 
+#include <iostream>
+#include <cmath>
+#include "fluid.h"
+#include "properties.h"
+#include "kvector.h"
+
+
 using namespace std;
 
 
@@ -31,7 +38,7 @@ bool getNparticles(const std::string& filename, const std::string& boundaryFile,
 }
 
 
-bool initialize(const std::string& filename, const std::string& boundaryFile, Fluid *fluid, int& nparticles, int& nboundaries) {
+bool initialize(const std::string& filename, const std::string& boundaryFile, Fluid& fluid, int& nparticles, int& nboundaries) {
     
     FILE* finput;
     finput = fopen(filename.c_str(),"r");
@@ -53,7 +60,7 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
         fscanf(finput, "%lf %lf %lf %lf %lf %lf %lf",&initProps.x,&initProps.y,
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc);
-        fluid->addParticle(i,initProps);
+        fluid.addParticle(i,initProps);
         
 //        cout << "x = " << initProps.x <<endl;
 //        cout << "y = " << initProps.y <<endl;
@@ -76,14 +83,14 @@ bool initialize(const std::string& filename, const std::string& boundaryFile, Fl
                &initProps.u,&initProps.v,
                &initProps.mass,&initProps.density,&initProps.visc
                );
-        fluid->addBoundary(i,initProps);
+        fluid.addBoundary(i,initProps);
       }
       fclose(fboundary);
     }
     return true;
 }
 
-void rectangleParticles(Kvector p0, Kvector p1, double density, double smoothinglength, Fluid *fluid) {
+void rectangleParticles(Kvector p0, Kvector p1, double density, double smoothinglength, Fluid& fluid) {
   p0.x += 0.5*smoothinglength; p0.y += 0.5*smoothinglength;
   p1.x -= 0.5*smoothinglength; p1.y -= 0.5*smoothinglength;
   int xsteps = 1 + (int) floor((p1.x-p0.x)/smoothinglength);
@@ -97,7 +104,7 @@ void rectangleParticles(Kvector p0, Kvector p1, double density, double smoothing
       props.y = p0.y + j*smoothinglength;
       props.u = 0; props.v = 0; props.mass = mass; props.density = 0;
       props.visc = 0;
-      fluid->addParticle(counter,props);
+      fluid.addParticle(counter,props);
       counter += 1;
     }
   }

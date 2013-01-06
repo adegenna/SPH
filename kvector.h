@@ -8,4 +8,4 @@ struct Kvector
     double y;
 };
 
-#endif  // VECTOR_H_
+#endif  // KVECTOR_H_

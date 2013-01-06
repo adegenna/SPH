@@ -1,11 +1,11 @@
-#include <stdlib.h>
+#include <cstdlib>
 #include <iostream>
 #include <string>
+#include <boost/shared_ptr.hpp>
 
 #include "fluid.h"
 #include "initialize.h"
 #include "incompinvisc.h"
-#include "kernel.h"
 #include "gaussiankernel.h"
 #include "splinekernel.h"
 #include "euler.h"
@@ -31,34 +31,31 @@ int main(int argc, char** argv){
     }
     else{
         cout << "USAGE: " << argv[0] << " <initFile> <boundaryFile(OPTIONAL)> <tFinal>  <timestep>" << endl;
-        exit(1);
+        return 1;
     }
 
     const double smoothinglength = 1;
 
 
-    //int nparticles = 3;  //this shouldn't be hard coded,
     int nparticles;
     int nboundaries;
     //read in number of particles, so that fluid can be initialized
     getNparticles(initFile,boundaryFile, nparticles,nboundaries);
-    //int nparticles = 15;  //this shouldn't be hard coded,
-    
-    string kerneltype = "Spline";
-    
-    Fluid *fluid;
-    Kernel *myKer;
+
+    const string kerneltype = "Spline";
+
+    boost::shared_ptr<Kernel> myKer;
     
     if (kerneltype=="Spline"){
-        myKer = new SplineKernel(smoothinglength);
+        myKer.reset(new SplineKernel(smoothinglength));
     }
     else if (kerneltype=="Gaussian"){
-        myKer = new GaussianKernel(smoothinglength);
+        myKer.reset(new GaussianKernel(smoothinglength));
     }
     //initialize fluid, so that initialize will work:
-    fluid = new Fluid(myKer,nparticles,nboundaries,smoothinglength);
+    Fluid fluid(*myKer, nparticles, nboundaries, smoothinglength);
     
-    string inputtype = "IndivParts";
+    const string inputtype = "IndivParts";
     
     if (inputtype == "IndivParts") {
         initialize(initFile,boundaryFile,fluid,nparticles,nboundaries); // initializes the fluid from file
@@ -67,33 +64,27 @@ int main(int argc, char** argv){
         //
     }
         
-    Physics *physics;
-    Integrator *integrator;
-
-    physics = new IncompInvisc();
-    integrator = new Euler(dt,fluid,physics);
+    boost::shared_ptr<Physics> physics(new IncompInvisc());
+    boost::shared_ptr<Integrator> integrator(new Euler(dt, fluid, *physics));
 
     Output output("fluid.dat");
     
     double t = 0;
-    int counter = 0;
-    while(t < tFinal){
-        cout << "t = " << t <<endl;
-      fluid->findNeighbors();
-       // cout <<"found neighbors"<<endl;
+    for (size_t i = 0; t < tFinal; ++i)
+    {
+      cout << "t = " << t << endl;
+
+      fluid.findNeighbors();
+
       integrator->step();
-       // cout <<"stepped"<<endl;
-      if (counter%10 == 0){  //output every 10 timesteps
-        output.write(t, *fluid);
-      }
-      fluid->resetNeighbors();  // Need to reset after each time step  
-      counter += 1;
+
+      if (i % 10 == 0) //output every 10 timesteps
+        output.write(t, fluid);
+
+      fluid.resetNeighbors();  // Need to reset after each time step
+
       t += dt;
     }
 
-    delete integrator;
-    delete physics;
-    delete fluid;
-    delete myKer;
     return 0;
 }

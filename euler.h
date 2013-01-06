@@ -2,25 +2,19 @@
 #define EULER_H_
 
 #include "integrator.h"
-#include "fluid.h"
-#include "physics.h"
-#include "kernel.h"
-#include <iostream>
 
+class Fluid;
 class Physics;
 
 class Euler : public Integrator {
  public:
-  Euler(double dt,Fluid *fluid,Physics *physics);
-  ~Euler();
+  Euler(double dt, Fluid& fluid, Physics& physics);
   int step();
+
  private:
-//  const int dimen_;                     // dimension of state x
     double dt_;                     // timestep
-    Fluid *fluid_;                 
-    Physics *physics_;
-    double *fx_;   						// temporary space to hold f(x,t)
-  	Particle** parts_;
+    Fluid& fluid_;
+    Physics& physics_;
 };
 
 #endif  // EULER_H

@@ -1,31 +1,27 @@
 #include "fluid.h"
-#include <iostream>
 
-Fluid::Fluid(Kernel* kernel, int nparticles, int nboundaries, double smoothinglength){
-  nparticles_ = nparticles;
-  smoothinglength_ = smoothinglength;
-  kernel_ = kernel;
-  nboundaries_ = nboundaries;
-  
-  // this could change, but currently we are just using a simple
-  // array of particles
-  particles_ = new Particle*[nparticles_];
-  boundaries_ = new Particle*[nboundaries_];
+#include <cmath>
+#include "particle.h"
 
-}
 
-Fluid::~Fluid(){
-  delete [] particles_;
-  delete [] boundaries_;
-}
+Fluid::Fluid(Kernel& kernel, size_t nparticles, size_t nboundaries, double smoothinglength) :
+kernel_(kernel),
+nparticles_(nparticles),
+nboundaries_(nboundaries),
+smoothinglength_(smoothinglength),
+particles_(nparticles),
+boundaries_(nboundaries)
+{}
 
 //should this just be addParticle(Properties props) ?
-void Fluid::addParticle(int tag, Properties prop){
-  particles_[tag] = new Particle(tag,nparticles_,nboundaries_,prop);
+void Fluid::addParticle(int tag, const Properties& prop)
+{
+    particles_[tag].reset(new Particle(tag, nparticles_, nboundaries_,prop));
 }
 
-void Fluid::addBoundary(int tag, Properties prop){
-  boundaries_[tag] = new Particle(tag,nparticles_,nboundaries_,prop);  
+void Fluid::addBoundary(int tag, const Properties& prop)
+{
+    boundaries_[tag].reset(new Particle(tag, nparticles_, nboundaries_, prop));
 }
 
 void Fluid::findNeighbors(){
@@ -37,8 +33,8 @@ void Fluid::findNeighbors(){
         
         //should this cutoff distance be larger?
       if(dist < 5.*smoothinglength_){  //this is somewhat arbitrary at the moment
-        particles_[i]->addNeighbor(particles_[j]);
-        particles_[j]->addNeighbor(particles_[i]);
+        particles_[i]->addNeighbor(*particles_[j]);
+        particles_[j]->addNeighbor(*particles_[i]);
       }
     }
   }
@@ -52,7 +48,7 @@ void Fluid::findNeighbors(){
 
         //should this cutoff distance be larger?
       if(dist < 5.*smoothinglength_){
-        particles_[j]->addBoundaryNeighbor(boundaries_[i]);
+        particles_[j]->addBoundaryNeighbor(*boundaries_[i]);
       }
     }
   }
@@ -64,38 +60,32 @@ void Fluid::resetNeighbors(){
   }
 }
 
-Kernel* Fluid::getKernel(){
-  // should this just be Kernel Fluid::..?
+Kernel& Fluid::getKernel()
+{
   return kernel_;
 }
 
-int Fluid::getNParticles() const
+size_t Fluid::getNParticles() const
 {
   return nparticles_;
 }
 
-int Fluid::getNBoundaries() const
+size_t Fluid::getNBoundaries() const
 {
   return nboundaries_;
 }
 
-void Fluid::getParticles(Particle** particles) const
+Fluid::ParticleArray Fluid::getParticles() const
 {
-  for (int i=0; i<nparticles_; ++i) {
-    particles[i] = particles_[i];
-  }
+    return particles_;
 }
 
-void Fluid::getBoundaries(Particle** boundaries) const
+Fluid::ParticleArray Fluid::getBoundaries() const
 {
-  for (int i=0; i<nboundaries_; ++i) {
-    boundaries[i] = boundaries_[i];
-  }
+    return boundaries_;
 }
 
-void Fluid::resetParticles(Particle** newparticles) {
-  for(int i=0; i<nparticles_; ++i){
-   // delete particles_[i];
-    particles_[i] = newparticles[i];
-  }
+void Fluid::resetParticles(const ParticleArray& newparticles)
+{
+    particles_ = newparticles;
 }

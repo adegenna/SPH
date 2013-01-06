@@ -24,7 +24,7 @@ TEST_F (ParticleTest,checkNeighbors){
   EXPECT_EQ(0,part1_->numberOfNeighbors());
 
   // check that there is now 1 neighbor
-  part1_->addNeighbor(part2_);
+  part1_->addNeighbor(*part2_);
   EXPECT_EQ(1,part1_->numberOfNeighbors());
 
   // check that there are now 0 neighbors

@@ -6,7 +6,6 @@ class Integrator {
  public:
   virtual ~Integrator() {}
     
-    //
   virtual int step() = 0;
 };
 
