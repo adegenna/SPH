@@ -1,3 +1,8 @@
+/**
+ *  \file
+ *  
+ *  \brief Driver program for smoothed particle hydrodynamics solver.
+ * */
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -88,3 +93,8 @@ int main(int argc, char** argv){
 
     return 0;
 }
+/**
+ * \mainpage
+ *
+ * This is where the overview of the program goes. Need to write that.
+ */
