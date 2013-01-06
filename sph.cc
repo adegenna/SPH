@@ -72,18 +72,19 @@ int main(int argc, char** argv){
 
     physics = new IncompInvisc();
     integrator = new Euler(dt,fluid,physics);
+
+    Output output("fluid.dat");
     
     double t = 0;
     int counter = 0;
     while(t < tFinal){
-        cout << "t =" << t <<endl;
+        cout << "t = " << t <<endl;
       fluid->findNeighbors();
        // cout <<"found neighbors"<<endl;
       integrator->step();
        // cout <<"stepped"<<endl;
-        
-      if (counter%100 == 0){  //output every 10 timesteps
-        output(t,fluid);
+      if (counter%10 == 0){  //output every 10 timesteps
+        output.write(t, *fluid);
       }
       fluid->resetNeighbors();  // Need to reset after each time step  
       counter += 1;

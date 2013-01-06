@@ -74,21 +74,25 @@ Kernel* Fluid::getKernel(){
   return kernel_;
 }
 
-int Fluid::getNParticles(){
+int Fluid::getNParticles() const
+{
   return nparticles_;
 }
 
-int Fluid::getNBoundaries(){
+int Fluid::getNBoundaries() const
+{
   return nboundaries_;
 }
 
-void Fluid::getParticles(Particle** particles){
+void Fluid::getParticles(Particle** particles) const
+{
   for (int i=0; i<nparticles_; ++i) {
     particles[i] = particles_[i];
   }
 }
 
-void Fluid::getBoundaries(Particle** boundaries) {
+void Fluid::getBoundaries(Particle** boundaries) const
+{
   for (int i=0; i<nboundaries_; ++i) {
     boundaries[i] = boundaries_[i];
   }

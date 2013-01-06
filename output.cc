@@ -1,37 +1,37 @@
 #include "output.h"
 
-using namespace std;
+#include "fluid.h"
+#include <cstdlib>
 
-void output(double t,Fluid *fluid){
-  // this should write fluid_<t>.dat
-  // which is a list of particle positions
-  Properties props;
-  int nparticles = fluid->getNParticles();
-  Particle **particles = new Particle*[nparticles];
-  fluid->getParticles(particles);
 
-  // get the file name in the proper format
-  ofstream myfile;
-  stringstream ss (stringstream::in | stringstream::out);
-  ss << t;
-  string fname = "fluid_";
-  fname = fname + ss.str() + ".dat";
-  char *fnamechar = new char [fname.size()+1];
-  strcpy(fnamechar,fname.c_str());
+Output::Output(const std::string& filename) : file_(filename.c_str())
+{
+    if (file_.good())
+    {
+        // Matlab-style comment (to ease import) on first line
+        file_ << "% t\tp[0].x\tp[0].y\tp[1].x\tp[1].y\t..." << std::endl;
+    }
+    else
+    {
+        std::cerr << "### Output file creation failed ###" << std::endl;
+        std::cerr << "Make sure that '" << filename << "' is writable." << std::endl;
+        std::cerr << "The output directory must exist." << std::endl;
+        exit(0);
+    }
+}
 
-  ofstream file;
-  file.open(fnamechar);
+void Output::write(double t, const Fluid& fluid)
+{
+    const int nparticles = fluid.getNParticles();
+    Particle *particles[nparticles];
+    fluid.getParticles(particles);
 
-  // not sure we need headers
-  // should we also include the particle labels??
-  file << "x\ty" << endl;
-      std::string NEW = "NEW";
-  for(int i=0; i<nparticles; ++i){
-    particles[i]->get("OLD",props); //this line seg faults...why?
-    file << props.x << "\t" << props.y << endl;
-  }
-
-  file.close();
-  delete particles;
-  delete fnamechar; 
+    file_ << t;
+    for (size_t i = 0; i < nparticles; ++i)
+    {
+        Properties props;
+        particles[i]->get("OLD", props);
+        file_ << '\t' << props.x << '\t' << props.y;
+    }
+    file_ << std::endl;
 }
