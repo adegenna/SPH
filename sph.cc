@@ -34,7 +34,6 @@ int main(int argc, char** argv){
         exit(1);
     }
 
-    //const double dt = 0.1; // <-- make into input??
     const double smoothinglength = 1;
 
 
@@ -45,7 +44,7 @@ int main(int argc, char** argv){
     getNparticles(initFile,boundaryFile, nparticles,nboundaries);
     //int nparticles = 15;  //this shouldn't be hard coded,
     
-    string kerneltype = "Gaussian";
+    string kerneltype = "Spline";
     
     Fluid *fluid;
     Kernel *myKer;
@@ -59,8 +58,15 @@ int main(int argc, char** argv){
     //initialize fluid, so that initialize will work:
     fluid = new Fluid(myKer,nparticles,nboundaries,smoothinglength);
     
-    initialize(initFile,boundaryFile,fluid,nparticles,nboundaries); // initializes the fluid from file
+    string inputtype = "IndivParts";
     
+    if (inputtype == "IndivParts") {
+        initialize(initFile,boundaryFile,fluid,nparticles,nboundaries); // initializes the fluid from file
+    }
+    else if (inputtype == "RectangleParticles" ) {
+        //
+    }
+        
     Physics *physics;
     Integrator *integrator;
 
@@ -76,7 +82,7 @@ int main(int argc, char** argv){
       integrator->step();
        // cout <<"stepped"<<endl;
         
-      if (counter%10 == 0){  //output every 10 timesteps
+      if (counter%100 == 0){  //output every 10 timesteps
         output(t,fluid);
       }
       fluid->resetNeighbors();  // Need to reset after each time step  
