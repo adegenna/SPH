@@ -1,0 +1,69 @@
+\hypertarget{classIncompInvisc}{\section{\-Incomp\-Invisc \-Class \-Reference}
+\label{classIncompInvisc}\index{\-Incomp\-Invisc@{\-Incomp\-Invisc}}
+}
+
+
+class for an incompressibe, inviscid fluid  
+
+
+
+
+{\ttfamily \#include $<$incompinvisc.\-h$>$}
+
+\-Inheritance diagram for \-Incomp\-Invisc\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIncompInvisc}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classIncompInvisc_a06fbd0a590ef1ef102352a094ae4c698}{rhs} (\hyperlink{classFluid}{\-Fluid} \&fluid, \hyperlink{classParticle}{\-Particle} \&part, \hyperlink{classKernel}{\-Kernel} \&myker, \hyperlink{structProperties}{\-Properties} \&fx)
+\begin{DoxyCompactList}\small\item\em update function \end{DoxyCompactList}\item 
+\hypertarget{classIncompInvisc_a06483b536f7464b593b55fe4d11a45ce}{int \hyperlink{classIncompInvisc_a06483b536f7464b593b55fe4d11a45ce}{update} (\hyperlink{classParticle}{\-Particle} \&part)}\label{classIncompInvisc_a06483b536f7464b593b55fe4d11a45ce}
+
+\begin{DoxyCompactList}\small\item\em move part's new properties to old properties \end{DoxyCompactList}\item 
+\hypertarget{classIncompInvisc_a4363561397ee2a76b67c23851fbaced5}{int \hyperlink{classIncompInvisc_a4363561397ee2a76b67c23851fbaced5}{calc\-Pressure} (\hyperlink{classParticle}{\-Particle} \&part)}\label{classIncompInvisc_a4363561397ee2a76b67c23851fbaced5}
+
+\begin{DoxyCompactList}\small\item\em calculates pressure \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+class for an incompressibe, inviscid fluid 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classIncompInvisc_a06fbd0a590ef1ef102352a094ae4c698}{\index{\-Incomp\-Invisc@{\-Incomp\-Invisc}!rhs@{rhs}}
+\index{rhs@{rhs}!IncompInvisc@{\-Incomp\-Invisc}}
+\subsubsection[{rhs}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Incomp\-Invisc\-::rhs} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Fluid} \&}]{fluid, }
+\item[{{\bf \-Particle} \&}]{part, }
+\item[{{\bf \-Kernel} \&}]{myker, }
+\item[{{\bf \-Properties} \&}]{fx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classIncompInvisc_a06fbd0a590ef1ef102352a094ae4c698}
+
+
+update function 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em fluid} & input fluid \\
+\hline
+{\em part} & particular fluid particle \\
+\hline
+{\em myker} & kernel to use \\
+\hline
+{\em fx} & stores changes of update \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements \hyperlink{classPhysics_a0fd5afe65228da08e3886e58d5285d43}{\-Physics}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{incompinvisc_8h}{incompinvisc.\-h}\end{DoxyCompactItemize}

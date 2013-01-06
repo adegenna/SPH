@@ -1,7 +1,12 @@
+/**
+ * \file
+ *
+ * \brief struct for 2D vector object useful for kernel operations
+ */
 #ifndef KVECTOR_H_
 #define KVECTOR_H_
 
-// create a struct for a vector object that is useful for kernel operations
+/// struct for 2D vector useful for kernel operations
 struct Kvector
 {
     double x;

@@ -1,0 +1,72 @@
+\hypertarget{classPhysics}{\section{\-Physics \-Class \-Reference}
+\label{classPhysics}\index{\-Physics@{\-Physics}}
+}
+
+
+superclass for implementing different fluid physics  
+
+
+
+
+{\ttfamily \#include $<$physics.\-h$>$}
+
+\-Inheritance diagram for \-Physics\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPhysics}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classPhysics_afdd87b5bb9fe2e927c37d50fbeb8216b}{virtual \hyperlink{classPhysics_afdd87b5bb9fe2e927c37d50fbeb8216b}{$\sim$\-Physics} ()}\label{classPhysics_afdd87b5bb9fe2e927c37d50fbeb8216b}
+
+\begin{DoxyCompactList}\small\item\em dtor \end{DoxyCompactList}\item 
+virtual int \hyperlink{classPhysics_a0fd5afe65228da08e3886e58d5285d43}{rhs} (\hyperlink{classFluid}{\-Fluid} \&fluid, \hyperlink{classParticle}{\-Particle} \&part, \hyperlink{classKernel}{\-Kernel} \&my\-Ker, \hyperlink{structProperties}{\-Properties} \&fx)=0
+\begin{DoxyCompactList}\small\item\em update function \end{DoxyCompactList}\item 
+\hypertarget{classPhysics_ab51a11d51e09b132610cd6fbb95d0c0c}{virtual int \hyperlink{classPhysics_ab51a11d51e09b132610cd6fbb95d0c0c}{update} (\hyperlink{classParticle}{\-Particle} \&part)=0}\label{classPhysics_ab51a11d51e09b132610cd6fbb95d0c0c}
+
+\begin{DoxyCompactList}\small\item\em move part's new properties to old properties \end{DoxyCompactList}\item 
+\hypertarget{classPhysics_a50759e0407dff12021c94f9fa6729765}{virtual int \hyperlink{classPhysics_a50759e0407dff12021c94f9fa6729765}{calc\-Pressure} (\hyperlink{classParticle}{\-Particle} \&part)=0}\label{classPhysics_a50759e0407dff12021c94f9fa6729765}
+
+\begin{DoxyCompactList}\small\item\em calculates pressure \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+superclass for implementing different fluid physics 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classPhysics_a0fd5afe65228da08e3886e58d5285d43}{\index{\-Physics@{\-Physics}!rhs@{rhs}}
+\index{rhs@{rhs}!Physics@{\-Physics}}
+\subsubsection[{rhs}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf \-Physics\-::rhs} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Fluid} \&}]{fluid, }
+\item[{{\bf \-Particle} \&}]{part, }
+\item[{{\bf \-Kernel} \&}]{my\-Ker, }
+\item[{{\bf \-Properties} \&}]{fx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classPhysics_a0fd5afe65228da08e3886e58d5285d43}
+
+
+update function 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em fluid} & input fluid \\
+\hline
+{\em part} & particular fluid particle \\
+\hline
+{\em my\-Ker} & kernel to use \\
+\hline
+{\em fx} & stores changes of update \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in \hyperlink{classIncompInvisc_a06fbd0a590ef1ef102352a094ae4c698}{\-Incomp\-Invisc}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{physics_8h}{physics.\-h}\end{DoxyCompactItemize}

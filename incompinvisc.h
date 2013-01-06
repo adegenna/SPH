@@ -1,3 +1,8 @@
+/**
+ * \file
+ *
+ * \brief implementation of physics for a fluid which is incompressible and inviscid
+ */
 #ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
 
@@ -5,12 +10,19 @@
 #include "properties.h"
 #include "kvector.h"
 
-// Class for an incompressibe, inviscid fluid
+/// class for an incompressibe, inviscid fluid
 class IncompInvisc : public Physics
 {
 public:
-    int rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& fx);
+    /// update function
+    int rhs(Fluid& fluid, //!< input fluid
+        Particle& part,   //!< particular fluid particle
+        Kernel& myker,    //!< kernel to use
+        Properties& fx    //!< stores changes of update
+        );
+    /// move part's new properties to old properties
     int update(Particle& part);
+    /// calculates pressure
     int calcPressure(Particle& part);
 private:
     int numberneighbors_;

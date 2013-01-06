@@ -1,0 +1,90 @@
+\hypertarget{classFluid}{\section{\-Fluid \-Class \-Reference}
+\label{classFluid}\index{\-Fluid@{\-Fluid}}
+}
+
+
+\-Holds particles and boundary praticles.  
+
+
+
+
+{\ttfamily \#include $<$fluid.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classFluid_a25e5d85ff44e6f570e3f85cd759d4375}{typedef std\-::vector\*
+$<$ boost\-::shared\-\_\-ptr$<$ \hyperlink{classParticle}{\-Particle} $>$ $>$ {\bfseries \-Particle\-Array}}\label{classFluid_a25e5d85ff44e6f570e3f85cd759d4375}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFluid_ae4aecca54a935e361157859de51ce2e3}{\-Fluid} (\hyperlink{classKernel}{\-Kernel} \&kernel, size\-\_\-t nparticles, size\-\_\-t nboundaries, double smoothinglength)
+\begin{DoxyCompactList}\small\item\em ctor \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a653f9edf3a6c53ec1f42e7f41cdc87a8}{\-Particle\-Array \hyperlink{classFluid_a653f9edf3a6c53ec1f42e7f41cdc87a8}{get\-Particles} () const }\label{classFluid_a653f9edf3a6c53ec1f42e7f41cdc87a8}
+
+\begin{DoxyCompactList}\small\item\em get the array of particles \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a128d7ad9ce3a78bc8ef039702f9c2706}{void \hyperlink{classFluid_a128d7ad9ce3a78bc8ef039702f9c2706}{add\-Particle} (int tag, const \hyperlink{structProperties}{\-Properties} \&prop)}\label{classFluid_a128d7ad9ce3a78bc8ef039702f9c2706}
+
+\begin{DoxyCompactList}\small\item\em add particle to the particle array \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a8c9d7de21e341ec6344e78cb2ca21baf}{\-Particle\-Array \hyperlink{classFluid_a8c9d7de21e341ec6344e78cb2ca21baf}{get\-Boundaries} () const }\label{classFluid_a8c9d7de21e341ec6344e78cb2ca21baf}
+
+\begin{DoxyCompactList}\small\item\em get the array of boundary particles \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a366795e3ce9fe395ee33febd3813b6f7}{void \hyperlink{classFluid_a366795e3ce9fe395ee33febd3813b6f7}{add\-Boundary} (int tag, const \hyperlink{structProperties}{\-Properties} \&prop)}\label{classFluid_a366795e3ce9fe395ee33febd3813b6f7}
+
+\begin{DoxyCompactList}\small\item\em add particle to the boundary \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a55230ad05ce44fc00032547393788796}{void \hyperlink{classFluid_a55230ad05ce44fc00032547393788796}{find\-Neighbors} ()}\label{classFluid_a55230ad05ce44fc00032547393788796}
+
+\begin{DoxyCompactList}\small\item\em find neighbors for all particles in the fluid \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a6f1fc57fb0aa2de6c81134f02c1a82ce}{void \hyperlink{classFluid_a6f1fc57fb0aa2de6c81134f02c1a82ce}{reset\-Neighbors} ()}\label{classFluid_a6f1fc57fb0aa2de6c81134f02c1a82ce}
+
+\begin{DoxyCompactList}\small\item\em reset particles to have no neighbors \end{DoxyCompactList}\item 
+\hypertarget{classFluid_afb89fa53b31cbd8a053fea20779f7fc0}{\hyperlink{classKernel}{\-Kernel} \& \hyperlink{classFluid_afb89fa53b31cbd8a053fea20779f7fc0}{get\-Kernel} ()}\label{classFluid_afb89fa53b31cbd8a053fea20779f7fc0}
+
+\begin{DoxyCompactList}\small\item\em get the kernel \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a01a17b69aaea73239a3f13f191dbd48a}{size\-\_\-t \hyperlink{classFluid_a01a17b69aaea73239a3f13f191dbd48a}{get\-N\-Particles} () const }\label{classFluid_a01a17b69aaea73239a3f13f191dbd48a}
+
+\begin{DoxyCompactList}\small\item\em get the number of particles \end{DoxyCompactList}\item 
+\hypertarget{classFluid_aad2f8ee1598445f42f41e7faf1fd9a09}{size\-\_\-t \hyperlink{classFluid_aad2f8ee1598445f42f41e7faf1fd9a09}{get\-N\-Boundaries} () const }\label{classFluid_aad2f8ee1598445f42f41e7faf1fd9a09}
+
+\begin{DoxyCompactList}\small\item\em get the number of boundary particles \end{DoxyCompactList}\item 
+\hypertarget{classFluid_a1f422a0a94dc16192650ea11db416576}{void \hyperlink{classFluid_a1f422a0a94dc16192650ea11db416576}{reset\-Particles} (const \-Particle\-Array \&newparticles)}\label{classFluid_a1f422a0a94dc16192650ea11db416576}
+
+\begin{DoxyCompactList}\small\item\em update all particles with input particle array \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Holds particles and boundary praticles. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classFluid_ae4aecca54a935e361157859de51ce2e3}{\index{\-Fluid@{\-Fluid}!\-Fluid@{\-Fluid}}
+\index{\-Fluid@{\-Fluid}!Fluid@{\-Fluid}}
+\subsubsection[{\-Fluid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Fluid\-::\-Fluid} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Kernel} \&}]{kernel, }
+\item[{size\-\_\-t}]{nparticles, }
+\item[{size\-\_\-t}]{nboundaries, }
+\item[{double}]{smoothinglength}
+\end{DoxyParamCaption}
+)}}\label{classFluid_ae4aecca54a935e361157859de51ce2e3}
+
+
+ctor 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em kernel} & \-Type of kernel to use (\hyperlink{classGaussianKernel}{\-Gaussian\-Kernel} or \hyperlink{classSplineKernel}{\-Spline\-Kernel}) \\
+\hline
+{\em nparticles} & \-Number of particles in the fluid (constant) \\
+\hline
+{\em nboundaries} & \-Number of boundary particles in the fluid (constant) \\
+\hline
+{\em smoothinglength} & \-The smoothing length \\
+\hline
+\end{DoxyParams}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fluid_8h}{fluid.\-h}\end{DoxyCompactItemize}

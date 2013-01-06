@@ -1,0 +1,71 @@
+\hypertarget{classParticle}{\section{\-Particle \-Class \-Reference}
+\label{classParticle}\index{\-Particle@{\-Particle}}
+}
+
+
+\hyperlink{structProperties}{\-Properties} and functions for individual particles.  
+
+
+
+
+{\ttfamily \#include $<$particle.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classParticle_aded94129b877208bb64f1af2c51742d1}{typedef int {\bfseries \-Tag}}\label{classParticle_aded94129b877208bb64f1af2c51742d1}
+
+\item 
+\hypertarget{classParticle_a0724b5e0276679c358b729a26f9629a4}{typedef std\-::vector$<$ int $>$ {\bfseries \-Tag\-Array}}\label{classParticle_a0724b5e0276679c358b729a26f9629a4}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classParticle_a88358bdce88d9dda12e57c5ff976dca5}{\hyperlink{classParticle_a88358bdce88d9dda12e57c5ff976dca5}{\-Particle} (\-Tag tag, size\-\_\-t \-N, size\-\_\-t \-N\-B, const \hyperlink{structProperties}{\-Properties} \&properties)}\label{classParticle_a88358bdce88d9dda12e57c5ff976dca5}
+
+\begin{DoxyCompactList}\small\item\em ctor \end{DoxyCompactList}\item 
+\hypertarget{classParticle_ac2bd006400deb1c9f17ddce9d70d3728}{\hyperlink{structProperties}{\-Properties} \hyperlink{classParticle_ac2bd006400deb1c9f17ddce9d70d3728}{get\-Old\-Properties} () const }\label{classParticle_ac2bd006400deb1c9f17ddce9d70d3728}
+
+\begin{DoxyCompactList}\small\item\em return old version of particle properties \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a4dd65686cc2494434cab8db8a2a8e923}{\hyperlink{structProperties}{\-Properties} \hyperlink{classParticle_a4dd65686cc2494434cab8db8a2a8e923}{get\-New\-Properties} () const }\label{classParticle_a4dd65686cc2494434cab8db8a2a8e923}
+
+\begin{DoxyCompactList}\small\item\em return new version of particle properties \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a0b1b6f1166d06dbe1ab143c6561bb9cc}{void \hyperlink{classParticle_a0b1b6f1166d06dbe1ab143c6561bb9cc}{set\-Old\-Properties} (const \hyperlink{structProperties}{\-Properties} \&props)}\label{classParticle_a0b1b6f1166d06dbe1ab143c6561bb9cc}
+
+\begin{DoxyCompactList}\small\item\em set old version of particle properties \end{DoxyCompactList}\item 
+\hypertarget{classParticle_afea2eefc83b471a45c9b1e6c442b91c6}{void \hyperlink{classParticle_afea2eefc83b471a45c9b1e6c442b91c6}{set\-New\-Properties} (const \hyperlink{structProperties}{\-Properties} \&props)}\label{classParticle_afea2eefc83b471a45c9b1e6c442b91c6}
+
+\begin{DoxyCompactList}\small\item\em set new version of particle properties \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a3ac6511d98e8472de59bb474dfe851a1}{void \hyperlink{classParticle_a3ac6511d98e8472de59bb474dfe851a1}{add\-Neighbor} (const \hyperlink{classParticle}{\-Particle} \&neighbor)}\label{classParticle_a3ac6511d98e8472de59bb474dfe851a1}
+
+\begin{DoxyCompactList}\small\item\em add a neighbor tag \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a19bc575957444c91ed5c236e065673ac}{void \hyperlink{classParticle_a19bc575957444c91ed5c236e065673ac}{add\-Boundary\-Neighbor} (const \hyperlink{classParticle}{\-Particle} \&neighbor)}\label{classParticle_a19bc575957444c91ed5c236e065673ac}
+
+\begin{DoxyCompactList}\small\item\em add a boundary neighbor tag \end{DoxyCompactList}\item 
+\hypertarget{classParticle_addaece13cd072de3db9b3281262a9793}{size\-\_\-t \hyperlink{classParticle_addaece13cd072de3db9b3281262a9793}{number\-Of\-Neighbors} () const }\label{classParticle_addaece13cd072de3db9b3281262a9793}
+
+\begin{DoxyCompactList}\small\item\em return the number of neighbors (neighbors\-\_\-) \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a73a8242d6ee30d116ca6bdf952bd7b89}{size\-\_\-t \hyperlink{classParticle_a73a8242d6ee30d116ca6bdf952bd7b89}{number\-Of\-Boundary\-Neighbors} () const }\label{classParticle_a73a8242d6ee30d116ca6bdf952bd7b89}
+
+\begin{DoxyCompactList}\small\item\em return the number of boundary neighbors (boundaryneighbors\-\_\-) \end{DoxyCompactList}\item 
+\hypertarget{classParticle_ae3e4f71b6d03c5e100674e8dead0565e}{\-Tag\-Array \hyperlink{classParticle_ae3e4f71b6d03c5e100674e8dead0565e}{get\-Neighbors} () const }\label{classParticle_ae3e4f71b6d03c5e100674e8dead0565e}
+
+\begin{DoxyCompactList}\small\item\em return the array of neighbor tags (neighborarray\-\_\-) \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a13ece3496e8e2510d7302d1692b5090d}{\-Tag\-Array \hyperlink{classParticle_a13ece3496e8e2510d7302d1692b5090d}{get\-Boundary\-Neighbors} () const }\label{classParticle_a13ece3496e8e2510d7302d1692b5090d}
+
+\begin{DoxyCompactList}\small\item\em return the array of boundary neighbor tags (boundaryneighborarray\-\_\-) \end{DoxyCompactList}\item 
+\hypertarget{classParticle_adce0a40cce7f7862ff2fc0e6bab2e3f4}{\-Tag \hyperlink{classParticle_adce0a40cce7f7862ff2fc0e6bab2e3f4}{get\-Tag} () const }\label{classParticle_adce0a40cce7f7862ff2fc0e6bab2e3f4}
+
+\begin{DoxyCompactList}\small\item\em return the particle's tag (tag\-\_\-) \end{DoxyCompactList}\item 
+\hypertarget{classParticle_a54b1e463538ca132ca86c758ca1f04c2}{void \hyperlink{classParticle_a54b1e463538ca132ca86c758ca1f04c2}{delete\-Neighbors} ()}\label{classParticle_a54b1e463538ca132ca86c758ca1f04c2}
+
+\begin{DoxyCompactList}\small\item\em re-\/initiliaze neighborarray\-\_\- and boundaryneighborarray\-\_\- \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\hyperlink{structProperties}{\-Properties} and functions for individual particles. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{particle_8h}{particle.\-h}\end{DoxyCompactItemize}
