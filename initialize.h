@@ -2,6 +2,7 @@
 #define INITIALIZE_H_
 
 #include <string>
+#include <stdio.h>
 
 class Fluid;
 struct Kvector;

@@ -3,7 +3,7 @@
 objs_tests = tests.o properties_test.o kvector_test.o particle_test.o fluid_test.o kernel_test.o particle.o fluid.o gaussiankernel.o splinekernel.o
 objs_sph = sph.o particle.o fluid.o initialize.o incompinvisc.o splinekernel.o gaussiankernel.o euler.o output.o
 
-CXXFLAGS = -c -g -Wall
+CXXFLAGS = -I$(BOOST) -g -c -Wall
 
 # To enable compiler optimizations, run: NDEBUG=1 make
 ifdef NDEBUG
