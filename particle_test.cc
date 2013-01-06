@@ -2,7 +2,7 @@
 
 TEST_F (ParticleTest,checkGetSet){
   // check Particle::get
-  ASSERT_EQ(0,part1_->get("OLD",props2_));
+  props2_ = part1_->getOldProperties();
   EXPECT_FLOAT_EQ(1.25,props2_.x);
   EXPECT_FLOAT_EQ(-12.4,props2_.y);
   EXPECT_FLOAT_EQ(-.5,props2_.u);
@@ -14,8 +14,8 @@ TEST_F (ParticleTest,checkGetSet){
   
   // check Particle::set
   props2_.x = 0.0;
-  ASSERT_EQ(0,part1_->set("NEW",props2_));
-  ASSERT_EQ(0,part1_->get("NEW",props1_));
+  part1_->setNewProperties(props2_);
+  props1_ = part1_->getNewProperties();
   EXPECT_EQ(props1_.x,props2_.x);
 }
 

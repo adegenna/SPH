@@ -29,15 +29,11 @@ void Fluid::addBoundary(int tag, Properties prop){
 }
 
 void Fluid::findNeighbors(){
-  Properties propi, propj;
-  // old or new??
-  std::string old = "OLD";
   for(int i=0; i<nparticles_; ++i){
-    particles_[i]->get(old,propi);
+    const Properties propi = particles_[i]->getOldProperties();
     for(int j=i+1; j<nparticles_; ++j){
-      particles_[j]->get(old,propj);
-      float dist = sqrt(pow(propi.x-propj.x,2)+
-        pow(propi.y-propj.y,2));
+      const Properties propj = particles_[j]->getOldProperties();
+      float dist = sqrt(pow(propi.x-propj.x,2)+pow(propi.y-propj.y,2));
         
         //should this cutoff distance be larger?
       if(dist < 5.*smoothinglength_){  //this is somewhat arbitrary at the moment
@@ -47,11 +43,10 @@ void Fluid::findNeighbors(){
     }
   }
   for(int i=0; i<nboundaries_; ++i) {
-    boundaries_[i]->get(old,propi);
+    const Properties propi = boundaries_[i]->getOldProperties();
     for(int j=0; j<nparticles_; ++j){
-      particles_[j]->get(old,propj);
-      float dist = sqrt(pow(propi.x-propj.x,2)+
-        pow(propi.y-propj.y,2));
+      const Properties propj = particles_[j]->getOldProperties();
+      float dist = sqrt(pow(propi.x-propj.x,2)+pow(propi.y-propj.y,2));
 
 //      int BN = particles_[j]->numberOfBoundaryNeighbors();
 

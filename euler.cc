@@ -14,7 +14,6 @@ Euler::~Euler() {
 // Step all particles forward using explicit Euler method
 //I don't think we explicitly need time here, as equations are time invariant
 int Euler::step(){
-    Properties props;
     int nparticles = fluid_->getNParticles();
     int nboundaries = fluid_->getNBoundaries();
     Particle** particles = new Particle*[nparticles];
@@ -51,13 +50,13 @@ int Euler::step(){
         //Do Euler's method for all properties,
         //maybe there is a nicer way to do this:
         
-        particles[i]->get("OLD", props);
+        Properties props = particles[i]->getOldProperties();
         props.x += props.u * dt_;
         props.y += props.v * dt_;
         props.density += fx.density * dt_;
         props.u += fx.u * dt_;
         props.v += fx.v * dt_;
-        particles[i]->set("NEW", props);
+        particles[i]->setNewProperties(props);
         
 //        std::cout << "Euler: x = " <<props.x <<std::endl;
 //        std::cout << "Euler: u = " <<props.u <<std::endl;
@@ -67,8 +66,8 @@ int Euler::step(){
     }
     
     for(int i=0; i<nparticles; ++i){
-        particles[i]->get("NEW", props);
-        particles[i]->set("OLD", props);
+        const Properties props = particles[i]->getNewProperties();
+        particles[i]->setOldProperties(props);
     }
     
     

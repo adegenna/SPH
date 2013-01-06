@@ -61,7 +61,7 @@ int main() {
     Properties properties;
     
     for(int i=0;i<N;i++){
-        particles[i]->Get("OLD",properties);
+        properties = particles[i]->getOldProperties();
         Mass[i] = 2.;
         rho[i] = 2.;
         xdot[i]=0.;
@@ -119,7 +119,7 @@ int main() {
             
             myPhysics->advance(particles[a],myKer);
            // myFluid->update(particles[a]);
-            particles[a]->Get("OLD",properties);
+            properties = particles[a]->getOldProperties();
             
             
             

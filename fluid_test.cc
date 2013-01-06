@@ -128,9 +128,9 @@ TEST_F (FluidTest,checkResetParticles){
   fluid_->resetParticles(parts1);
   fluid_->getParticles(parts2);
 
-  parts2[0]->get("OLD",props3);
+  props3 = parts2[0]->getOldProperties();
   EXPECT_FLOAT_EQ(props3.x,props1_.x+1);
-  parts2[1]->get("OLD",props3);
+  props3 = parts2[1]->getOldProperties();
   EXPECT_FLOAT_EQ(props3.density,props1_.density-1);
 }
 

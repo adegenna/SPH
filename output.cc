@@ -29,8 +29,7 @@ void Output::write(double t, const Fluid& fluid)
     file_ << t;
     for (size_t i = 0; i < nparticles; ++i)
     {
-        Properties props;
-        particles[i]->get("OLD", props);
+        const Properties props = particles[i]->getOldProperties();
         file_ << '\t' << props.x << '\t' << props.y;
     }
     file_ << std::endl;

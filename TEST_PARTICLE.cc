@@ -46,7 +46,7 @@ int main() {
   // *********************************************
   
   // ********* Example Method Usages *************
-  Properties p2props; particles[1]->get("OLD", p2props);
+  Properties p2props = particles[1]->getOldProperties();
   double location2[2] = {p2props.x, p2props.y};
   printf("\nP2 OLD location = %lf %lf\n", location2[0], location2[1]);
   
@@ -60,13 +60,11 @@ int main() {
   printf("P1 neighbors are particles %d and %d and %d\n", neighbors[0], neighbors[1], neighbors[2]);
 
   // Use properties struct for get/set
-  Properties properties;
-  particles[0]->get("OLD", properties);
+  Properties properties = particles[0]->getOldProperties();
   printf("\nP1 OLD: x = %lf y = %lf\n", properties.x, properties.y);
   properties.x = -17.0; properties.y = 27.0;
-  particles[0]->set("NEW", properties);
-  Properties newprop1;
-  particles[0]->get("NEW", newprop1);
+  particles[0]->setNewProperties(properties);
+  Properties newprop1 = particles[0]->getNewProperties();
   printf("\nP1 NEW: x = %lf y = %lf\n", newprop1.x, newprop1.y);
   
   // Delete all neighbors
