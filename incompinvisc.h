@@ -36,6 +36,11 @@ private:
     double B_;
     double gamma_;
     double rho_0_;
+    double rx_;
+    double ry_;
+    double vdotr_;
+    double mu_;
+    double viscousforce_;
     Kvector veldiff_;
     Kvector neighloc_;
     Kvector gradker_;

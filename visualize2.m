@@ -2,6 +2,7 @@ close all
 clear all
 %% Load SPH results
 load fluid.dat
+fluid;
 
 t = fluid(:,1);
 x = fluid(:,2:2:end);
@@ -29,7 +30,7 @@ y = fluid(:,3:2:end);
 figure
 for k=1:length(t)
  %   if k == 1
-        plot(x(k,:), y(k,:), '.','MarkerSize',60)
+        plot(x(k,:), y(k,:), '.','MarkerSize',120)
 %     else
 %         plot(x(1:k,:), y(1:k,:), '-', x(k,:), y(k,:), '.')
 %     end

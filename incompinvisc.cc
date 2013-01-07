@@ -34,10 +34,23 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         
 		//add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
-
+        
+        //compute viscous force
+        rx_ = partprops_.x - neighprops_.x;
+        ry_ = partprops_.y - neighprops_.y;
+        
+        vdotr_ =  veldiff_.x * rx_  + veldiff_.y * ry_;
+        if (vdotr_ < 0.) {
+            mu_ = 0.3* vdotr_/(pow(rx_,2)+pow(ry_,2)+.01);
+            viscousforce_ = - mu_/ (partprops_.density+neighprops_.density);
+        }
+        else {
+            viscousforce_ = 0;
+        }
+        //viscousforce = 0;
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
-                                   + neighprops_.pressure/ pow(neighprops_.density,2));
+                                   + neighprops_.pressure/ pow(neighprops_.density,2)+viscousforce_);
 
         du_ += - coeff_ *gradker_.x;
         dv_ += - coeff_ *gradker_.y;
