@@ -24,6 +24,7 @@ public:
     int update(Particle& part);
     /// calculates pressure
     int calcPressure(Particle& part);
+    int initPressureParams();
 private:
     int numberneighbors_;
     int numberboundaryneighbors_;
@@ -32,6 +33,9 @@ private:
     double dv_;
     double dt_;
     double coeff_;
+    double B_;
+    double gamma_;
+    double rho_0_;
     Kvector veldiff_;
     Kvector neighloc_;
     Kvector gradker_;

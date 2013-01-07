@@ -27,6 +27,7 @@ class Physics {
   virtual int update(Particle& part) = 0;
   /// calculates pressure
   virtual int calcPressure(Particle& part) = 0;
+    virtual int initPressureParams() = 0;
 };
 
 #endif  // PHYSICS_H_

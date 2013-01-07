@@ -32,7 +32,6 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         
         gradker_ = myker.gradW(partloc_,neighloc_);
         
-        
 		//add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
 
@@ -60,19 +59,26 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         gradker_ = myker.gradW(partloc_,neighloc_);
         
 		//add contribution to change in density of particle part by boundary neighbors
-        drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
+        //do we want to include this or not? Seems to work better without
+        //drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
         
 		//add contribution to change in velocity of particle part by boundary neighbors
-        coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
-                                     + neighprops_.pressure/ pow(neighprops_.density,2));
-    
+        //coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
+        //                             + neighprops_.pressure/ pow(neighprops_.density,2));
         
-        du_ += - coeff_ *gradker_.x;
-        dv_ += - coeff_ *gradker_.y;
+        //Change to use a Lennard-Jones type force at the boundary
+        double r0 = 1;
+        double r = hypot(partloc_.x-neighloc_.x,partloc_.y-neighloc_.y);
+        double r0hat = r0 / r;
+        if ( r0hat > 1) {
+            double dmag = 0.000001 * (pow(r0hat,12)-pow(r0hat,6)) / r;
+            du_ +=  dmag *(partloc_.x-neighloc_.x)  / r;
+            dv_ += dmag *(partloc_.y-neighloc_.y)  / r;
+        }
     }
 
-    //add gravitational force
-    dv_ += -1.;    
+    //add gravitational force (scaled down for now)
+    dv_ += -0.1;    
     
     //update changes as a property struct
     fx.u = du_;
@@ -95,14 +101,21 @@ int IncompInvisc::update(Particle& part) {
     return 0;
 }
 
+int IncompInvisc::initPressureParams() {   //this is currently inactive
+    B_ = 3000; 
+    gamma_ = 7;
+    rho_0_ = 1000.;
+    return 0;
+}
+
+
 int IncompInvisc::calcPressure(Particle& part) {
-    //set properties to those which apparently approximate water
-    
-    int B = 3000;   //this should be changed so the parameters are not set every time
-    int gamma = 7;
-    double rho_0 = 1000.;
+    //set properties to those which approximate water
+    B_ = 3000;   //this should be changed so the parameters are not set every time
+    gamma_ = 7;
+    rho_0_ = 1000.;
     Properties props = part.getOldProperties();
-    props.pressure = B * (pow(props.density / rho_0,gamma)-1.);
+    props.pressure = B_ * (pow(props.density / rho_0_,gamma_)-1.);
     part.setOldProperties(props);
     return 0;
 }

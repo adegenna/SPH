@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <cmath>
 #include <boost/shared_ptr.hpp>
 
 #include "fluid.h"
@@ -73,6 +74,7 @@ int main(int argc, char** argv){
     boost::shared_ptr<Integrator> integrator(new Euler(dt, fluid, *physics));
 
     Output output("fluid.dat");
+    int outsteps = floor(0.1/dt);
     
     double t = 0;
     for (size_t i = 0; t < tFinal; ++i)
@@ -83,7 +85,7 @@ int main(int argc, char** argv){
 
       integrator->step();
 
-      if (i % 10 == 0) //output every 10 timesteps
+      if (i % outsteps == 0) //output every outsteps timesteps
         output.write(t, fluid);
 
       fluid.resetNeighbors();  // Need to reset after each time step
