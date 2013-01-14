@@ -65,11 +65,12 @@ void Fluid::findNeighbors(){
     props = particles_[i]->getOldProperties();
     nxcell = floor((props.x - xmin)/smoothinglength_);
     nycell = floor((props.y - ymin)/smoothinglength_);
-    grid.insert(std::pair<int,int>(nycell*nx+nxcell,particles_[i].getTag()));
+    grid.insert(std::pair<int,int>(nycell*nx+nxcell,particles_[i]->getTag()));
   }
 
   // with all particles in the grid, we need to iterate through grid cells
-  pair<multimap<int,int>::iterator, multimap<int,int>>::iterator> iter;
+  pair< multimap<int,int>::iterator, multimap<int,int>::iterator> iter;
+  pair< multimap<int,int>::iterator, multimap<int,int>::iterator> iter1;
   for(int i=0; i<nx*ny; ++i){
     iter = grid.equal_range(i);
     for( multimap<int,int>::iterator it2 = iter.first; 
@@ -87,64 +88,72 @@ void Fluid::findNeighbors(){
       }
       // add particles from cell to left, if applicable
       if(i%nx != 0){
-        for( multimap<int,int>::iterator it3 = iter.first-1;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i-1);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from cell to right, if applicable
       if((i+1)%nx != 0){
-        for( multimap<int,int>::iterator it3 = iter.first+1;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i+1);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from cell below, if applicable
       if(i>=nx){
-        for( multimap<int,int>::iterator it3 = iter.first-8;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i-8);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from cell above, if applicable
       if(i < nx*(ny-1)){
-        for( multimap<int,int>::iterator it3 = iter.first+8;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i+8);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from bot left, if applicable
       if(i%nx != 0 && i>=nx){
-        for( multimap<int,int>::iterator it3 = iter.first-9;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i-9);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from bot right, if applicable
       if((i+1)%nx !=0 && i>=nx){
-        for( multimap<int,int>::iterator it3 = iter.first-7;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i-7);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from top left, if applicable
       if(i%nx != 0 && i<nx*(ny-1)){
-        for( multimap<int,int>::iterator it3 = iter.first+7;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i+7);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
       }
       // add particles from top right, if applicable
       if((i+1)%nx != 0 && i< nx*(ny-1)){
-        for( multimap<int,int>::iterator it3 = iter.first+9;
-            it3 != iter.second;
+        iter1 = grid.equal_range(i+9);
+        for( multimap<int,int>::iterator it3 = iter1.first;
+            it3 != iter1.second;
             ++it3){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
