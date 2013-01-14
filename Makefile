@@ -19,7 +19,7 @@ endif
 all: sph tests
 
 sph: $(objs_sph)
-	$(CXX) -o $@ $^ $(LDFLAGS)
+	$(CXX) -pg -o $@ $^ $(LDFLAGS)
 
 # to run this the user should have set the environment variable GTEST to
 # something equivalent to /usr/src/gtest/include/
