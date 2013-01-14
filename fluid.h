@@ -9,7 +9,6 @@
 
 #include <vector>
 #include <boost/shared_ptr.hpp>
-
 #include "properties.h"
 
 class Kernel;
