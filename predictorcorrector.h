@@ -1,10 +1,10 @@
 /**
  * \file
  *
- * \brief implementation of euler integrator
+ * \brief Implementation of predictor-corrector integration scheme
  */
-#ifndef EULER_H_
-#define EULER_H_
+#ifndef PREDICTORCORRECTOR_H_
+#define PREDICTORCORRECTOR_H_
 
 #include "integrator.h"
 #include "fluid.h"
@@ -15,10 +15,10 @@ class Fluid;
 class Physics;
 
 /// euler integrator
-class Euler : public Integrator {
+class PredictorCorrector : public Integrator {
  public:
   /// ctor
-  Euler(double dt, Fluid& fluid, Physics& physics);
+  PredictorCorrector(double dt, Fluid& fluid, Physics& physics);
   /// advances one timestep
   int step();
 
@@ -29,4 +29,4 @@ class Euler : public Integrator {
     Properties fx_;
 };
 
-#endif  // EULER_H
+#endif  // PREDICTORCORRECTOR_H_

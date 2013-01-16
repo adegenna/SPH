@@ -1,12 +1,12 @@
 close all
 clear all
 %% Load SPH results
-%load spherefallingoutput.dat
+load spherefallingoutput.dat
 load fluid.dat
-load fluidlltestoutput.dat
+%load fluidlltestoutput.dat
 %fluid = sphereoninclineoutput;
 %fluid = spherefallingoutput;
-
+%fluid = fluidlltestoutput;
 t = fluid(:,1);
 x = fluid(:,2:2:end);
 y = fluid(:,3:2:end);
@@ -31,17 +31,17 @@ y = fluid(:,3:2:end);
 
 %% Video
 F = figure
-for k=1:length(t)
+for k=1:length(t)*0.25
  %   if k == 1
-        plot([-20 60],[21 -59] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
-       % plot([-10 10],[0 0] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
+     %   plot([-20 60],[21 -59] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
+        plot([-10 10],[0 0] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
 %     else
    %      plot(x(1:k,:), y(1:k,:), '-', x(k,:), y(k,:), '.')
 %     end
     xlabel('x')
     ylabel('y')
     axis([-25 25 -30 20])
-   % axis([0 10 0 10])
+    %axis([0 10 0 10])
     title(['t = ' num2str(t(k))])
     %set(gcf,'Position',[200 200 400 400])
     drawnow
