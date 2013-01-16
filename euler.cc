@@ -68,7 +68,6 @@ int Euler::step(){
         particles[i]->setOldProperties(props);
     }
     
-    
     fluid_.resetParticles(particles);
 
     return 0;

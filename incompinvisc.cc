@@ -1,5 +1,4 @@
 #include "incompinvisc.h"
-
 #include <cmath>
 #include "fluid.h"
 #include "particle.h"
@@ -38,7 +37,6 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         //compute viscous force
         rx_ = partprops_.x - neighprops_.x;
         ry_ = partprops_.y - neighprops_.y;
-        
         vdotr_ =  veldiff_.x * rx_  + veldiff_.y * ry_;
         if (vdotr_ < 0.) {
             mu_ = 0.3* vdotr_/(pow(rx_,2)+pow(ry_,2)+.01);
@@ -47,7 +45,7 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         else {
             viscousforce_ = 0;
         }
-        //viscousforce = 0;
+        
 		//add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                    + neighprops_.pressure/ pow(neighprops_.density,2)+viscousforce_);
@@ -72,14 +70,7 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         gradker_ = myker.gradW(partloc_,neighloc_);
         
 		//add contribution to change in density of particle part by boundary neighbors
-        //do we want to include this or not? Seems to work better without
-        //drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
-        
-		//add contribution to change in velocity of particle part by boundary neighbors
-        //coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
-        //                             + neighprops_.pressure/ pow(neighprops_.density,2));
-        
-        //Change to use a Lennard-Jones type force at the boundary
+        //using a Lennard-Jones type force at the boundary
         double r0 = 1;
         double r = hypot(partloc_.x-neighloc_.x,partloc_.y-neighloc_.y);
         double r0hat = r0 / r;
@@ -97,7 +88,7 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
     fx.u = du_;
     fx.v = dv_;
     fx.density = drho_;
-    //the following are unnecessary, but I set them to 0 for clarity:
+    //the following assignments are unnecessary, but set them to 0 for clarity:
     fx.mass = 0;
     fx.visc = 0;
     fx.x = 0;
