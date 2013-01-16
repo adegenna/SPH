@@ -5,20 +5,18 @@
  */
 #include "fluid_test.h"
 
-//TEST_F (FluidTest,checkAddGetParticle){
-//  fluid_->addParticle(0,props1_);
-//  fluid_->addParticle(1,props2_);
-//    std::cout << "here" <<std::endl;
-//  Particle **parts = new Particle*[2];
-//    std::cout << "here2" <<std::endl;
-//  fluid_->getParticles(parts);
-//std::cout << "here3" <<std::endl;
-//  EXPECT_EQ(0,parts[0]->getTag());
-//  EXPECT_EQ(1,parts[1]->getTag());
-//std::cout << "here4" <<std::endl;
-//  delete parts;
-//    std::cout << "here5" <<std::endl;
-//}
+Properties pos(double x, double y){
+  Properties props;
+  props.x = x;
+  props.y = y;
+  props.u = 0;
+  props.v = 0;
+  props.density = 0;
+  props.visc = 0;
+  props.pressure = 0;
+  props.mass = 0;
+  return props;
+}
 
 /// tests Fluid::addBoundary and Fluid::getBoundaries
 TEST_F (FluidTest,checkAddGetBoundary){
@@ -29,34 +27,7 @@ TEST_F (FluidTest,checkAddGetBoundary){
   EXPECT_EQ(0,parts[0]->getTag());
 }
 
-/// tests Fluid::findNeighbors
-TEST_F (FluidTest,DISABLED_checkFindNeighbors){
-  initFluid();
 
-  fluid_->findNeighbors();
-  Fluid::ParticleArray parts = fluid_->getParticles();
-  Fluid::ParticleArray bound = fluid_->getBoundaries();
-
-  const Particle::TagArray neighbors0 = parts[0]->getNeighbors();
-  EXPECT_EQ(1,neighbors0[0]);
-  EXPECT_EQ(2,neighbors0[1]);
-  EXPECT_EQ(-1,neighbors0[2]);
-
-  const Particle::TagArray neighbors1 = parts[1]->getNeighbors();
-  EXPECT_EQ(0,neighbors1[0]);
-  EXPECT_EQ(2,neighbors1[1]);
-  EXPECT_EQ(-1,neighbors1[2]);
-
-  const Particle::TagArray neighbors2 = parts[2]->getNeighbors();
-  EXPECT_EQ(0,neighbors2[0]);
-  EXPECT_EQ(1,neighbors2[1]);
-  EXPECT_EQ(-1,neighbors2[2]);
-  
-  const Particle::TagArray boundneigh2 = parts[2]->getBoundaryNeighbors();
-  EXPECT_EQ(0,boundneigh2[0]);
-
-  fluid_->resetNeighbors();
-}
 
 /// tests Fluid::resetNeighbors undoes neighbor tags
 TEST_F (FluidTest,checkResetNeighbors){
@@ -120,3 +91,167 @@ TEST_F (FluidTest,checkResetParticles){
   EXPECT_FLOAT_EQ(props3.density,props1_.density-1);
 }
 
+/// tests Fluid::findNeighbors
+TEST_F (FluidTest,_checkFindNeighbors){
+  double sl = 2;
+  int np = 2;
+  int nb = 0;
+  boost::shared_ptr<Fluid> fl;
+  std::vector< boost::shared_ptr<Particle> > parts;
+  std::vector<int>neighbs;
+  boost::shared_ptr<Kernel> ker;
+  ker.reset(new GaussianKernel(sl));
+
+  // check current square is neighbor
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(1,0));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],0);
+  EXPECT_EQ(neighbs[1],-1);
+
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(0,1));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],0);
+  EXPECT_EQ(neighbs[1],-1);
+  
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(1,1));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],0);
+  EXPECT_EQ(neighbs[1],-1);
+  
+  // check one right is neighbor
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(3,0));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],0);
+  EXPECT_EQ(neighbs[1],-1);
+
+  // check one up is neighbor
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(0,3));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],0);
+  EXPECT_EQ(neighbs[1],-1);
+
+  // check one up, one right is neighbor
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(3,3));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],0);
+  EXPECT_EQ(neighbs[1],-1);
+
+  // check two right has no neighbors
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(5,0));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+
+  // check two above has no neighbors
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(0,5));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+  
+  // check two right, one up has no neighbors
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(5,3));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+
+  // check two up, one right has no neighbors
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(3,5));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+
+  // check two up, two right has no neighbors
+  fl.reset(new Fluid(*ker,np,nb,sl));
+  fl->addParticle(0,pos(0,0));
+  fl->addParticle(1,pos(5,5));
+  fl->findNeighbors();
+
+  parts = fl->getParticles();
+  neighbs = parts[0]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+  neighbs = parts[1]->getNeighbors();
+  EXPECT_EQ(neighbs[0],-1);
+  EXPECT_EQ(neighbs[1],-1);
+
+}

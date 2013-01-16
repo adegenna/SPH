@@ -7,6 +7,7 @@
 #include "fluid.h"
 #include "gaussiankernel.h"
 #include "gtest/gtest.h"
+#include <vector>
 
 class FluidTest : public ::testing::Test{
   protected:
