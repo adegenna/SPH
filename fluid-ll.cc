@@ -106,7 +106,7 @@ void Fluid::findNeighbors(){
       }
       // add particles from cell below, if applicable
       if(i>=nx){
-        iter1 = grid.equal_range(i-8);
+        iter1 = grid.equal_range(i-nx);
         for( multimap<int,int>::iterator it3 = iter1.first;
             it3 != iter1.second;
             ++it3){
@@ -115,7 +115,7 @@ void Fluid::findNeighbors(){
       }
       // add particles from cell above, if applicable
       if(i < nx*(ny-1)){
-        iter1 = grid.equal_range(i+8);
+        iter1 = grid.equal_range(i+nx);
         for( multimap<int,int>::iterator it3 = iter1.first;
             it3 != iter1.second;
             ++it3){
@@ -124,7 +124,7 @@ void Fluid::findNeighbors(){
       }
       // add particles from bot left, if applicable
       if(i%nx != 0 && i>=nx){
-        iter1 = grid.equal_range(i-9);
+        iter1 = grid.equal_range(i-nx-1);
         for( multimap<int,int>::iterator it3 = iter1.first;
             it3 != iter1.second;
             ++it3){
@@ -133,7 +133,7 @@ void Fluid::findNeighbors(){
       }
       // add particles from bot right, if applicable
       if((i+1)%nx !=0 && i>=nx){
-        iter1 = grid.equal_range(i-7);
+        iter1 = grid.equal_range(i-nx+1);
         for( multimap<int,int>::iterator it3 = iter1.first;
             it3 != iter1.second;
             ++it3){
@@ -142,7 +142,7 @@ void Fluid::findNeighbors(){
       }
       // add particles from top left, if applicable
       if(i%nx != 0 && i<nx*(ny-1)){
-        iter1 = grid.equal_range(i+7);
+        iter1 = grid.equal_range(i+nx-1);
         for( multimap<int,int>::iterator it3 = iter1.first;
             it3 != iter1.second;
             ++it3){
@@ -151,7 +151,7 @@ void Fluid::findNeighbors(){
       }
       // add particles from top right, if applicable
       if((i+1)%nx != 0 && i< nx*(ny-1)){
-        iter1 = grid.equal_range(i+9);
+        iter1 = grid.equal_range(i+nx+1);
         for( multimap<int,int>::iterator it3 = iter1.first;
             it3 != iter1.second;
             ++it3){
