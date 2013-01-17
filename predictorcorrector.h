@@ -1,8 +1,8 @@
 /**
- * \file
- *
- * \brief Implementation of predictor-corrector integration scheme
- */
+ *  \file
+ *  
+ *  \brief Integrator implimenting the modified predictor-corrector method outlined in Price (2004), for example.
+ * */
 #ifndef PREDICTORCORRECTOR_H_
 #define PREDICTORCORRECTOR_H_
 
@@ -14,7 +14,7 @@
 class Fluid;
 class Physics;
 
-/// euler integrator
+/// Predictor-corrector integrator
 class PredictorCorrector : public Integrator {
  public:
   /// ctor

@@ -2,6 +2,7 @@ close all
 clear all
 %% Load SPH results
 load spherefallingoutput.dat
+load spherefallingoutputPC.dat
 load fluid.dat
 %load fluidlltestoutput.dat
 %fluid = sphereoninclineoutput;
@@ -31,7 +32,7 @@ y = fluid(:,3:2:end);
 
 %% Video
 F = figure
-for k=1:length(t)*0.25
+for k=1:length(t)
  %   if k == 1
      %   plot([-20 60],[21 -59] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
         plot([-10 10],[0 0] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)

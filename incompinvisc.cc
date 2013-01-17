@@ -3,7 +3,11 @@
 #include "fluid.h"
 #include "particle.h"
 #include "kernel.h"
-
+/**
+ * \file
+ *
+ * \brief Physics for an approximately incompressible fluid, with viscosity to damp motion
+ */
 
 int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& fx) {   // change input to fluid
     
@@ -62,12 +66,8 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         
         //treating boundary particles as having the same properties as fluid particles:
         neighprops_ = boundaryneighbors[boundaryneighbortags[i]]->getOldProperties();
-        
-//        veldiff_.x = partprops_.u-neighprops_.u;
-//        veldiff_.y = partprops_.v-neighprops_.v;
         neighloc_.x = neighprops_.x;
         neighloc_.y = neighprops_.y;
-//        gradker_ = myker.gradW(partloc_,neighloc_);
         
 		//add contribution to change in density of particle part by boundary neighbors
         //using a Lennard-Jones type force at the boundary
