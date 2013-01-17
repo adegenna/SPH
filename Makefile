@@ -7,7 +7,7 @@ CXXFLAGS = -I$(BOOST) -g -c -Wall
 
 # To enable compiler optimizations, run: NDEBUG=1 make
 ifdef NDEBUG
-	CXXFLAGS = -c -O3 -Wall
+	CXXFLAGS = -I$(BOOST) -c -O3 -Wall
     LDFLAGS = -O3
 endif
 
