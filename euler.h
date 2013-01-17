@@ -26,7 +26,8 @@ class Euler : public Integrator {
     double dt_;                     // timestep
     Fluid& fluid_;
     Physics& physics_;
-    Properties fx_;
+    Properties fx_;     //struct to store the changes in particle properties,
+                        //which itself can be a Properties struct.
 };
 
 #endif  // EULER_H

@@ -1,7 +1,7 @@
 /**
  *  \file
  *  
- *  \brief Integrator implimenting the modified predictor-corrector method outlined in Price (2004), for example.
+ *  \brief Integrator implimenting the modified predictor-corrector method outlined in Price (2004).
  * */
 #ifndef PREDICTORCORRECTOR_H_
 #define PREDICTORCORRECTOR_H_
