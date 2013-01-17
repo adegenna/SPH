@@ -12,6 +12,7 @@
 #include "fluid.h"
 #include "initialize.h"
 #include "incompinvisc.h"
+#include "incompvisc.h"
 #include "gaussiankernel.h"
 #include "splinekernel.h"
 #include "euler.h"
@@ -72,7 +73,8 @@ int main(int argc, char** argv){
         //
     }
         
-    boost::shared_ptr<Physics> physics(new IncompInvisc());
+   // boost::shared_ptr<Physics> physics(new IncompInvisc());
+    boost::shared_ptr<Physics> physics(new IncompVisc(1.,0.1,3000.,7.,1000.,0.3,0.01));
 
     boost::shared_ptr<Integrator> integrator(new Euler(dt, fluid, *physics));
    // boost::shared_ptr<Integrator> integrator(new PredictorCorrector(dt, fluid, *physics));
