@@ -73,11 +73,11 @@ int main(int argc, char** argv){
     }
         
     boost::shared_ptr<Physics> physics(new IncompInvisc());
-    //boost::shared_ptr<Integrator> integrator(new Euler(dt, fluid, *physics));
+
+    boost::shared_ptr<Integrator> integrator(new Euler(dt, fluid, *physics));
    // boost::shared_ptr<Integrator> integrator(new PredictorCorrector(dt, fluid, *physics));
-    boost::shared_ptr<Integrator> integrator(new Eulermod(dt, fluid, *physics));
-    
-    
+   // boost::shared_ptr<Integrator> integrator(new Eulermod(dt, fluid, *physics));
+
     Output output("fluid.dat");
     int outsteps = floor(0.1/dt);
     

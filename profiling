@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [ $NDEBUG -ne 1 ]
+then
+  echo "NDEBUG != 1 or not set"
+  exit
+fi
+
+if [ -e gmon.out ]
+then
+  rm gmon.out
+fi
+
+if [ -e profile.dat ]
+then
+  rm profile.dat
+fi
+
+cp fluidn2.cc fluid.cc
+make
+
+echo "Profile data for naive n^2 findNeighbor" >> profile.dat
+printf "\n\n\n" >> profile.dat
+
+for INPUT in 15particleinput.dat 30particleinput.dat 60particleinput.dat 120particleinput.dat
+do
+  sph $INPUT box10by10.dat 10 .001 >/dev/null
+  gprof -b sph >> profile.dat
+  printf "\n\n\n" >> profile.dat
+done
+
+
+cp fluid-ll.cc fluid.cc
+make
+
+echo "Profile data for mesh findNeighbor" >> profile.dat
+printf "\n\n\n" >> profile.dat
+
+for INPUT in 15particleinput.dat 30particleinput.dat 60particleinput.dat 120particleinput.dat
+do
+  sph $INPUT box10by10.dat 10 .001 >/dev/null
+  gprof -b sph >> profile.dat
+  printf "\n\n\n" >> profile.dat
+done
