@@ -32,7 +32,7 @@ y = fluid(:,3:2:end);
 
 %% Video
 F = figure
-for k=1:length(t)
+for k=1:length(t)-6
  %   if k == 1
      %   plot([-20 60],[21 -59] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
         plot([-10 10],[0 0] ,'k',x(k,:), y(k,:), '.','MarkerSize',5)
