@@ -1,7 +1,8 @@
 /**
  * \file
  *
- * \brief implementation of Physics for a fluid which is incompressible and viscous
+ * \brief implementation of Physics for a fluid which is incompressible and 
+ * viscous
  */
 #ifndef INCOMPVISC_H_
 #define INCOMPVISC_H_
@@ -17,17 +18,17 @@
 /// class for an incompressible fluid with the inclusion of viscous forces
 class IncompVisc : public Physics
 {
-public:
+  public:
     /// ctor
     IncompVisc(double smoothinglength,  //!< input smoothinglength of fluid
-               double grav,             //!< input gravitational acceleration
-               double pressB,           //!< input pressure coefficient B
-               double pressGamma,       //!< input pressure exponent Gamma
-               double rho_0,            //!< input reference density
-               double viscMu,           //!< input viscosity parameter mu
-               double viscEta           //!< inpu tviscosity parameter eta
-               );
-    
+        double grav,             //!< input gravitational acceleration
+        double pressB,           //!< input pressure coefficient B
+        double pressGamma,       //!< input pressure exponent Gamma
+        double rho_0,            //!< input reference density
+        double viscMu,           //!< input viscosity parameter mu
+        double viscEta           //!< inpu tviscosity parameter eta
+        );
+
     /// update function
     int rhs(Fluid& fluid, //!< input fluid
         Particle& part,   //!< particular fluid particle
@@ -39,7 +40,7 @@ public:
     /// calculates pressure
     int calcPressure(Particle& part);
     int initPressureParams();
-private:
+  private:
     int numberneighbors_;
     int numberboundaryneighbors_;
     double drho_;

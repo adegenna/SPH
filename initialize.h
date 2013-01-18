@@ -13,18 +13,26 @@ class Fluid;
 struct Kvector;
 
 /// find the number of particles and boundary particles from input files
-bool getNparticles(const std::string& filename, //!< file with initial particle properties
-    const std::string& boundaryFile,            //!< file with initial boundary particle properties
-    int& nparticles,                            //!< address for number of particles
-    int& nboundaries                            //!< address for number of boundary particles
+bool getNparticles(const std::string& filename, //!< file with initial particle
+                                                //!<  properties
+    const std::string& boundaryFile,            //!< file with initial boundary
+                                                //!< particle properties
+    int& nparticles,                            //!< address for number of 
+                                                //!< particles
+    int& nboundaries                            //!< address for number of 
+                                                //!< boundary particles
     );
 
 /// initializes fluid from input files
-bool initialize(const std::string& filename,  //!< file with initial particle properties
-    const std::string& boundaryFile,          //!< file with initial boundary particle properties
+bool initialize(const std::string& filename,  //!< file with initial particle 
+                                              //!< properties
+    const std::string& boundaryFile,          //!< file with initial boundary 
+                                              //!< particle properties
     Fluid& fluid,                             //!< fluid to be initialized
-    int& nparticles,                          //!< address for number of particles
-    int& nboundaries                          //!< address for number of boundary particles
+    int& nparticles,                          //!< address for number of 
+                                              //!< particles
+    int& nboundaries                          //!< address for number of 
+                                              //!< boundary particles
     );
 
 /// alternate initialization of fluid in a rectangle

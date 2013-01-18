@@ -8,11 +8,11 @@
 
 /// superclass for integrators
 class Integrator {
- public:
-  /// dtor
-  virtual ~Integrator() {}
-  /// required function advancing one timestep
-  virtual int step() = 0;
+  public:
+    /// dtor
+    virtual ~Integrator() {}
+    /// required function advancing one timestep
+    virtual int step() = 0;
 };
 
 #endif  // INTEGRATOR_H_

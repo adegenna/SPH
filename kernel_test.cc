@@ -49,7 +49,7 @@ TEST_F (KernelTest,gaussianGradW){
 TEST_F (KernelTest,splineGradW){
   Kvector kvec1, kvec2, kvec3;
   SplineKernel kernel(h_);
-  
+
   kvec1.x = .5;
   kvec1.y = 0;
   kvec2.x = 0;

@@ -1,7 +1,8 @@
 /**
  * \file
  *
- * \brief implementation of Physics for a Fluid which is incompressible and inviscid
+ * \brief implementation of Physics for a Fluid which is incompressible and 
+ * inviscid
  */
 #ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_
@@ -13,7 +14,7 @@
 /// class for an incompressibe, inviscid fluid
 class IncompInvisc : public Physics
 {
-public:
+  public:
     /// update function
     int rhs(Fluid& fluid, //!< input fluid
         Particle& part,   //!< particular fluid particle
@@ -25,7 +26,7 @@ public:
     /// calculates pressure
     int calcPressure(Particle& part);
     int initPressureParams();
-private:
+  private:
     int numberneighbors_;
     int numberboundaryneighbors_;
     double drho_;

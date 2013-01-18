@@ -11,7 +11,7 @@
 /// Gaussian approximation of point particle
 class GaussianKernel : public Kernel
 {
-public:
+  public:
     /// ctor
     GaussianKernel(double smoothinglength);
     /// dtor
@@ -23,7 +23,7 @@ public:
     /// returns value of the Laplacian of Gaussian
     double lapW(double r);
 
-private:
+  private:
     double h_;
 };
 

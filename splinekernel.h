@@ -11,7 +11,7 @@
 /// cubic spline approximation of point particle
 class SplineKernel : public Kernel
 {
-public:
+  public:
     /// ctor
     SplineKernel(double smoothinglength);
     /// dtor
@@ -23,7 +23,7 @@ public:
     /// returns Laplacian of cubic spline
     double lapW(double r);
 
-private:
+  private:
     double h_;
 };
 

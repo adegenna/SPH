@@ -9,14 +9,14 @@
 /// struct holding physical particle properties
 struct Properties
 {
-    double x;         //!< x position
-    double y;         //!< y position
-    double u;         //!< x velocity
-    double v;         //!< y velocity
-    double density;   //!< density at particle
-    double mass;      //!< particle mass
-    double pressure;  //!< pressure at particle
-    double energy;    //!< particle viscosity
+  double x;         //!< x position
+  double y;         //!< y position
+  double u;         //!< x velocity
+  double v;         //!< y velocity
+  double density;   //!< density at particle
+  double mass;      //!< particle mass
+  double pressure;  //!< pressure at particle
+  double energy;    //!< particle energy
 };
 
 #endif  // PROPERTIES_H_

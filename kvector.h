@@ -9,8 +9,8 @@
 /// struct for 2D vector useful for kernel operations
 struct Kvector
 {
-    double x;
-    double y;
+  double x;
+  double y;
 };
 
 #endif  // KVECTOR_H_

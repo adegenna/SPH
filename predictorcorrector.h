@@ -1,7 +1,8 @@
 /**
  *  \file
  *  
- *  \brief Integrator implementing the modified predictor-corrector method outlined in Price (2004).
+ *  \brief Integrator implementing the modified predictor-corrector method 
+ *  outlined in Price (2004).
  * */
 #ifndef PREDICTORCORRECTOR_H_
 #define PREDICTORCORRECTOR_H_
@@ -16,13 +17,13 @@ class Physics;
 
 /// Predictor-corrector integrator
 class PredictorCorrector : public Integrator {
- public:
-  /// ctor
-  PredictorCorrector(double dt, Fluid& fluid, Physics& physics);
-  /// advances one timestep
-  int step();
+  public:
+    /// ctor
+    PredictorCorrector(double dt, Fluid& fluid, Physics& physics);
+    /// advances one timestep
+    int step();
 
- private:
+  private:
     double dt_;                     // timestep
     Fluid& fluid_;
     Physics& physics_;

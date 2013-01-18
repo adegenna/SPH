@@ -17,7 +17,7 @@ TEST_F (ParticleTest,checkGetSet){
   EXPECT_FLOAT_EQ(0.0,props2_.mass);
   EXPECT_FLOAT_EQ(-2039,props2_.pressure);
   EXPECT_FLOAT_EQ(13,props2_.energy);
-  
+
   // check Particle::set
   props2_.x = 0.0;
   part1_->setNewProperties(props2_);
@@ -25,7 +25,8 @@ TEST_F (ParticleTest,checkGetSet){
   EXPECT_EQ(props1_.x,props2_.x);
 }
 
-/// tests Particle::numberOfNeighbors, Particle::addNeighbor, Particle::deleteNeighbors
+/// tests Particle::numberOfNeighbors, Particle::addNeighbor, 
+/// Particle::deleteNeighbors
 TEST_F (ParticleTest,checkNeighbors){
   // check numberOfNeighbors is initially 0
   EXPECT_EQ(0,part1_->numberOfNeighbors());

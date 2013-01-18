@@ -7,24 +7,27 @@
 using namespace std;
 
 
-Fluid::Fluid(Kernel& kernel, size_t nparticles, size_t nboundaries, double smoothinglength) :
-kernel_(kernel),
-nparticles_(nparticles),
-nboundaries_(nboundaries),
-smoothinglength_(smoothinglength),
-particles_(nparticles),
-boundaries_(nboundaries)
+Fluid::Fluid(Kernel& kernel, 
+    size_t nparticles, 
+    size_t nboundaries, 
+    double smoothinglength) :
+  kernel_(kernel),
+  nparticles_(nparticles),
+  nboundaries_(nboundaries),
+  smoothinglength_(smoothinglength),
+  particles_(nparticles),
+  boundaries_(nboundaries)
 {}
-
+                                                                                
 //should this just be addParticle(Properties props) ?
 void Fluid::addParticle(int tag, const Properties& prop)
 {
-    particles_[tag].reset(new Particle(tag, nparticles_, nboundaries_,prop));
+  particles_[tag].reset(new Particle(tag, nparticles_, nboundaries_,prop));
 }
 
 void Fluid::addBoundary(int tag, const Properties& prop)
 {
-    boundaries_[tag].reset(new Particle(tag, nparticles_, nboundaries_, prop));
+  boundaries_[tag].reset(new Particle(tag, nparticles_, nboundaries_, prop));
 }
 
 void Fluid::findNeighbors(){
@@ -51,7 +54,7 @@ void Fluid::findNeighbors(){
       ymax = props.y;
     }
   }
-  
+
   // now we need to make the grid with spacing of smoothing length
   int nx = floor((xmax-xmin)/smoothinglength_)+1;
   int ny = floor((ymax-ymin)/smoothinglength_)+1;
@@ -80,8 +83,8 @@ void Fluid::findNeighbors(){
       int tag = (*it2).second;
       // add particles from current cell
       for( multimap<int,int>::iterator it3 = iter.first;
-            it3 != iter.second;
-            ++it3){
+          it3 != iter.second;
+          ++it3){
         if((*it3).second != tag){
           particles_[tag]->addNeighbor(*particles_[(*it3).second]);
         }
@@ -169,9 +172,9 @@ void Fluid::findNeighbors(){
       const Properties propj = particles_[j]->getOldProperties();
       float dist = sqrt(pow(propi.x-propj.x,2)+pow(propi.y-propj.y,2));
 
-//      int BN = particles_[j]->numberOfBoundaryNeighbors();
+      //      int BN = particles_[j]->numberOfBoundaryNeighbors();
 
-        //should this cutoff distance be larger?
+      //should this cutoff distance be larger?
       if(dist < 1.*smoothinglength_){
         particles_[j]->addBoundaryNeighbor(*boundaries_[i]);
       }
@@ -202,15 +205,15 @@ size_t Fluid::getNBoundaries() const
 
 Fluid::ParticleArray Fluid::getParticles() const
 {
-    return particles_;
+  return particles_;
 }
 
 Fluid::ParticleArray Fluid::getBoundaries() const
 {
-    return boundaries_;
+  return boundaries_;
 }
 
 void Fluid::resetParticles(const ParticleArray& newparticles)
 {
-    particles_ = newparticles;
+  particles_ = newparticles;
 }

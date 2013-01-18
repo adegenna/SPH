@@ -128,7 +128,7 @@ TEST_F (FluidTest,_checkFindNeighbors){
   neighbs = parts[1]->getNeighbors();
   EXPECT_EQ(neighbs[0],0);
   EXPECT_EQ(neighbs[1],-1);
-  
+
   fl.reset(new Fluid(*ker,np,nb,sl));
   fl->addParticle(0,pos(0,0));
   fl->addParticle(1,pos(1,1));
@@ -141,7 +141,7 @@ TEST_F (FluidTest,_checkFindNeighbors){
   neighbs = parts[1]->getNeighbors();
   EXPECT_EQ(neighbs[0],0);
   EXPECT_EQ(neighbs[1],-1);
-  
+
   // check one right is neighbor
   fl.reset(new Fluid(*ker,np,nb,sl));
   fl->addParticle(0,pos(0,0));
@@ -211,7 +211,7 @@ TEST_F (FluidTest,_checkFindNeighbors){
   neighbs = parts[1]->getNeighbors();
   EXPECT_EQ(neighbs[0],-1);
   EXPECT_EQ(neighbs[1],-1);
-  
+
   // check two right, one up has no neighbors
   fl.reset(new Fluid(*ker,np,nb,sl));
   fl->addParticle(0,pos(0,0));

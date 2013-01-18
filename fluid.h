@@ -20,9 +20,11 @@ class Fluid {
     typedef std::vector< boost::shared_ptr<Particle> > ParticleArray;
 
     /// ctor
-    Fluid(Kernel& kernel,       //!< Type of kernel to use (GaussianKernel or SplineKernel)
+    Fluid(Kernel& kernel,       //!< Type of kernel to use (GaussianKernel or 
+                                //!< SplineKernel)
         size_t nparticles,      //!< Number of particles in the fluid (constant)
-        size_t nboundaries,     //!< Number of boundary particles in the fluid (constant)
+        size_t nboundaries,     //!< Number of boundary particles in the fluid 
+                                //!< (constant)
         double smoothinglength  //!< The smoothing length
         );
     /// get the array of particles

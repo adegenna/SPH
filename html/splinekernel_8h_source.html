@@ -87,14 +87,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 
 <a name="l00012"></a><a class="code" href="classSplineKernel.html">00012</a> <span class="keyword">class </span><a class="code" href="classSplineKernel.html" title="cubic spline approximation of point particle">SplineKernel</a> : <span class="keyword">public</span> <a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>
 <a name="l00013"></a>00013 {
-<a name="l00014"></a>00014 <span class="keyword">public</span>:
+<a name="l00014"></a>00014   <span class="keyword">public</span>:
 <a name="l00016"></a>00016     <a class="code" href="classSplineKernel.html#a5b2e456001025775c0912f43d5fae88c" title="ctor">SplineKernel</a>(<span class="keywordtype">double</span> smoothinglength);
 <a name="l00018"></a>00018     <a class="code" href="classSplineKernel.html#ab88c7d460702f581c87817c82fe792d2" title="dtor">~SplineKernel</a>();
 <a name="l00020"></a>00020     <span class="keywordtype">double</span> <a class="code" href="classSplineKernel.html#a8dd3d968b0436c799789da0777398151" title="returns value of cubic spline">W</a>(<span class="keywordtype">double</span> r);
 <a name="l00022"></a>00022     <a class="code" href="structKvector.html" title="struct for 2D vector useful for kernel operations">Kvector</a> <a class="code" href="classSplineKernel.html#a67e539f362309f2c196a186e565da62b" title="returns gradient of cubic spline">gradW</a>(<a class="code" href="structKvector.html" title="struct for 2D vector useful for kernel operations">Kvector</a> vec1, <a class="code" href="structKvector.html" title="struct for 2D vector useful for kernel operations">Kvector</a> vec2);
 <a name="l00024"></a>00024     <span class="keywordtype">double</span> <a class="code" href="classSplineKernel.html#a51a02339e02aa47138e8a4b0e5bed5cc" title="returns Laplacian of cubic spline">lapW</a>(<span class="keywordtype">double</span> r);
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="keyword">private</span>:
+<a name="l00026"></a>00026   <span class="keyword">private</span>:
 <a name="l00027"></a>00027     <span class="keywordtype">double</span> h_;
 <a name="l00028"></a>00028 };
 <a name="l00029"></a>00029 
@@ -117,7 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 18 2013 15:08:58 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2013 16:43:30 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
