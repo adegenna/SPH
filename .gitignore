@@ -12,4 +12,3 @@ tests
 *.swp
 fluid*.dat
 gmon.out
-profile.dat

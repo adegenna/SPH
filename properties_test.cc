@@ -15,7 +15,7 @@ TEST (PropertiesTest,checkAllProps){
   props.density = 1.0;
   props.mass = 0.0;
   props.pressure = -2039;
-  props.visc = 13;
+  props.energy = 13;
   EXPECT_FLOAT_EQ(1.25, props.x);
   EXPECT_FLOAT_EQ(-12.4, props.y);
   EXPECT_FLOAT_EQ(-.5, props.u);
@@ -23,5 +23,5 @@ TEST (PropertiesTest,checkAllProps){
   EXPECT_FLOAT_EQ(1.0, props.density);
   EXPECT_FLOAT_EQ(0.0, props.mass);
   EXPECT_FLOAT_EQ(-2039, props.pressure);
-  EXPECT_FLOAT_EQ(13, props.visc);
+  EXPECT_FLOAT_EQ(13, props.energy);
 }

@@ -16,7 +16,7 @@ TEST_F (ParticleTest,checkGetSet){
   EXPECT_FLOAT_EQ(1.0,props2_.density);
   EXPECT_FLOAT_EQ(0.0,props2_.mass);
   EXPECT_FLOAT_EQ(-2039,props2_.pressure);
-  EXPECT_FLOAT_EQ(13,props2_.visc);
+  EXPECT_FLOAT_EQ(13,props2_.energy);
   
   // check Particle::set
   props2_.x = 0.0;

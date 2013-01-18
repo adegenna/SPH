@@ -16,7 +16,7 @@ struct Properties
     double density;   //!< density at particle
     double mass;      //!< particle mass
     double pressure;  //!< pressure at particle
-    double visc;      //!< particle viscosity
+    double energy;      //!< particle viscosity
 };
 
 #endif  // PROPERTIES_H_

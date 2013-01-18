@@ -90,7 +90,7 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
     fx.density = drho_;
     //the following assignments are unnecessary, but set them to 0 for clarity:
     fx.mass = 0;
-    fx.visc = 0;
+    fx.energy = 0;
     fx.x = 0;
     fx.y = 0;
 

@@ -16,7 +16,7 @@ class ParticleTest : public ::testing::Test{
       props1_.density = 1.0;
       props1_.mass = 0.0;
       props1_.pressure = -2039;
-      props1_.visc = 13;
+      props1_.energy = 13;
       props2_.x = -3.25;
       props2_.y = 1.34;
       props2_.u = -98;
@@ -24,7 +24,7 @@ class ParticleTest : public ::testing::Test{
       props2_.density = 2.7;
       props2_.mass = 1.005;
       props2_.pressure = 0.005;
-      props2_.visc = 2;
+      props2_.energy = 2;
 
       part1_.reset(new Particle(1,2,0,props1_));
       part2_.reset(new Particle(2,2,0,props2_));

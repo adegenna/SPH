@@ -22,7 +22,7 @@ class FluidTest : public ::testing::Test{
       props1_.density = 1;
       props1_.mass = 1;
       props1_.pressure = 2;
-      props1_.visc = 1;
+      props1_.energy = 1;
 
       props2_.x = 1;
       props2_.y = -1.0001;
@@ -31,7 +31,7 @@ class FluidTest : public ::testing::Test{
       props2_.density = 1;
       props2_.mass = 1;
       props2_.pressure = 2;
-      props2_.visc = 1;
+      props2_.energy = 1;
 
       props3_.x = 1;
       props3_.y = -1.0005;
@@ -40,7 +40,7 @@ class FluidTest : public ::testing::Test{
       props3_.density = 1;
       props3_.mass = 1;
       props3_.pressure = 2;
-      props3_.visc = 1;
+      props3_.energy = 1;
 
       propsb_.x = 0;
       propsb_.y = 0;
@@ -49,7 +49,7 @@ class FluidTest : public ::testing::Test{
       propsb_.density = 100;
       propsb_.mass = 100;
       propsb_.pressure = 0;
-      propsb_.visc = 100;
+      propsb_.energy = 100;
 
       fluid_.reset(new Fluid(*kernel_,3,1,smoothinglength_));
     }
