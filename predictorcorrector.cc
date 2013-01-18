@@ -27,7 +27,7 @@ int PredictorCorrector::step(){
         fx_.density = 0;
         fx_.mass = 0;
         fx_.pressure = 0;
-        fx_.visc = 0;
+        fx_.energy = 0;
 
         physics_.rhs(fluid_, *particles[i], fluid_.getKernel(), fx_);
         
@@ -63,7 +63,7 @@ int PredictorCorrector::step(){
         fx_.density = 0;
         fx_.mass = 0;
         fx_.pressure = 0;
-        fx_.visc = 0;
+        fx_.energy = 0;
         
         physics_.rhs(fluid_, *particles[i], fluid_.getKernel(), fx_);
         props = particles[i]->getNewProperties();  //made this new so that algorithm is correct

@@ -26,7 +26,7 @@ int Eulermod::step(){
         fx_.density = 0;
         fx_.mass = 0;
         fx_.pressure = 0;
-        fx_.visc = 0;
+        fx_.energy = 0;
 
         physics_.rhs(fluid_, *particles[i], fluid_.getKernel(), fx_);
         Properties props = particles[i]->getOldProperties();
