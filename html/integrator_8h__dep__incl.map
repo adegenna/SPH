@@ -1,5 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$euler_8h.html" title="implementation of explicit Euler integrator" alt="" coords="5,83,67,112"/>
-<area shape="rect" id="node7" href="$predictorcorrector_8h.html" title="Integrator implimenting the modified predictor&#45;corrector method outlined in Price (2004)..." alt="" coords="91,83,224,112"/>
-<area shape="rect" id="node5" href="$sph_8cc.html" title="Driver program for smoothed particle hydrodynamics solver." alt="" coords="65,160,127,189"/>
+<area shape="rect" id="node7" href="$eulermod_8h.html" title="implementation of Euler integrator, modified so that the position is updated using the updated veloci..." alt="" coords="91,83,176,112"/>
+<area shape="rect" id="node10" href="$predictorcorrector_8h.html" title="Integrator implimenting the modified predictor&#45;corrector method outlined in Price (2004)..." alt="" coords="200,83,333,112"/>
+<area shape="rect" id="node5" href="$sph_8cc.html" title="Driver program for smoothed particle hydrodynamics solver." alt="" coords="103,160,164,189"/>
 </map>
