@@ -115,9 +115,21 @@ int main(int argc, char** argv){
 /**
  * \mainpage
  *
- * sph is a smoothed particle hydrodynamics solver. The driver program is 
- * sph.cc.
+ * sph is a smoothed particle hydrodynamics solver. This is a Langrangian, i.e.,
+ * not a fixed grid, solver which tracks particles and their properties instead
+ * of properties at fixed grid spaces. This is useful for investigating free 
+ * surface problems and mixing of fluids with different properties.
+ *
+ * The driver program is sph.cc. Usage: sph <initFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep> <integrator> <kernel>
  *
  * Associated with sph is tests.cc, which is the driver program for testing 
  * classes and structs used by sph.
+ *
+ * Usage: tests
+ *
+ * <br /> <br /> <br />
+ *
+ * Code developed by Scott Dawson, Anthony DeGennaro, Imene Goumiri, and Kevin
+ * Nowland as a final project for Princeton University course APC 524: Software 
+ * Engineering for Scientific Computiattion during the Fall of 2012. 
  */

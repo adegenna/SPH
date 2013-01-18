@@ -73,8 +73,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Smoothed Particle Hydrodynamics Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>sph is a smoothed particle hydrodynamics solver. The driver program is <a class="el" href="sph_8cc.html" title="Driver program for smoothed particle hydrodynamics solver.">sph.cc</a>.</p>
-<p>Associated with sph is <a class="el" href="tests_8cc.html" title="Driver program for testing of sph.">tests.cc</a>, which is the driver program for testing classes and structs used by sph. </p>
+<div class="textblock"><p>sph is a smoothed particle hydrodynamics solver. This is a Langrangian, i.e., not a fixed grid, solver which tracks particles and their properties instead of properties at fixed grid spaces. This is useful for investigating free surface problems and mixing of fluids with different properties.</p>
+<p>The driver program is <a class="el" href="sph_8cc.html" title="Driver program for smoothed particle hydrodynamics solver.">sph.cc</a>. Usage: sph &lt;initFile&gt; &lt;boundaryFile(OPTIONAL)&gt; &lt;tFinal&gt; &lt;timestep&gt; &lt;integrator&gt; &lt;kernel&gt;</p>
+<p>Associated with sph is <a class="el" href="tests_8cc.html" title="Driver program for testing of sph.">tests.cc</a>, which is the driver program for testing classes and structs used by sph.</p>
+<p>Usage: tests</p>
+<p><br/>
+ <br/>
+ <br/>
+</p>
+<p>Code developed by Scott Dawson, Anthony DeGennaro, Imene Goumiri, and Kevin Nowland as a final project for Princeton University course APC 524: Software Engineering for Scientific Computiattion during the Fall of 2012. </p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -93,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 18 2013 10:26:38 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2013 11:11:19 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
