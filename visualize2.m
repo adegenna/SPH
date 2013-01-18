@@ -1,8 +1,8 @@
 close all
 clear all
 %% Load SPH results
-load spherefallingoutput.dat
-load spherefallingoutputPC.dat
+%load spherefallingoutput.dat
+%load spherefallingoutputPC.dat
 load fluid.dat
 %load fluidlltestoutput.dat
 %fluid = sphereoninclineoutput;

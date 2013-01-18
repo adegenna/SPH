@@ -172,7 +172,7 @@ void Fluid::findNeighbors(){
 //      int BN = particles_[j]->numberOfBoundaryNeighbors();
 
         //should this cutoff distance be larger?
-      if(dist < 2.*smoothinglength_){
+      if(dist < 1.*smoothinglength_){
         particles_[j]->addBoundaryNeighbor(*boundaries_[i]);
       }
     }
