@@ -1,160 +1,72 @@
-Profile data for naive n^2 findNeighbor
+Flat profile:
 
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
+Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-Profile data for mesh findNeighbor
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
-
-granularity: each sample hit covers 4 byte(s) no time propagated
-
-                                  called/total       parents 
-index  %time    self descendents  called+self    name    	index
-                                  called/total       children
-
-
-
-granularity: each sample hit covers 4 byte(s) no time accumulated
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-
-Index by function name
-
-
-
-
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+ 16.53      1.83     1.83                             boost::detail::atomic_exchange_and_add(int*, int)
+ 14.18      3.40     1.57                             boost::detail::sp_counted_base::add_ref_copy()
+ 12.10      4.74     1.34                             boost::detail::atomic_increment(int*)
+  5.92      5.39     0.66                             std::pow(double, int)
+  5.60      6.01     0.62                             Fluid::findNeighbors()
+  5.06      6.58     0.56                             boost::detail::shared_count::shared_count(boost::detail::shared_count const&)
+  3.75      6.99     0.41                             boost::shared_ptr<Particle>::shared_ptr(boost::shared_ptr<Particle> const&)
+  3.43      7.37     0.38                             __gnu_cxx::__enable_if<std::__is_scalar<int>::__value, void>::__type std::__fill_a<int*, int>(int*, int*, int const&)
+  3.16      7.72     0.35                             boost::shared_ptr<Particle>* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >, boost::shared_ptr<Particle>*>(__gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >, __gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >, boost::shared_ptr<Particle>*)
+  2.71      8.02     0.30                             boost::detail::shared_count::~shared_count()
+  2.53      8.30     0.28                             IncompVisc::rhs(Fluid&, Particle&, Kernel&, Properties&)
+  2.30      8.55     0.26                             void std::_Construct<boost::shared_ptr<Particle>, boost::shared_ptr<Particle> >(boost::shared_ptr<Particle>*, boost::shared_ptr<Particle> const&)
+  2.26      8.80     0.25                             Particle::getOldProperties() const
+  1.94      9.02     0.21                             boost::shared_ptr<Particle>::~shared_ptr()
+  1.81      9.22     0.20                             bool __gnu_cxx::operator!=<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >(__gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > > const&, __gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > > const&)
+  1.63      9.40     0.18                             boost::detail::sp_counted_base::release()
+  1.54      9.57     0.17                             __gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >::operator++()
+  1.45      9.73     0.16                             void std::_Destroy_aux<false>::__destroy<boost::shared_ptr<Particle>*>(boost::shared_ptr<Particle>*, boost::shared_ptr<Particle>*)
+  1.22      9.87     0.14                             boost::shared_ptr<Particle>* std::__addressof<boost::shared_ptr<Particle> >(boost::shared_ptr<Particle>&)
+  1.04      9.98     0.12                             __gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >::base() const
+  0.95     10.09     0.10                             SplineKernel::gradW(Kvector, Kvector)
+  0.90     10.19     0.10                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_S_key(std::_Rb_tree_node<std::pair<int const, int> > const*)
+  0.90     10.29     0.10                             void std::_Destroy<boost::shared_ptr<Particle> >(boost::shared_ptr<Particle>*)
+  0.63     10.36     0.07                             boost::shared_ptr<Particle>::operator->() const
+  0.63     10.43     0.07                             __gnu_cxx::__normal_iterator<boost::shared_ptr<Particle> const*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >::operator*() const
+  0.54     10.48     0.06                             std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > >::operator[](unsigned int)
+  0.45     10.54     0.05                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::equal_range(int const&)
+  0.36     10.57     0.04                             __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<int const, int> > >::allocate(unsigned int, void const*)
+  0.36     10.62     0.04                             operator new(unsigned int, void*)
+  0.27     10.64     0.03                             Euler::step()
+  0.27     10.68     0.03                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_M_upper_bound(std::_Rb_tree_node<std::pair<int const, int> >*, std::_Rb_tree_node<std::pair<int const, int> >*, int const&)
+  0.27     10.71     0.03                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_S_value(std::_Rb_tree_node<std::pair<int const, int> > const*)
+  0.18     10.72     0.02                             Fluid::resetNeighbors()
+  0.18     10.74     0.02                             boost::shared_ptr<Particle>::operator*() const
+  0.18     10.77     0.02                             std::_Select1st<std::pair<int const, int> >::operator()(std::pair<int const, int> const&) const
+  0.18     10.79     0.02                             std::less<int>::operator()(int const&, int const&) const
+  0.18     10.80     0.02                             std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > >::vector(std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > const&)
+  0.18     10.82     0.02                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_S_right(std::_Rb_tree_node_base*)
+  0.14     10.84     0.01                             Particle::addNeighbor(Particle const&)
+  0.09     10.85     0.01                             __gnu_cxx::new_allocator<boost::shared_ptr<Particle> >::allocate(unsigned int, void const*)
+  0.09     10.86     0.01                             Particle::getNewProperties() const
+  0.09     10.87     0.01                             Particle::getTag() const
+  0.09     10.88     0.01                             std::_Rb_tree_iterator<std::pair<int const, int> >::operator*() const
+  0.09     10.89     0.01                             std::vector<int, std::allocator<int> >::size() const
+  0.09     10.90     0.01                             std::vector<int, std::allocator<int> >::begin() const
+  0.09     10.91     0.01                             std::_Iter_base<__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, true>::_S_base(__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >)
+  0.09     10.92     0.01                             std::_Vector_base<int, std::allocator<int> >::~_Vector_base()
+  0.09     10.93     0.01                             std::_Rb_tree_iterator<std::pair<int const, int> >::operator++()
+  0.09     10.94     0.01                             std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > >::~vector()
+  0.09     10.95     0.01                             std::vector<int, std::allocator<int> >::operator[](unsigned int)
+  0.09     10.96     0.01                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_M_create_node(std::pair<int const, int> const&)
+  0.09     10.97     0.01                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_M_lower_bound(std::_Rb_tree_node<std::pair<int const, int> >*, std::_Rb_tree_node<std::pair<int const, int> >*, int const&)
+  0.09     10.98     0.01                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_M_insert_equal(std::pair<int const, int> const&)
+  0.09     10.99     0.01                             std::_Rb_tree<int, std::pair<int const, int>, std::_Select1st<std::pair<int const, int> >, std::less<int>, std::allocator<std::pair<int const, int> > >::_S_left(std::_Rb_tree_node_base*)
+  0.09     11.00     0.01                             std::multimap<int, int, std::less<int>, std::allocator<std::pair<int const, int> > >::multimap()
+  0.09     11.01     0.01                             int* std::copy<__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, int*>(__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, int*)
+  0.09     11.02     0.01                             operator delete(void*, void*)
+  0.05     11.03     0.01                             SplineKernel::W(double)
+  0.05     11.03     0.01                             void boost::checked_delete<Eulermod>(Eulermod*)
+  0.05     11.04     0.01                             boost::detail::sp_counted_impl_p<Eulermod>::~sp_counted_impl_p()
+  0.05     11.04     0.01                             Particle::Particle(int, unsigned int, unsigned int, Properties const&)
+  0.05     11.04     0.01                             __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >::__normal_iterator(int const* const&)
+  0.05     11.05     0.01                             __gnu_cxx::__normal_iterator<boost::shared_ptr<Particle>*, std::vector<boost::shared_ptr<Particle>, std::allocator<boost::shared_ptr<Particle> > > >::base() const
+  0.05     11.05     0.01                             std::vector<int, std::allocator<int> >::end()
+  0.05     11.06     0.01                             std::vector<int, std::allocator<int> >::begin()
+  0.05     11.06     0.01                             std::multimap<int, int, std::less<int>, std::allocator<std::pair<int const, int> > >::~multimap()
+  0.05     11.07     0.01                             int* std::uninitialized_copy<__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, int*>(__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >, int*)

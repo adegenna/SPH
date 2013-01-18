@@ -12,7 +12,7 @@ Properties pos(double x, double y){
   props.u = 0;
   props.v = 0;
   props.density = 0;
-  props.visc = 0;
+  props.energy = 0;
   props.pressure = 0;
   props.mass = 0;
   return props;
