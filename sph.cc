@@ -24,61 +24,71 @@ using namespace std;
 
 /// Usage: main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep>
 int main(int argc, char** argv){
-    string initFile, boundaryFile;
+    string initFile, boundaryFile, kerneltype, integtype;
     double tFinal;
     double dt;
-    if(argc == 4) {
+    if(argc == 6) {
       initFile = argv[1];
       tFinal = atof(argv[2]);
       dt = atof(argv[3]);
+      integtype = argv[4];
+      kerneltype = argv[5];
     }
-    else if(argc == 5) {
+    else if(argc == 7) {
       initFile = argv[1];
       tFinal = atof(argv[3]);
         dt = atof(argv[4]);
       boundaryFile = argv[2];
+      integtype = argv[5];
+      kerneltype = argv[6];
     }
     else{
-        cout << "USAGE: " << argv[0] << " <initFile> <boundaryFile(OPTIONAL)> <tFinal>  <timestep>" << endl;
+        cout << "USAGE: " << argv[0] << " <initFile> <boundaryFile(OPTIONAL)> "
+          "<tFinal> <timestep> <integrator> <kernel>" << endl;
         return 1;
     }
 
     const double smoothinglength = 1;
 
-
     int nparticles;
     int nboundaries;
-    //read in number of particles, so that fluid can be initialized
+    // read in number of particles, so that fluid can be initialized
     getNparticles(initFile,boundaryFile, nparticles,nboundaries);
 
-    const string kerneltype = "Spline";
 
     boost::shared_ptr<Kernel> myKer;
     
-    if (kerneltype=="Spline"){
+    if (kerneltype=="spline"){
         myKer.reset(new SplineKernel(smoothinglength));
     }
-    else if (kerneltype=="Gaussian"){
+    else if (kerneltype=="gaussian"){
         myKer.reset(new GaussianKernel(smoothinglength));
     }
-    //initialize fluid, so that initialize will work:
+    else{
+      cout << "Invalid kernel. Options are spline and gaussian" <<endl;
+    }
+    // initialize fluid, so that initialize will work:
     Fluid fluid(*myKer, nparticles, nboundaries, smoothinglength);
     
-    const string inputtype = "IndivParts";
+    // initializes the fluid from file
+    initialize(initFile,boundaryFile,fluid,nparticles,nboundaries);
     
-    if (inputtype == "IndivParts") {
-        initialize(initFile,boundaryFile,fluid,nparticles,nboundaries); // initializes the fluid from file
-    }
-    else if (inputtype == "RectangleParticles" ) {
-        //
-    }
-        
-   // boost::shared_ptr<Physics> physics(new IncompInvisc());
     boost::shared_ptr<Physics> physics(new IncompVisc(1.,0.1,3000.,7.,1000.,0.3,0.01));
 
-    boost::shared_ptr<Integrator> integrator(new Euler(dt, fluid, *physics));
-   // boost::shared_ptr<Integrator> integrator(new PredictorCorrector(dt, fluid, *physics));
-   // boost::shared_ptr<Integrator> integrator(new Eulermod(dt, fluid, *physics));
+    boost::shared_ptr<Integrator> integrator;
+    if (integtype=="euler"){
+      integrator.reset(new Euler(dt, fluid, *physics));
+    }
+    else if (integtype=="pc"){
+      integrator.reset(new PredictorCorrector(dt, fluid, *physics));
+    }
+    else if (integtype=="eulermod"){
+      integrator.reset(new Eulermod(dt, fluid, *physics));
+    }
+    else{
+      cout << "Invalid integrator. Options are euler, pc, eulermod." << endl;
+      return -1;
+    }
 
     Output output("fluid.dat");
     int outsteps = floor(0.1/dt);
