@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$physics_8h.html" title="superclass for implementing different fluid physics" alt="" coords="51,83,128,112"/>
+<area shape="rect" id="node5" href="$properties_8h.html" title="Struct to hold a particle&#39;s physical properties." alt="" coords="333,160,424,189"/>
+<area shape="rect" id="node7" href="$kvector_8h.html" title="struct for 2D vector object useful for kernel operations" alt="" coords="448,160,523,189"/>
+<area shape="rect" id="node9" href="$fluid_8h.html" title="Definition of fluid class for packaging together particles, boundary particles, and their properties..." alt="" coords="251,83,307,112"/>
+<area shape="rect" id="node16" href="$particle_8h.html" title="Definition of the particle class." alt="" coords="152,83,227,112"/>
+<area shape="rect" id="node22" href="$kernel_8h.html" title="superclass for kernels" alt="" coords="381,83,448,112"/>
+</map>

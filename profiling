@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# script used to automate profiling for naive versus linked list neighbor search
+
+# HAS DEPRECATED INCOVATION OF sph
+
 if [ $NDEBUG -ne 1 ]
 then
   echo "NDEBUG != 1 or not set"

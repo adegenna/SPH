@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classKernel.html" title="smooth kernels approximating point particles" alt="" coords="5,32,64,61"/>
+<area shape="rect" id="node3" href="$classGaussianKernel.html" title="Gaussian approximation of point particle." alt="" coords="112,5,227,35"/>
+<area shape="rect" id="node5" href="$classSplineKernel.html" title="cubic spline approximation of point particle" alt="" coords="123,59,216,88"/>
+</map>
