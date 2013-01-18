@@ -85,41 +85,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00009"></a>00009 <span class="preprocessor"></span>
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="properties_8h.html" title="Struct to hold a particle&#39;s physical properties.">properties.h</a>&quot;</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="keyword">class </span><a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>;
-<a name="l00016"></a>00016 <span class="keyword">class </span><a class="code" href="classParticle.html" title="Properties and functions for individual particles.">Particle</a>;
-<a name="l00017"></a>00017 
-<a name="l00019"></a><a class="code" href="classFluid.html">00019</a> <span class="keyword">class </span><a class="code" href="classFluid.html" title="Holds particles and boundary praticles.">Fluid</a> {
-<a name="l00020"></a>00020   <span class="keyword">public</span>:
-<a name="l00021"></a>00021     <span class="keyword">typedef</span> std::vector&lt; boost::shared_ptr&lt;Particle&gt; &gt; ParticleArray;
-<a name="l00022"></a>00022 
-<a name="l00024"></a>00024     <a class="code" href="classFluid.html#ae4aecca54a935e361157859de51ce2e3" title="ctor">Fluid</a>(<a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>&amp; kernel,       
-<a name="l00025"></a>00025         <span class="keywordtype">size_t</span> nparticles,      
-<a name="l00026"></a>00026         <span class="keywordtype">size_t</span> nboundaries,     
-<a name="l00027"></a>00027         <span class="keywordtype">double</span> smoothinglength  
-<a name="l00028"></a>00028         );
-<a name="l00030"></a>00030     ParticleArray <a class="code" href="classFluid.html#a653f9edf3a6c53ec1f42e7f41cdc87a8" title="get the array of particles">getParticles</a>() <span class="keyword">const</span>;
-<a name="l00032"></a>00032     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a128d7ad9ce3a78bc8ef039702f9c2706" title="add particle to the particle array">addParticle</a>(<span class="keywordtype">int</span> tag, <span class="keyword">const</span> <a class="code" href="structProperties.html" title="struct holding physical particle properties">Properties</a>&amp; prop);
-<a name="l00034"></a>00034     ParticleArray <a class="code" href="classFluid.html#a8c9d7de21e341ec6344e78cb2ca21baf" title="get the array of boundary particles">getBoundaries</a>() <span class="keyword">const</span>;
-<a name="l00036"></a>00036     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a366795e3ce9fe395ee33febd3813b6f7" title="add particle to the boundary">addBoundary</a>(<span class="keywordtype">int</span> tag, <span class="keyword">const</span> <a class="code" href="structProperties.html" title="struct holding physical particle properties">Properties</a>&amp; prop);
-<a name="l00038"></a>00038     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a55230ad05ce44fc00032547393788796" title="find neighbors for all particles in the fluid">findNeighbors</a>();
-<a name="l00040"></a>00040     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a6f1fc57fb0aa2de6c81134f02c1a82ce" title="reset particles to have no neighbors">resetNeighbors</a>();
-<a name="l00042"></a>00042     <a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>&amp; <a class="code" href="classFluid.html#afb89fa53b31cbd8a053fea20779f7fc0" title="get the kernel">getKernel</a>();
-<a name="l00044"></a>00044     <span class="keywordtype">size_t</span> <a class="code" href="classFluid.html#a01a17b69aaea73239a3f13f191dbd48a" title="get the number of particles">getNParticles</a>() <span class="keyword">const</span>;
-<a name="l00046"></a>00046     <span class="keywordtype">size_t</span> <a class="code" href="classFluid.html#aad2f8ee1598445f42f41e7faf1fd9a09" title="get the number of boundary particles">getNBoundaries</a>() <span class="keyword">const</span>;
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a1f422a0a94dc16192650ea11db416576" title="update all particles with input particle array">resetParticles</a>(<span class="keyword">const</span> ParticleArray&amp; newparticles);
-<a name="l00049"></a>00049     
-<a name="l00050"></a>00050   <span class="keyword">private</span>:
-<a name="l00051"></a>00051     <a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>&amp; kernel_;
-<a name="l00052"></a>00052     <span class="keywordtype">size_t</span> nparticles_;  <span class="comment">// number of particles</span>
-<a name="l00053"></a>00053     <span class="keywordtype">size_t</span> nboundaries_; <span class="comment">// number of boundaries</span>
-<a name="l00054"></a>00054     <span class="keywordtype">double</span> smoothinglength_;
-<a name="l00055"></a>00055     ParticleArray particles_;
-<a name="l00056"></a>00056     ParticleArray boundaries_; <span class="comment">// Boundary particles</span>
-<a name="l00057"></a>00057 };
-<a name="l00058"></a>00058 <span class="preprocessor">#endif // FLUID_H</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="properties_8h.html" title="Struct to hold a particle&#39;s physical properties.">properties.h</a>&quot;</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="keyword">class </span><a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>;
+<a name="l00015"></a>00015 <span class="keyword">class </span><a class="code" href="classParticle.html" title="Properties and functions for individual particles.">Particle</a>;
+<a name="l00016"></a>00016 
+<a name="l00018"></a><a class="code" href="classFluid.html">00018</a> <span class="keyword">class </span><a class="code" href="classFluid.html" title="Holds particles and boundary praticles.">Fluid</a> {
+<a name="l00019"></a>00019   <span class="keyword">public</span>:
+<a name="l00020"></a>00020     <span class="keyword">typedef</span> std::vector&lt; boost::shared_ptr&lt;Particle&gt; &gt; ParticleArray;
+<a name="l00021"></a>00021 
+<a name="l00023"></a>00023     <a class="code" href="classFluid.html#ae4aecca54a935e361157859de51ce2e3" title="ctor">Fluid</a>(<a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>&amp; kernel,       
+<a name="l00024"></a>00024         <span class="keywordtype">size_t</span> nparticles,      
+<a name="l00025"></a>00025         <span class="keywordtype">size_t</span> nboundaries,     
+<a name="l00026"></a>00026         <span class="keywordtype">double</span> smoothinglength  
+<a name="l00027"></a>00027         );
+<a name="l00029"></a>00029     ParticleArray <a class="code" href="classFluid.html#a653f9edf3a6c53ec1f42e7f41cdc87a8" title="get the array of particles">getParticles</a>() <span class="keyword">const</span>;
+<a name="l00031"></a>00031     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a128d7ad9ce3a78bc8ef039702f9c2706" title="add particle to the particle array">addParticle</a>(<span class="keywordtype">int</span> tag, <span class="keyword">const</span> <a class="code" href="structProperties.html" title="struct holding physical particle properties">Properties</a>&amp; prop);
+<a name="l00033"></a>00033     ParticleArray <a class="code" href="classFluid.html#a8c9d7de21e341ec6344e78cb2ca21baf" title="get the array of boundary particles">getBoundaries</a>() <span class="keyword">const</span>;
+<a name="l00035"></a>00035     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a366795e3ce9fe395ee33febd3813b6f7" title="add particle to the boundary">addBoundary</a>(<span class="keywordtype">int</span> tag, <span class="keyword">const</span> <a class="code" href="structProperties.html" title="struct holding physical particle properties">Properties</a>&amp; prop);
+<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a55230ad05ce44fc00032547393788796" title="find neighbors for all particles in the fluid">findNeighbors</a>();
+<a name="l00039"></a>00039     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a6f1fc57fb0aa2de6c81134f02c1a82ce" title="reset particles to have no neighbors">resetNeighbors</a>();
+<a name="l00041"></a>00041     <a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>&amp; <a class="code" href="classFluid.html#afb89fa53b31cbd8a053fea20779f7fc0" title="get the kernel">getKernel</a>();
+<a name="l00043"></a>00043     <span class="keywordtype">size_t</span> <a class="code" href="classFluid.html#a01a17b69aaea73239a3f13f191dbd48a" title="get the number of particles">getNParticles</a>() <span class="keyword">const</span>;
+<a name="l00045"></a>00045     <span class="keywordtype">size_t</span> <a class="code" href="classFluid.html#aad2f8ee1598445f42f41e7faf1fd9a09" title="get the number of boundary particles">getNBoundaries</a>() <span class="keyword">const</span>;
+<a name="l00047"></a>00047     <span class="keywordtype">void</span> <a class="code" href="classFluid.html#a1f422a0a94dc16192650ea11db416576" title="update all particles with input particle array">resetParticles</a>(<span class="keyword">const</span> ParticleArray&amp; newparticles);
+<a name="l00048"></a>00048     
+<a name="l00049"></a>00049   <span class="keyword">private</span>:
+<a name="l00050"></a>00050     <a class="code" href="classKernel.html" title="smooth kernels approximating point particles">Kernel</a>&amp; kernel_;
+<a name="l00051"></a>00051     <span class="keywordtype">size_t</span> nparticles_;  <span class="comment">// number of particles</span>
+<a name="l00052"></a>00052     <span class="keywordtype">size_t</span> nboundaries_; <span class="comment">// number of boundaries</span>
+<a name="l00053"></a>00053     <span class="keywordtype">double</span> smoothinglength_;
+<a name="l00054"></a>00054     ParticleArray particles_;
+<a name="l00055"></a>00055     ParticleArray boundaries_; <span class="comment">// Boundary particles</span>
+<a name="l00056"></a>00056 };
+<a name="l00057"></a>00057 <span class="preprocessor">#endif // FLUID_H</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -138,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 6 2013 15:44:59 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2013 07:58:35 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

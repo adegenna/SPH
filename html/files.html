@@ -80,11 +80,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock">Here is a list of all documented files with brief descriptions:</div><table>
-  <tr><td class="indexkey"><a class="el" href="euler_8h.html">euler.h</a> <a href="euler_8h_source.html">[code]</a></td><td class="indexvalue">Implementation of euler integrator </td></tr>
+  <tr><td class="indexkey"><a class="el" href="euler_8h.html">euler.h</a> <a href="euler_8h_source.html">[code]</a></td><td class="indexvalue">Implementation of explicit <a class="el" href="classEuler.html" title="euler integrator">Euler</a> integrator </td></tr>
   <tr><td class="indexkey"><a class="el" href="fluid_8h.html">fluid.h</a> <a href="fluid_8h_source.html">[code]</a></td><td class="indexvalue">Definition of fluid class for packaging together particles, boundary particles, and their properties </td></tr>
   <tr><td class="indexkey"><a class="el" href="fluid__test_8cc.html">fluid_test.cc</a></td><td class="indexvalue">Tests for <a class="el" href="classFluid.html" title="Holds particles and boundary praticles.">Fluid</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="gaussiankernel_8h.html">gaussiankernel.h</a> <a href="gaussiankernel_8h_source.html">[code]</a></td><td class="indexvalue">Implementation of a Gaussian kernel </td></tr>
   <tr><td class="indexkey"><a class="el" href="incompinvisc_8h.html">incompinvisc.h</a> <a href="incompinvisc_8h_source.html">[code]</a></td><td class="indexvalue">Implementation of physics for a fluid which is incompressible and inviscid </td></tr>
+  <tr><td class="indexkey"><a class="el" href="incompvisc_8h.html">incompvisc.h</a> <a href="incompvisc_8h_source.html">[code]</a></td><td class="indexvalue">Implementation of physics for a fluid which is incompressible and inviscid </td></tr>
   <tr><td class="indexkey"><a class="el" href="initialize_8h.html">initialize.h</a> <a href="initialize_8h_source.html">[code]</a></td><td class="indexvalue">Code for initialization of fluid and boundary from input files </td></tr>
   <tr><td class="indexkey"><a class="el" href="integrator_8h.html">integrator.h</a> <a href="integrator_8h_source.html">[code]</a></td><td class="indexvalue">Superclass for integrators </td></tr>
   <tr><td class="indexkey"><a class="el" href="kernel_8h.html">kernel.h</a> <a href="kernel_8h_source.html">[code]</a></td><td class="indexvalue">Superclass for kernels </td></tr>
@@ -95,6 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey"><a class="el" href="particle_8h.html">particle.h</a> <a href="particle_8h_source.html">[code]</a></td><td class="indexvalue">Definition of the particle class </td></tr>
   <tr><td class="indexkey"><a class="el" href="particle__test_8cc.html">particle_test.cc</a></td><td class="indexvalue">Tests <a class="el" href="classParticle.html" title="Properties and functions for individual particles.">Particle</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="physics_8h.html">physics.h</a> <a href="physics_8h_source.html">[code]</a></td><td class="indexvalue">Superclass for implementing different fluid physics </td></tr>
+  <tr><td class="indexkey"><a class="el" href="predictorcorrector_8h.html">predictorcorrector.h</a> <a href="predictorcorrector_8h_source.html">[code]</a></td><td class="indexvalue"><a class="el" href="classIntegrator.html" title="superclass for integrators">Integrator</a> implimenting the modified predictor-corrector method outlined in Price (2004) </td></tr>
   <tr><td class="indexkey"><a class="el" href="properties_8h.html">properties.h</a> <a href="properties_8h_source.html">[code]</a></td><td class="indexvalue">Struct to hold a particle's physical properties </td></tr>
   <tr><td class="indexkey"><a class="el" href="properties__test_8cc.html">properties_test.cc</a></td><td class="indexvalue">Tests for <a class="el" href="structProperties.html" title="struct holding physical particle properties">Properties</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="sph_8cc.html">sph.cc</a></td><td class="indexvalue">Driver program for smoothed particle hydrodynamics solver </td></tr>
@@ -119,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 6 2013 15:45:00 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2013 07:58:36 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -99,9 +99,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00025"></a>00025       ) = 0;
 <a name="l00027"></a>00027   <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classPhysics.html#ab51a11d51e09b132610cd6fbb95d0c0c" title="move part&#39;s new properties to old properties">update</a>(<a class="code" href="classParticle.html" title="Properties and functions for individual particles.">Particle</a>&amp; part) = 0;
 <a name="l00029"></a>00029   <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classPhysics.html#a50759e0407dff12021c94f9fa6729765" title="calculates pressure">calcPressure</a>(<a class="code" href="classParticle.html" title="Properties and functions for individual particles.">Particle</a>&amp; part) = 0;
-<a name="l00030"></a>00030 };
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="preprocessor">#endif  // PHYSICS_H_</span>
+<a name="l00030"></a>00030     <span class="keyword">virtual</span> <span class="keywordtype">int</span> initPressureParams() = 0;
+<a name="l00031"></a>00031 };
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="preprocessor">#endif  // PHYSICS_H_</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -120,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 6 2013 15:44:59 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2013 07:58:35 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

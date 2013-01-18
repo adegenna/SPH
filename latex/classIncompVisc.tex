@@ -1,0 +1,111 @@
+\hypertarget{classIncompVisc}{\section{\-Incomp\-Visc \-Class \-Reference}
+\label{classIncompVisc}\index{\-Incomp\-Visc@{\-Incomp\-Visc}}
+}
+
+
+class for an incompressible fluid with the inclusion of viscous forces  
+
+
+
+
+{\ttfamily \#include $<$incompvisc.\-h$>$}
+
+\-Inheritance diagram for \-Incomp\-Visc\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIncompVisc}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIncompVisc_a30ec80f360669cb6549710bc6d8b1571}{\-Incomp\-Visc} (double smoothinglength, double grav, double press\-B, double press\-Gamma, double rho\-\_\-0, double visc\-Mu, double visc\-Eta)
+\begin{DoxyCompactList}\small\item\em ctor \end{DoxyCompactList}\item 
+int \hyperlink{classIncompVisc_a937b901289ff887f072c36b66e9360e8}{rhs} (\hyperlink{classFluid}{\-Fluid} \&fluid, \hyperlink{classParticle}{\-Particle} \&part, \hyperlink{classKernel}{\-Kernel} \&myker, \hyperlink{structProperties}{\-Properties} \&fx)
+\begin{DoxyCompactList}\small\item\em update function \end{DoxyCompactList}\item 
+\hypertarget{classIncompVisc_a21d2b01dfc8239e08970a94726c016e3}{int \hyperlink{classIncompVisc_a21d2b01dfc8239e08970a94726c016e3}{update} (\hyperlink{classParticle}{\-Particle} \&part)}\label{classIncompVisc_a21d2b01dfc8239e08970a94726c016e3}
+
+\begin{DoxyCompactList}\small\item\em move part's new properties to old properties \end{DoxyCompactList}\item 
+\hypertarget{classIncompVisc_a507655c39e5e76e18bd8bd422879984e}{int \hyperlink{classIncompVisc_a507655c39e5e76e18bd8bd422879984e}{calc\-Pressure} (\hyperlink{classParticle}{\-Particle} \&part)}\label{classIncompVisc_a507655c39e5e76e18bd8bd422879984e}
+
+\begin{DoxyCompactList}\small\item\em calculates pressure \end{DoxyCompactList}\item 
+\hypertarget{classIncompVisc_a63138bdbcda1877e621027d271848ba6}{int {\bfseries init\-Pressure\-Params} ()}\label{classIncompVisc_a63138bdbcda1877e621027d271848ba6}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+class for an incompressible fluid with the inclusion of viscous forces 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classIncompVisc_a30ec80f360669cb6549710bc6d8b1571}{\index{\-Incomp\-Visc@{\-Incomp\-Visc}!\-Incomp\-Visc@{\-Incomp\-Visc}}
+\index{\-Incomp\-Visc@{\-Incomp\-Visc}!IncompVisc@{\-Incomp\-Visc}}
+\subsubsection[{\-Incomp\-Visc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Incomp\-Visc\-::\-Incomp\-Visc} (
+\begin{DoxyParamCaption}
+\item[{double}]{smoothinglength, }
+\item[{double}]{grav, }
+\item[{double}]{press\-B, }
+\item[{double}]{press\-Gamma, }
+\item[{double}]{rho\-\_\-0, }
+\item[{double}]{visc\-Mu, }
+\item[{double}]{visc\-Eta}
+\end{DoxyParamCaption}
+)}}\label{classIncompVisc_a30ec80f360669cb6549710bc6d8b1571}
+
+
+ctor 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em smoothinglength} & input smoothinglength of fluid \\
+\hline
+{\em grav} & input gravitational acceleration \\
+\hline
+{\em press\-B} & input pressure coefficient \-B \\
+\hline
+{\em press\-Gamma} & input pressure exponent \-Gamma \\
+\hline
+{\em rho\-\_\-0} & input reference density \\
+\hline
+{\em visc\-Mu} & input viscosity parameter mu \\
+\hline
+{\em visc\-Eta} & inpu tviscosity parameter eta \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classIncompVisc_a937b901289ff887f072c36b66e9360e8}{\index{\-Incomp\-Visc@{\-Incomp\-Visc}!rhs@{rhs}}
+\index{rhs@{rhs}!IncompVisc@{\-Incomp\-Visc}}
+\subsubsection[{rhs}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Incomp\-Visc\-::rhs} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Fluid} \&}]{fluid, }
+\item[{{\bf \-Particle} \&}]{part, }
+\item[{{\bf \-Kernel} \&}]{myker, }
+\item[{{\bf \-Properties} \&}]{fx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classIncompVisc_a937b901289ff887f072c36b66e9360e8}
+
+
+update function 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em fluid} & input fluid \\
+\hline
+{\em part} & particular fluid particle \\
+\hline
+{\em myker} & kernel to use \\
+\hline
+{\em fx} & stores changes of update \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements \hyperlink{classPhysics_a0fd5afe65228da08e3886e58d5285d43}{\-Physics}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{incompvisc_8h}{incompvisc.\-h}\end{DoxyCompactItemize}

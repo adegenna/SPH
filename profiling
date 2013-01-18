@@ -22,9 +22,9 @@ make
 echo "Profile data for naive n^2 findNeighbor" >> profile.dat
 printf "\n\n\n" >> profile.dat
 
-for INPUT in 15particleinput.dat 30particleinput.dat 60particleinput.dat 120particleinput.dat
+for INPUT in 37sphere.dat 75sphere.dat 150sphere.dat 300sphere.dat 600sphere.dat
 do
-  sph $INPUT box10by10.dat 10 .001 >/dev/null
+  sph $INPUT Box23by20New.dat 50 .001 >/dev/null
   gprof -b sph >> profile.dat
   printf "\n\n\n" >> profile.dat
 done
@@ -36,9 +36,9 @@ make
 echo "Profile data for mesh findNeighbor" >> profile.dat
 printf "\n\n\n" >> profile.dat
 
-for INPUT in 15particleinput.dat 30particleinput.dat 60particleinput.dat 120particleinput.dat
+for INPUT in 37sphere.dat 75sphere.dat 150sphere.dat 300sphere.dat 600sphere.dat
 do
-  sph $INPUT box10by10.dat 10 .001 >/dev/null
+  sph $INPUT Box23by20New.dat 50 .001 >/dev/null
   gprof -b sph >> profile.dat
   printf "\n\n\n" >> profile.dat
 done

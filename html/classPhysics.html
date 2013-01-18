@@ -95,6 +95,7 @@ Inheritance diagram for Physics:</div>
   <img src="classPhysics.png" usemap="#Physics_map" alt=""/>
   <map id="Physics_map" name="Physics_map">
 <area href="classIncompInvisc.html" title="class for an incompressibe, inviscid fluid" alt="IncompInvisc" shape="rect" coords="0,56,85,80"/>
+<area href="classIncompVisc.html" title="class for an incompressible fluid with the inclusion of viscous forces" alt="IncompVisc" shape="rect" coords="95,56,180,80"/>
 </map>
  </div></div>
 
@@ -113,6 +114,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50759e0407dff12021c94f9fa6729765"></a><!-- doxytag: member="Physics::calcPressure" ref="a50759e0407dff12021c94f9fa6729765" args="(Particle &amp;part)=0" -->
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysics.html#a50759e0407dff12021c94f9fa6729765">calcPressure</a> (<a class="el" href="classParticle.html">Particle</a> &amp;part)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates pressure <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a933c3288d21bd8dbdab422d4fe09f84d"></a><!-- doxytag: member="Physics::initPressureParams" ref="a933c3288d21bd8dbdab422d4fe09f84d" args="()=0" -->
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>initPressureParams</b> ()=0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>superclass for implementing different fluid physics </p>
@@ -165,7 +168,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classIncompInvisc.html#a06fbd0a590ef1ef102352a094ae4c698">IncompInvisc</a>.</p>
+<p>Implemented in <a class="el" href="classIncompVisc.html#a937b901289ff887f072c36b66e9360e8">IncompVisc</a>, and <a class="el" href="classIncompInvisc.html#a06fbd0a590ef1ef102352a094ae4c698">IncompInvisc</a>.</p>
 
 </div>
 </div>
@@ -190,7 +193,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 6 2013 15:45:00 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2013 07:58:36 for Smoothed Particle Hydrodynamics by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
