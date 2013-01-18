@@ -91,7 +91,7 @@ TEST_F (FluidTest,checkResetParticles){
   EXPECT_FLOAT_EQ(props3.density,props1_.density-1);
 }
 
-/// tests Fluid::findNeighbors
+/// tests Fluid::findNeighbors - implementation specific
 TEST_F (FluidTest,_checkFindNeighbors){
   double sl = 2;
   int np = 2;

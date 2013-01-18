@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief Code for initialization of fluid and boundary from input files
+ * \brief Code for initialization of Fluid and boundary from input files
  */
 #ifndef INITIALIZE_H_
 #define INITIALIZE_H_

@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief implementation of Physics for a fluid which is incompressible and inviscid
+ * \brief implementation of Physics for a Fluid which is incompressible and inviscid
  */
 #ifndef INCOMPINVISC_H_
 #define INCOMPINVISC_H_

@@ -35,10 +35,10 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         
         gradker_ = myker.gradW(partloc_,neighloc_);
         
-		//add contribution to change in density of particle part by neighbors
+		// add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
         
-        //compute viscous force
+        // compute viscous force
         rx_ = partprops_.x - neighprops_.x;
         ry_ = partprops_.y - neighprops_.y;
         vdotr_ =  veldiff_.x * rx_  + veldiff_.y * ry_;
@@ -50,7 +50,7 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
             viscousforce_ = 0;
         }
         
-		//add contribution to change in velocity of particle part by neighbors
+		// add contribution to change in velocity of particle part by neighbors
         coeff_ = neighprops_.mass * (partprops_.pressure/ pow(partprops_.density,2)
                                    + neighprops_.pressure/ pow(neighprops_.density,2)+viscousforce_);
 
@@ -61,16 +61,16 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
     Fluid::ParticleArray boundaryneighbors = fluid.getBoundaries();
     Particle::TagArray boundaryneighbortags = part.getBoundaryNeighbors(); // Returns tags of all boundary neighbors
     
-    //add contribution from boundary neighbors:
+    // add contribution from boundary neighbors:
     for(int i=0; i<numberboundaryneighbors_; ++i) {
         
-        //treating boundary particles as having the same properties as fluid particles:
+        // treating boundary particles as having the same properties as fluid particles:
         neighprops_ = boundaryneighbors[boundaryneighbortags[i]]->getOldProperties();
         neighloc_.x = neighprops_.x;
         neighloc_.y = neighprops_.y;
         
-		//add contribution to change in density of particle part by boundary neighbors
-        //using a Lennard-Jones type force at the boundary
+		    // add contribution to change in density of particle part by boundary neighbors
+        // using a Lennard-Jones type force at the boundary
         double r0 = 1;
         double r = hypot(partloc_.x-neighloc_.x,partloc_.y-neighloc_.y);
         double r0hat = r0 / r;
@@ -81,14 +81,14 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
         }
     }
 
-    //add gravitational force (scaled approx value for cm/s^2)
+    // add gravitational force (scaled approx value for cm/s^2)
     dv_ += -0.1;    
     
-    //update changes as a property struct
+    // update changes as a property struct
     fx.u = du_;
     fx.v = dv_;
     fx.density = drho_;
-    //the following assignments are unnecessary, but set them to 0 for clarity:
+    // the following assignments are unnecessary, but set them to 0 for clarity:
     fx.mass = 0;
     fx.energy = 0;
     fx.x = 0;
@@ -98,7 +98,7 @@ int IncompInvisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& f
 }
 
 
-//This function might be obsolete now. I put this directly in the integrator (Euler)
+// This function might be obsolete now. I put this directly in the integrator (Euler)
 int IncompInvisc::update(Particle& part) {
     partprops_ = part.getNewProperties();
     part.setOldProperties(partprops_);
@@ -114,7 +114,7 @@ int IncompInvisc::initPressureParams() {   //this is currently inactive
 
 
 int IncompInvisc::calcPressure(Particle& part) {
-    //set properties to those which approximate water
+    // set properties to those which approximate water
     B_ = 3000;   //this should be changed so the parameters are not set every time
     gamma_ = 7;
     rho_0_ = 1000.;

@@ -102,7 +102,7 @@ int main(int argc, char** argv){
 
       integrator->step();
 
-      if (i % outsteps == 0) //output every outsteps timesteps
+      if (i % outsteps == 0) // output every outsteps timesteps
         output.write(t, fluid);
 
       fluid.resetNeighbors();  // Need to reset after each time step

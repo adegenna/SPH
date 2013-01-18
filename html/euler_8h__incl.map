@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$integrator_8h.html" title="superclass for integrators" alt="" coords="5,83,91,112"/>
-<area shape="rect" id="node5" href="$fluid_8h.html" title="Definition of fluid class for packaging together particles, boundary particles, and their properties..." alt="" coords="213,83,269,112"/>
+<area shape="rect" id="node5" href="$fluid_8h.html" title="Definition of Fluid class for packaging together particles, boundary particles, and their properties..." alt="" coords="213,83,269,112"/>
 <area shape="rect" id="node13" href="$physics_8h.html" title="superclass for implementing different fluid physics" alt="" coords="293,83,371,112"/>
 <area shape="rect" id="node15" href="$particle_8h.html" title="Definition of the particle class." alt="" coords="115,83,189,112"/>
 <area shape="rect" id="node11" href="$properties_8h.html" title="Struct to hold a particle&#39;s physical properties." alt="" coords="200,160,291,189"/>

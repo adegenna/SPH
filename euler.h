@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief implementation of explicit Euler integrator
+ * \brief implementation of explicit Euler Integrator
  */
 #ifndef EULER_H_
 #define EULER_H_

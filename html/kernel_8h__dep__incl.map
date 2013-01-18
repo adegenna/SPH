@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$incompvisc_8h.html" title="implementation of Physics for a fluid which is incompressible and viscous" alt="" coords="5,83,104,112"/>
-<area shape="rect" id="node7" href="$gaussiankernel_8h.html" title="implementation of a Gaussian kernel" alt="" coords="128,83,248,112"/>
-<area shape="rect" id="node10" href="$splinekernel_8h.html" title="implentation of a cubic spline kernel" alt="" coords="272,83,373,112"/>
+<area shape="rect" id="node7" href="$gaussiankernel_8h.html" title="implementation of a Gaussian Kernel" alt="" coords="128,83,248,112"/>
+<area shape="rect" id="node10" href="$splinekernel_8h.html" title="implentation of a cubic spline Kernel" alt="" coords="272,83,373,112"/>
 <area shape="rect" id="node5" href="$sph_8cc.html" title="Driver program for smoothed particle hydrodynamics solver." alt="" coords="157,160,219,189"/>
 </map>

@@ -1,7 +1,7 @@
 /**
  *  \file
  *
- *  \brief implementation of a Gaussian kernel
+ *  \brief implementation of a Gaussian Kernel
  */
 #ifndef GAUSSIANKERNEL_H_
 #define GAUSSIANKERNEL_H_

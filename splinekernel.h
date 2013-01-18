@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief implentation of a cubic spline kernel
+ * \brief implentation of a cubic spline Kernel
  */
 #ifndef SPLINEKERNEL_H_
 #define SPLINEKERNEL_H_

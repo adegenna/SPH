@@ -17,8 +17,6 @@ int Eulermod::step(){
     }
     
     for(int i=0; i<nparticles; ++i){
-       // Properties fx;   //struct to store the changes in particle properties,
-                         //which itself can be a Properties struct.
         fx_.x = 0;
         fx_.y = 0;
         fx_.u = 0;

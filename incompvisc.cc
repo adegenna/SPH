@@ -46,7 +46,7 @@ int IncompVisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& fx)
         
         gradker_ = myker.gradW(partloc_,neighloc_);
         
-		//add contribution to change in density of particle part by neighbors
+		    //add contribution to change in density of particle part by neighbors
         drho_ += neighprops_.mass * (veldiff_.x * gradker_.x + veldiff_.y * gradker_.y);
         
         //compute viscous force
@@ -79,7 +79,7 @@ int IncompVisc::rhs(Fluid& fluid, Particle& part, Kernel& myker, Properties& fx)
         neighloc_.x = neighprops_.x;
         neighloc_.y = neighprops_.y;
         
-		//add contribution to change in density of particle part by boundary neighbors
+		    //add contribution to change in density of particle part by boundary neighbors
         //using a Lennard-Jones type force at the boundary
         //double r0 = 1;
         double r = hypot(partloc_.x-neighloc_.x,partloc_.y-neighloc_.y);
@@ -121,10 +121,6 @@ int IncompVisc::initPressureParams() {   //this is currently inactive
 
 
 int IncompVisc::calcPressure(Particle& part) {
-    //set properties to those which approximate water
-//    B_ = 3000;   //this should be changed so the parameters are not set every time
-//    gamma_ = 7;
-//    rho_0_ = 1000.;
     Properties props = part.getOldProperties();
     props.pressure = pressB_ * (pow(props.density / rho_0_,pressGamma_)-1.);
     part.setOldProperties(props);

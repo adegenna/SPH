@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$fluid_8h.html" title="Definition of fluid class for packaging together particles, boundary particles, and their properties..." alt="" coords="151,83,207,112"/>
+<area shape="rect" id="node3" href="$fluid_8h.html" title="Definition of Fluid class for packaging together particles, boundary particles, and their properties..." alt="" coords="151,83,207,112"/>
 <area shape="rect" id="node7" href="$incompvisc_8h.html" title="implementation of Physics for a fluid which is incompressible and viscous" alt="" coords="25,160,124,189"/>
-<area shape="rect" id="node19" href="$incompinvisc_8h.html" title="implementation of Physics for a fluid which is incompressible and inviscid" alt="" coords="393,83,503,112"/>
+<area shape="rect" id="node19" href="$incompinvisc_8h.html" title="implementation of Physics for a Fluid which is incompressible and inviscid" alt="" coords="393,83,503,112"/>
 <area shape="rect" id="node23" href="$particle_8h.html" title="Definition of the particle class." alt="" coords="231,83,305,112"/>
 <area shape="rect" id="node5" href="$sph_8cc.html" title="Driver program for smoothed particle hydrodynamics solver." alt="" coords="196,237,257,267"/>
-<area shape="rect" id="node10" href="$euler_8h.html" title="implementation of explicit Euler integrator" alt="" coords="148,160,209,189"/>
-<area shape="rect" id="node13" href="$eulermod_8h.html" title="implementation of Euler integrator, modified so that the position is updated using the updated veloci..." alt="" coords="233,160,319,189"/>
-<area shape="rect" id="node16" href="$predictorcorrector_8h.html" title="Integrator implimenting the modified predictor&#45;corrector method outlined in Price (2004)..." alt="" coords="343,160,476,189"/>
+<area shape="rect" id="node10" href="$euler_8h.html" title="implementation of explicit Euler Integrator" alt="" coords="148,160,209,189"/>
+<area shape="rect" id="node13" href="$eulermod_8h.html" title="implementation of Euler Integrator, modified so that the position is updated using the updated veloci..." alt="" coords="233,160,319,189"/>
+<area shape="rect" id="node16" href="$predictorcorrector_8h.html" title="Integrator implementing the modified predictor&#45;corrector method outlined in Price (2004)..." alt="" coords="343,160,476,189"/>
 </map>

@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief implementation of Euler integrator, modified so that the position is updated using the updated velocity
+ * \brief implementation of Euler Integrator, modified so that the position is updated using the updated velocity
  *        
  */
 #ifndef EULERMOD_H_
@@ -15,7 +15,7 @@
 class Fluid;
 class Physics;
 
-/// Modified euler integrator
+/// modified Euler integrator
 class Eulermod : public Integrator {
  public:
   /// ctor

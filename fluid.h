@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief Definition of fluid class for packaging together particles, boundary 
+ * \brief Definition of Fluid class for packaging together particles, boundary 
  * particles, and their properties.
  */
 #ifndef FLUID_H_
