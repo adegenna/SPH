@@ -121,10 +121,6 @@ int IncompVisc::initPressureParams() {   //this is currently inactive
 
 
 int IncompVisc::calcPressure(Particle& part) {
-    //set properties to those which approximate water
-//    B_ = 3000;   //this should be changed so the parameters are not set every time
-//    gamma_ = 7;
-//    rho_0_ = 1000.;
     Properties props = part.getOldProperties();
     props.pressure = pressB_ * (pow(props.density / rho_0_,pressGamma_)-1.);
     part.setOldProperties(props);

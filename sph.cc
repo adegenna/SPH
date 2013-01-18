@@ -8,7 +8,6 @@
 #include <string>
 #include <cmath>
 #include <boost/shared_ptr.hpp>
-
 #include "fluid.h"
 #include "initialize.h"
 #include "incompinvisc.h"
@@ -22,7 +21,7 @@
 
 using namespace std;
 
-/// Usage: main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep>
+/// Usage: main <initialFile> <boundaryFile(OPTIONAL)> <tFinal> <timestep>  <integrator> <kernel>
 int main(int argc, char** argv){
     string initFile, boundaryFile, kerneltype, integtype;
     double tFinal;
@@ -67,12 +66,18 @@ int main(int argc, char** argv){
     else{
       cout << "Invalid kernel. Options are spline and gaussian" <<endl;
     }
+    
     // initialize fluid, so that initialize will work:
     Fluid fluid(*myKer, nparticles, nboundaries, smoothinglength);
     
     // initializes the fluid from file
     initialize(initFile,boundaryFile,fluid,nparticles,nboundaries);
     
+    // initialize physics
+    // note that input parameters are:
+    // IncompVisc(double smoothinglength, double grav, 
+    //            double pressB, double pressGamma, double rho_0,  <- Eqn of state parameters
+    //            double viscAlpha, double viscEta)                <- Viscosity parameters
     boost::shared_ptr<Physics> physics(new IncompVisc(1.,0.1,3000.,7.,1000.,0.3,0.01));
 
     boost::shared_ptr<Integrator> integrator;
